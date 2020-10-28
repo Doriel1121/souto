@@ -14,9 +14,12 @@ const styles = {
   },
   title: {
     fontSize: "small",
-    color: "grey",
+    position: "relative",
+    top: -5,
+    color: "#646261",
     marginLeft: "2vh",
     display: "inline-block",
+    fontWeight: "bolder",
   },
   avatar: {
     width: "5vh",
@@ -26,16 +29,27 @@ const styles = {
     transform: "translateY(30%)",
     marginLeft: "2vh",
   },
+  rearInfo: {
+    fontSize: "x-small",
+    color: "#BFBAB8 ",
+    marginLeft: "9vh",
+    lineHeight: "0.2",
+  },
 };
 
 export default class Ticket extends Component {
   render() {
     return (
-      <div style={styles.pickBox} square={false}>
+      <div style={styles.pickBox}>
         <Avatar style={styles.avatar}>
           <span style={styles.AvatarContent}></span>
         </Avatar>
-        <Typography style={styles.title}>{this.props.list.task}</Typography>
+        <Typography style={styles.title}>
+          {this.props.ticketInfo.task}
+        </Typography>
+        <Typography style={styles.rearInfo}>
+          {this.props.ticketInfo.taskDescription}
+        </Typography>
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Ticket from "./Ticket";
+import Ticket from "../Ticket";
 import {
   AppBar,
   Toolbar,
@@ -43,8 +43,8 @@ export default class HomePage extends Component {
     this.state = {
       currentList: 0,
       TODO: {
-        task: "CHECK your progress",
-        extra: "Show you hourly result to Mark ",
+        task: "Progress inform",
+        taskDescription: "Show your hourly result to Mark ",
       },
     };
   }
@@ -68,7 +68,7 @@ export default class HomePage extends Component {
           style={styles.progressBar}
         />
         <div style={styles.page}>
-          <Ticket list={this.state.TODO} />
+          <Ticket ticketInfo={this.state.TODO} />
         </div>
         <BottomNavigation
           style={styles.buttonNav}
