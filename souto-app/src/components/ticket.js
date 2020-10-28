@@ -3,9 +3,7 @@ import { Typography, Avatar } from "@material-ui/core";
 
 const styles = {
   pickBox: {
-    marginBottom: "2.5vh",
-    marginLeft: "2vh",
-    position: "relative",
+    margin: "2.5vh",
     top: "5vh",
     width: "90%",
     height: "8vh",
