@@ -5,16 +5,10 @@ import EditIcon from '@material-ui/icons/Edit'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import Menu from '../menu'
 import Progress from '../progress'
+import Ticket from '../ticket'
+import Board from '../board'
 
 const styles = {
-    page: {
-        height: '60vh',
-        margin: '3vh',
-        borderRadius: '15px',
-        background: 'linear-gradient(45deg, #00B4DB, rgb(28 111 140))',
-        boxShadow: '0px 0px 20px 1px rgb(78 78 78)',
-        marginTop: '15vw'
-    },
     buttonNav: {
         position: 'absolute',
         bottom: '0px',
@@ -42,9 +36,7 @@ export default class HomePage extends Component {
             <div>
                 <Menu title={this.state.currentNav} />
                 <Progress steps={10} currentStep={3}/>
-                <div style={styles.page}>
-                    
-                </div>
+                <Board tickets={[{title: 'Deploy the document', description: 'Being able to deploy the tests right after push to master and after that remove all the code'},{title: 'Deploy the document', description: 'Being able to deploy the tests right after push to master and after that remove all the code'}]}/>
                 <BottomNavigation
                 style={styles.buttonNav}
                 value={this.state.currentNav}
