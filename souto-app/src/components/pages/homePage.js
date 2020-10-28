@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Pickit from "./Pickit";
+import Ticket from "./Ticket";
 import {
   AppBar,
   Toolbar,
@@ -42,17 +42,10 @@ export default class HomePage extends Component {
 
     this.state = {
       currentList: 0,
-      TODO: [
-        { task: "call Mark on arrival", extra: "" },
-        {
-          task: "check your progress",
-          extra: "Show you hourly result to Mark ",
-        },
-        {
-          task: "another instruction ",
-          extra: "information of the istruction",
-        },
-      ],
+      TODO: {
+        task: "CHECK your progress",
+        extra: "Show you hourly result to Mark ",
+      },
     };
   }
 
@@ -75,7 +68,7 @@ export default class HomePage extends Component {
           style={styles.progressBar}
         />
         <div style={styles.page}>
-          <Pickit list={this.state.TODO} />
+          <Ticket list={this.state.TODO} />
         </div>
         <BottomNavigation
           style={styles.buttonNav}
