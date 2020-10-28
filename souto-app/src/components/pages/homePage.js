@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { AppBar, Toolbar, Typography, IconButton, BottomNavigation, BottomNavigationAction, MobileStepper } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import MenuIcon from '@material-ui/icons/Menu'
+import { BottomNavigation, BottomNavigationAction } from '@material-ui/core'
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted'
 import EditIcon from '@material-ui/icons/Edit'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
+import Menu from '../menu'
+import Progress from '../progress'
 
 const styles = {
     page: {
@@ -20,55 +20,42 @@ const styles = {
         bottom: '0px',
         width: '100vw'
     },
-    progressBar: {
-        width: '100vw',
-        flexGrow: '1',
-      },
 }
+
+const bottomNavigators = [
+    {name: "To do", icon: <FormatListBulletedIcon />},
+    {name: "In progress", icon: <EditIcon />},
+    {name: "Done", icon: <CheckCircleIcon />},
+]
 
 export default class HomePage extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            currentList: 0
+            currentNav: "To do"
         }
     }
 
     render() {
         return (
             <div>
-                <AppBar position="static">
-                <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6">
-                        On boarding
-                    </Typography>
-                </Toolbar>
-                </AppBar>
-                <MobileStepper
-                variant="progress"
-                steps={6}
-                position="static"
-                activeStep={4}
-                style={styles.progressBar}
-                />
+                <Menu title={this.state.currentNav} />
+                <Progress steps={10} currentStep={3}/>
                 <div style={styles.page}>
                     
                 </div>
                 <BottomNavigation
                 style={styles.buttonNav}
-                value={this.state.currentList}
+                value={this.state.currentNav}
                 onChange={(_, newList) => {
-                    this.setState({currentList: newList})
+                    this.setState({currentNav: newList})
                 }}
                 showLabels
                 >
-                    <BottomNavigationAction label="To do" icon={<FormatListBulletedIcon />} />
-                    <BottomNavigationAction label="In progress" icon={<EditIcon />} />
-                    <BottomNavigationAction label="Done" icon={<CheckCircleIcon />} />
+                    {bottomNavigators.map((nav) => {
+                        return <BottomNavigationAction label={nav.name} icon={nav.icon} value={nav.name}/>
+                    })}
                 </BottomNavigation>
             </div>
         )
