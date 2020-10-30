@@ -9,12 +9,12 @@ const styles = {
     height: "8vh",
     borderRadius: "15px",
     backgroundColor: "white",
-    boxShadow: '0 0 10px 1px #3e3e3e'
+    boxShadow: "0 0 10px 1px #3e3e3e",
   },
   title: {
     fontSize: "small",
     position: "relative",
-    top: -5,
+    top: -7,
     color: "#646261",
     marginLeft: "2vh",
     display: "inline-block",
@@ -32,7 +32,7 @@ const styles = {
     fontSize: "x-small",
     color: "#BFBAB8 ",
     marginLeft: "9vh",
-    lineHeight: "0.2",
+    lineHeight: "0.07",
   },
 };
 
@@ -43,11 +43,11 @@ export default class Ticket extends Component {
         <Avatar style={styles.avatar}>
           <span style={styles.AvatarContent}></span>
         </Avatar>
-        <Typography style={styles.title}>
-          {this.props.info.title}
-        </Typography>
+        <Typography style={styles.title}>{this.props.info.title}</Typography>
         <Typography style={styles.rearInfo}>
-          {this.props.info.description}
+          {this.props.info.description.length > 50
+            ? this.props.info.description.slice(0, 45) + "..."
+            : this.props.info.description}
         </Typography>
       </div>
     );
