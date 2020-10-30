@@ -20,7 +20,7 @@ https.createServer(httpsOptions, app).listen(port, () => {
 app
   .use(bodyParser.json())
   .use(cors())
-  .post("/tickets/:userId", (request, response) => {
+  .get("/tickets/:userId", (request, response) => {
     console.log("New tickets request arrived");
     tickets.getAllTicketsByUserId(request.params.userId, (tickets) => {
       response.send(tickets)
