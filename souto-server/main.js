@@ -25,4 +25,10 @@ app
     tickets.getAllTicketsByUserId(request.params.userId, (tickets) => {
       response.send(tickets)
     })
+  })
+  .post("tickets/update", (request, response) => {
+    console.log("Change ticket request")
+    tickets.updateTicket(request.body.id, request.body, () => {
+      response.sendStatus(200)
+    })
   });
