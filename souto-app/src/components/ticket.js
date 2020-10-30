@@ -48,7 +48,7 @@ export default class Ticket extends Component {
         <Typography style={styles.rearInfo}>
           {this.props.info.description.length > 50
             ? this.props.info.description.slice(0, 45) + "..."
-            : null}
+            : this.props.info.description}
         </Typography>
       </div>
     );

@@ -24,7 +24,7 @@ export default class Board extends Component {
         <FlipMove
           typeName={null}
           maintainContainerHeight={true}
-          duration={300}
+          duration={100}
           staggerDurationBy={50}
         >
           {this.props.tickets.map((ticket) => {
