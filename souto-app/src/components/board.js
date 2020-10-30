@@ -18,6 +18,21 @@ const styles = {
 };
 
 export default class Board extends Component {
+  renderViews = (ticket) => {
+    let result = []
+    if(this.props.movePrev !== undefined) {
+      result.push(<div key={"prev"} style={styles.hiddenTicket}></div>)
+    }
+    result.push((
+      <div key={"ticket"}>
+        <Ticket info={ticket} />
+      </div>
+    ))
+    if(this.props.moveNext !== undefined) {
+      result.push(<div key={"next"} style={styles.hiddenTicket}></div>)
+    }
+    return result
+  }
   render() {
     return (
       <div>
@@ -30,18 +45,20 @@ export default class Board extends Component {
           {this.props.tickets.map((ticket) => {
             return (
               <SwipeableViews
+                index={this.props.movePrev === undefined ? 0 : 1}
                 key={ticket.id}
                 axis="x-reverse"
-                onChangeIndex={() => {
+                onChangeIndex={(a, b) => {
                   setTimeout(() => {
-                    this.props.moveTicket(ticket);
+                    if (a > b && (this.props.moveNext !== undefined)) {
+                        this.props.moveNext(ticket);
+                    } else if (this.props.movePrev !== undefined) {
+                      this.props.movePrev(ticket)
+                    }
                   }, 500);
                 }}
               >
-                <div>
-                  <Ticket info={ticket} />
-                </div>
-                <div style={styles.hiddenTicket}>cwecec</div>
+                {this.renderViews(ticket)}
               </SwipeableViews>
             );
           })}

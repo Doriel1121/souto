@@ -37,7 +37,7 @@ export default class HomePage extends Component {
     }
 
     
-    moveTicket = (ticket) => {
+    moveTicket = (ticket, next) => {
         let todoMatchingTickets = this.state.todoTickets.filter(item => item.id === ticket.id)
         if (todoMatchingTickets.length > 0) {
             this.setState((prevState) => {
@@ -56,10 +56,30 @@ export default class HomePage extends Component {
         if (inProgressMatchingTickets.length > 0) {
             this.setState((prevState) => {
                 let done = prevState.doneTickets
-                done.push(ticket)
+                let todo = prevState.todoTickets
+                if (next) {
+                    done.push(ticket)
+                } else {
+                    todo.push(ticket)
+                }
                 return {
                     inProgressTickets: this.state.inProgressTickets.filter(item => item.id !== ticket.id),
-                    doneTickets: done
+                    doneTickets: done,
+                    todoTickets: todo
+                }
+            })
+            return
+        }
+
+        let doneMatchingTickets = this.state.doneTickets.filter(item => item.id === ticket.id)
+        if (doneMatchingTickets.length > 0) {
+            this.setState((prevState) => {
+                let inProgress = prevState.inProgressTickets
+                inProgress.push(ticket)
+                let filtered = this.state.doneTickets.filter(item => item.id !== ticket.id)
+                return {
+                    doneTickets: filtered,
+                    inProgressTickets: inProgress
                 }
             })
             return
@@ -79,22 +99,26 @@ export default class HomePage extends Component {
     renderBoardById = (id) => {
         let tickets = []
         let boardName = "unknown"
+        let moveNext, movePrev
         switch (id) {
             case 0:
-                tickets = this.state.todoTickets 
+                tickets = this.state.todoTickets
+                moveNext = (t) => this.moveTicket(t, true) 
                 boardName = "todo"
                 break;
             case 1:
                 tickets = this.state.inProgressTickets
+                moveNext = (t) => this.moveTicket(t, true) 
+                movePrev = (t) => this.moveTicket(t, false) 
                 boardName = "inprogress"
                 break;
             case 2:
                 tickets = this.state.doneTickets
+                movePrev = (t) => this.moveTicket(t, false) 
                 boardName = "done"
                 break
-
         }
-        return <Board tickets={tickets} moveTicket={this.moveTicket} name={boardName}/>
+        return <Board tickets={tickets} moveNext={moveNext} movePrev={movePrev} name={boardName}/>
     }
 
     render() {
@@ -112,7 +136,7 @@ export default class HomePage extends Component {
                 showLabels
                 >
                     {bottomNavigators.map((nav) => {
-                        return <BottomNavigationAction key={nav.name} label={nav.name} icon={nav.icon} value={nav.id}/>
+                        return <BottomNavigationAction key={nav.id} label={nav.name} icon={nav.icon} value={nav.id}/>
                     })}
                 </BottomNavigation>
             </div>
