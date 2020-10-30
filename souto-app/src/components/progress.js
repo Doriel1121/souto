@@ -38,7 +38,7 @@ export default class Progress extends Component {
             
                 <MobileStepper
                 variant="progress"
-                steps={this.props.steps}
+                steps={this.props.steps + 1}
                 position="static"
                 activeStep={this.props.currentStep}
                 style={styles.progressBar}

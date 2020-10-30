@@ -70,13 +70,19 @@ export default class HomePage extends Component {
         return bottomNavigators.filter((item) => item.id === id)[0].name
     }
 
+    countAllTickets = () => {
+        return this.state.todoTickets.length +
+         this.state.inProgressTickets.length +
+         this.state.doneTickets.length
+    }
+
     renderBoardById = (id) => {
         let tickets = []
         let boardName = "unknown"
         switch (id) {
             case 0:
                 tickets = this.state.todoTickets 
-                boardName = "unknown"
+                boardName = "todo"
                 break;
             case 1:
                 tickets = this.state.inProgressTickets
@@ -95,7 +101,7 @@ export default class HomePage extends Component {
         return (
             <div>
                 <Menu title={this.getBoardName(this.state.currentBoard)} />
-                <Progress steps={10} currentStep={3}/>
+                <Progress steps={this.countAllTickets()} currentStep={this.state.doneTickets.length}/>
                 {this.renderBoardById(this.state.currentBoard)}
                 <BottomNavigation
                 style={styles.buttonNav}
