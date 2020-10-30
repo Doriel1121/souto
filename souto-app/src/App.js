@@ -1,11 +1,11 @@
 import React from 'react';
 import {Switch, HashRouter as Router, Route} from 'react-router-dom'
-import HomePage from './components/pages/homePage'
 import {
   ThemeProvider,
   createMuiTheme,
 } from "@material-ui/core/styles";
 import './App.css';
+import ClientApp from "./ClientApp"
 
 const mainTheme = createMuiTheme({
   palette: {
@@ -37,7 +37,7 @@ function App() {
       <ThemeProvider theme={mainTheme}>
         <Router>
           <Switch>
-            <Route exact path="/"><HomePage /></Route>
+            <Route path="/client"><ClientApp /></Route>
           </Switch>
         </Router>
       </ThemeProvider>

@@ -39,12 +39,10 @@ export default class Ticket extends Component {
   render() {
     return (
       <Grid container
-      container
       direction="row"
       justify="flex-start"
-      alignItems="start"
+      alignItems="center"
       spacing={3}
-      fil
       style={styles.pickBox}>
         <Grid item xs={2} style={styles.avatarBox}>
           <Avatar style={styles.avatar}>
