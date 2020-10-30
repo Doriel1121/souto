@@ -38,7 +38,6 @@ const styles = {
 
 export default class Ticket extends Component {
   render() {
-    console.log(this.props.info.description.length);
     return (
       <div style={styles.pickBox}>
         <Avatar style={styles.avatar}>
