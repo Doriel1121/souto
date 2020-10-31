@@ -49,7 +49,7 @@ exports.addTicket = (boardId, ticket, callback) => {
     connection.query("SELECT * FROM Tickets WHERE board_id = ? AND title = ? ORDER BY creation_time DESC", [boardId, ticket.title], (error, rows) => {
       if (error) throw error;
       let newTicket = rows[0]
-      connection.query("SELECT * Users WHERE board_id = ?", [boardId], (error, registeredUser) => {
+      connection.query("SELECT * FROM Users WHERE board_id = ?", [boardId], (error, registeredUser) => {
         if (error) throw error;
         let userRows = registeredUser.map(usr => {
           return [usr.id, newTicket.id, "TODO", (new Date()).toISOString()]
