@@ -18,11 +18,21 @@ export class ManagerAppDataProvider extends Component {
   }
 
   sync = () => {
-    axios.get(config.server + "/board/tickets/1")
+    axios.get(config.server + "/board/tickets/" + config.boardId)
     .then((response) => {
       this.setState({
         tickets: response.data
       })
+    })
+    .catch((error) => {
+      alert(error)
+    })
+  }
+
+  updateTicket = (ticket, callback) => {
+    axios.post(config.server + "/board/tickets/update", ticket)
+    .then(() => {
+      callback()
     })
     .catch((error) => {
       alert(error)
@@ -49,7 +59,7 @@ export class ManagerAppDataProvider extends Component {
   render() {
     return (
       <ManagerContext.Provider
-        value={{ state: this.state, deleteTicket: this.deleteTicketById }}
+        value={{ state: this.state, deleteTicket: this.deleteTicketById, updateTicket: this.updateTicket }}
       >
         {this.props.children}
       </ManagerContext.Provider>

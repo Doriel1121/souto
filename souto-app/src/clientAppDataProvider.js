@@ -31,7 +31,7 @@ export class ClientAppDataProvider extends Component {
   }
 
   sync = (callback) => {
-    axios.get(config.server + "/tickets/1")
+    axios.get(config.server + "/tickets/" + config.userId)
     .then((response) => {
       let data = lodash.groupBy(response.data, item => item.status)
       let todoT = data["TODO"] === undefined ? [] : data["TODO"]
@@ -42,16 +42,6 @@ export class ClientAppDataProvider extends Component {
         inProgressTickets: inProgressT,
         doneTickets: doneT
       }, callback)
-    })
-    .catch((error) => {
-      alert(error)
-    })
-  }
-
-  deleteTicketById = (id) => {
-    axios.post(config.server + "tickets/delete/" + id)
-    .then(() => {
-      this.deleteTicketByIdOffline(id)
     })
     .catch((error) => {
       alert(error)
@@ -83,17 +73,6 @@ export class ClientAppDataProvider extends Component {
     })
     .catch((error) => {
       alert(error)
-    })
-  }
-
-  deleteTicketByIdOffline = (id) => {
-    let todoT = this.state.todoTickets.filter(item => item.id !== id)
-    let inprogressT = this.state.inProgressTickets.filter(item => item.id !== id)
-    let doneT = this.state.doneTickets.filter(item => item.id !== id)
-    this.setState({
-      todoTickets: todoT,
-      inProgressTickets: inprogressT,
-      doneTickets: doneT
     })
   }
 

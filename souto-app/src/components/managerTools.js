@@ -17,7 +17,6 @@ export default class ManagerTools extends Component {
             <div style={styles.tools}>
                 <ButtonGroup fullWidth color="primary" aria-label="outlined primary button group">
                     <Button style={styles.buttonFull}><AddIcon /></Button>
-                    <Button style={styles.buttonFull} disabled>Remove</Button>
                 </ButtonGroup>
             </div>
         )

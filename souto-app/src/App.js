@@ -7,6 +7,7 @@ import {
 import './App.css';
 import ClientApp from "./ClientApp"
 import ManagerApp from './ManagerApp';
+import LoginPage from './components/pages/loginPage';
 
 const mainTheme = createMuiTheme({
   palette: {
@@ -40,6 +41,7 @@ function App() {
           <Switch>
             <Route path="/client"><ClientApp /></Route>
             <Route path="/manager"><ManagerApp /></Route>
+            <Route exact path="/"><LoginPage /></Route>
           </Switch>
         </Router>
       </ThemeProvider>
