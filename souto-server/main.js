@@ -31,4 +31,16 @@ app
     tickets.updateStatus(request.body.id, request.body.status, () => {
       response.sendStatus(200)
     })
+  })
+  .post("/tickets/delete/:id", (request, response) => {
+    console.log("Delete ticket request")
+    tickets.deleteTicket(request.params.id, () => {
+      response.sendStatus(200)
+    })
+  })
+  .get("/board/tickets/:boardId", (request, response) => {
+    console.log("Manager ticket request")
+    tickets.getAllTicketByBoardId(request.params.boardId, (tickets) => {
+      response.send(tickets)
+    })
   });

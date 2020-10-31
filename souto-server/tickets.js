@@ -27,3 +27,17 @@ exports.updateStatus = (id, status, callback) => {
     callback()
   })
 }
+
+exports.deleteTicket = (ticketId, callback) => {
+  connection.query("UPDATE Tickets SET active = 0 WHERE id = ?", [ticketId], (error) => {
+    if(error) throw error;
+    callback();
+  })
+}
+
+exports.getAllTicketByBoardId = (boardId, callback) => {
+  connection.query("SELECT * from Tickets WHERE board_id = ? AND active = 1", [boardId], (error, rows) => {
+    if(error) throw error;
+    callback(rows)
+  })
+}
