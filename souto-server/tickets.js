@@ -4,7 +4,7 @@ const connection = dal.connection;
 
 exports.getAllTicketsByUserId = (userId, callback) => {
   connection.query(
-    "SELECT * FROM Tickets WHERE user_id = ? AND active = 1",
+    "SELECT utm.id as id, t.title, t.description, utm.status FROM UserTicketMigration utm JOIN Tickets t ON t.id = utm.ticket_id WHERE utm.user_id = ? AND t.active = 1",
     [userId],
     (error, rows) => {
       if (error) throw error;
@@ -19,4 +19,11 @@ exports.updateTicket = (ticketId, ticket, callback) => {
         if(error) throw error;
         callback()
     })
+}
+
+exports.updateStatus = (id, status, callback) => {
+  connection.query("UPDATE UserTicketMigration SET Status = ? WHERE id = ?", [status, id], (error) => {
+    if(error) throw error;
+    callback()
+  })
 }
