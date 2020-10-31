@@ -3,10 +3,10 @@ import { Typography, Avatar } from "@material-ui/core";
 
 const styles = {
   pickBox: {
-    margin: "2.5vh",
+    margin: "2vh",
     top: "5vh",
     width: "90%",
-    height: "8vh",
+    height: "100%",
     borderRadius: "15px",
     backgroundColor: "white",
     boxShadow: "0 0 10px 1px #3e3e3e",
@@ -14,42 +14,56 @@ const styles = {
   title: {
     fontSize: "small",
     position: "relative",
-    top: -7,
+    // top: 0,
     color: "#646261",
-    marginLeft: "2vh",
-    display: "inline-block",
-    fontWeight: "bolder",
+    // marginLeft: "2vh",
+    // display: "inline",
+    // fontWeight: "bolder",
   },
   avatar: {
     width: "5vh",
     height: "5vh",
     backgroundColor: "purple",
     display: "inline-block",
-    transform: "translateY(30%)",
+    transform: "translateY(50%)",
     marginLeft: "2vh",
   },
   rearInfo: {
     fontSize: "x-small",
+    display: "block",
     color: "#BFBAB8 ",
     marginLeft: "9vh",
-    lineHeight: "0.07",
+    // marginTop: "0",
+    lineHeight: "0vh",
+  },
+
+  ticketForm: {
+    display: "inline",
+    // marginTop: "10%",
+    marginLeft: "2vh",
+    // verticalAlign: "middle",
   },
 };
 
 export default class Ticket extends Component {
   render() {
-    console.log(this.props.info.description.length);
     return (
       <div style={styles.pickBox}>
-        <Avatar style={styles.avatar}>
-          <span style={styles.AvatarContent}></span>
-        </Avatar>
-        <Typography style={styles.title}>{this.props.info.title}</Typography>
-        <Typography style={styles.rearInfo}>
-          {this.props.info.description.length > 50
-            ? this.props.info.description.slice(0, 45) + "..."
-            : this.props.info.description}
-        </Typography>
+        <div style={{ display: "inline" }}>
+          <Avatar style={styles.avatar}>
+            <span style={styles.AvatarContent}></span>
+          </Avatar>
+        </div>
+        <div style={styles.ticketForm}>
+          <b style={styles.title}>{this.props.info.title}</b>
+          {this.props.info.description.length > 50 ? (
+            <p style={styles.rearInfo}>
+              {this.props.info.description.slice(0, 45) + ".."}
+            </p>
+          ) : (
+            <p style={styles.rearInfo}>{this.props.info.description}</p>
+          )}
+        </div>
       </div>
     );
   }
