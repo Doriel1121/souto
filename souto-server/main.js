@@ -28,7 +28,7 @@ app
   })
   .post("/tickets/update", (request, response) => {
     console.log("Change ticket request")
-    tickets.updateTicket(request.body.id, request.status, () => {
+    tickets.updateStatus(request.body.id, request.status, () => {
       response.sendStatus(200)
     })
   });
