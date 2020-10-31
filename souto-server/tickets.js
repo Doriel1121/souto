@@ -22,7 +22,7 @@ exports.updateTicket = (ticketId, ticket, callback) => {
 }
 
 exports.updateStatus = (id, status, callback) => {
-  connection.query("UPDATE UserTicketMigration SET Status = ? WHERE id = ?", [status, id], (error) => {
+  connection.query("UPDATE UserTicketMigration SET status = ? WHERE id = ?", [status, id], (error) => {
     if(error) throw error;
     callback()
   })
