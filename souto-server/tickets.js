@@ -48,7 +48,17 @@ exports.addTicket = (boardId, ticket, callback) => {
     if(error) throw error;
     connection.query("SELECT * FROM Tickets WHERE board_id = ? AND title = ? ORDER BY creation_time DESC", [boardId, ticket.title], (error, rows) => {
       if (error) throw error;
-      callback(rows[0])
+      let newTicket = rows[0]
+      connection.query("SELECT * Users WHERE board_id = ?", [boardId], (error, registeredUser) => {
+        if (error) throw error;
+        let userRows = registeredUser.map(usr => {
+          return [usr.id, newTicket.id, "TODO", (new Date()).toISOString()]
+        })
+        connection.query("INSERT INTO UserTicketMigration (user_id, ticket_id, statud, last_update) VALUES ?", [userRows], (error) => {
+          if(error) throw error;
+          callback(newTicket)
+        })
+      })
     })
   })
 }
