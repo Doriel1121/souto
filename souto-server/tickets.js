@@ -41,3 +41,14 @@ exports.getAllTicketByBoardId = (boardId, callback) => {
     callback(rows)
   })
 }
+
+exports.addTicket = (boardId, ticket, callback) => {
+  connection.query("INSERT INTO Tickets (board_id, title, description, creation_time, active) VALUES (?, ?, ?, ?, 1)", 
+  [boardId, ticket.title, ticket.description, (new Date()).toISOString()], (error) => {
+    if(error) throw error;
+    connection.query("SELECT * FROM Tickets WHERE board_id = ? AND title = ? ORDER BY creation_time DESC", [boardId, ticket.title], (error, rows) => {
+      if (error) throw error;
+      callback(rows[0])
+    })
+  })
+}

@@ -49,4 +49,10 @@ app
     tickets.updateTicket(request.body.id, request.body, () => {
       response.sendStatus(200)
     })
+  })
+  .post("/board/tickets/add/:boardId", (request, response) => {
+    console.log("New ticket request")
+    tickets.addTicket(request.params.boardId, request.body, (ticket) => {
+      response.send(ticket)
+    })
   });
