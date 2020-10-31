@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { AppBar, Toolbar, Typography, IconButton, Drawer } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, IconButton, Drawer, List, ListItem, ListItemText, ListItemIcon } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 
 const styles = {
     menu: {
@@ -31,7 +32,16 @@ export default class Menu extends Component {
                     </Toolbar>
                 </AppBar>
                 <Drawer open={this.state.isOpen} onClose={() => {this.setState({isOpen: !this.state.isOpen})}}>
-                <div style={styles.menu}></div>
+                <div style={styles.menu}>
+                    <List>
+                        <ListItem button key={"logout"} disabled>
+                            <ListItemIcon>
+                                <ExitToAppIcon />
+                            </ListItemIcon>
+                            <ListItemText primary={"Logout"} />
+                        </ListItem>
+                    </List>
+                </div>
                 </Drawer>
             </div>
         )

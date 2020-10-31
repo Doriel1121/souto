@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import axios from "axios"
+import config from "./config"
+import lodash from 'lodash'
 
 const ClientContext = React.createContext();
 
@@ -7,16 +10,94 @@ export class ClientAppDataProvider extends Component {
     super(props);
 
     this.state = {
-      todoTickets: [{id: 0, title: 'Deploy the document1', description: 'Being able to deploy the tests right after push to master and after that remove all the code'},
-      {id: 1, title: 'Deploy the document', description: 'Being able to deploy the tests right after push to master and after that remove all the code'},
-      {id: 2, title: 'Deploy the document2', description: 'Being able to deploy the tests right after push to master and after that remove all the code'},
-      {id: 3, title: 'Deploy the do3', description: 'Being able to deploy the tests right after push to master and after that remove all the code'}],
+      todoTickets: [],
       inProgressTickets: [],
       doneTickets: []
     };
   }
 
+  componentDidMount = () => {
+    this.sync(() => {
+      this.syncInterval(5000)
+    })
+  }
+
+  syncInterval = (interval) => {
+    setTimeout(() => {
+      this.sync(() => {
+        this.syncInterval(interval)
+      })
+    }, interval)
+  }
+
+  sync = (callback) => {
+    axios.get(config.server + "/tickets/1")
+    .then((response) => {
+      let data = lodash.groupBy(response.data, item => item.status)
+      let todoT = data["TODO"] === undefined ? [] : data["TODO"]
+      let inProgressT = data["INPROGRESS"] === undefined ? [] : data["INPROGRESS"]
+      let doneT = data["DONE"] === undefined ? [] : data["DONE"]
+      this.setState({
+        todoTickets: todoT,
+        inProgressTickets: inProgressT,
+        doneTickets: doneT
+      }, callback)
+    })
+    .catch((error) => {
+      alert(error)
+    })
+  }
+
+  deleteTicketById = (id) => {
+    axios.post(config.server + "tickets/delete/" + id)
+    .then(() => {
+      this.deleteTicketByIdOffline(id)
+    })
+    .catch((error) => {
+      alert(error)
+    })
+  }
+
   moveTicket = (ticket, next) => {
+    switch (ticket.status) {
+      case "TODO": 
+        ticket.status = "INPROGRESS"
+        break;
+      case "INPROGRESS": 
+        if (next) {
+          ticket.status = "DONE"
+        } else {
+          ticket.status = "TODO"
+        }
+        break;
+      case "DONE": 
+        ticket.status = "INPROGRESS"
+        break;
+      default:
+        break;
+    }
+
+    axios.post(config.server + "/tickets/update", ticket)
+    .then(() => {
+      this.moveTicketOffline(ticket, next)
+    })
+    .catch((error) => {
+      alert(error)
+    })
+  }
+
+  deleteTicketByIdOffline = (id) => {
+    let todoT = this.state.todoTickets.filter(item => item.id !== id)
+    let inprogressT = this.state.inProgressTickets.filter(item => item.id !== id)
+    let doneT = this.state.doneTickets.filter(item => item.id !== id)
+    this.setState({
+      todoTickets: todoT,
+      inProgressTickets: inprogressT,
+      doneTickets: doneT
+    })
+  }
+
+  moveTicketOffline = (ticket, next) => {
     let todoMatchingTickets = this.state.todoTickets.filter(item => item.id === ticket.id)
     if (todoMatchingTickets.length > 0) {
         this.setState((prevState) => {
@@ -68,7 +149,7 @@ export class ClientAppDataProvider extends Component {
   render() {
     return (
       <ClientContext.Provider
-        value={{ state: this.state, moveTicket: this.moveTicket }}
+        value={{ state: this.state, moveTicket: this.moveTicket, sync: this.sync }}
       >
         {this.props.children}
       </ClientContext.Provider>

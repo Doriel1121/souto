@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Typography, Avatar, Grid } from "@material-ui/core";
+import { Typography, Avatar, Grid, IconButton } from "@material-ui/core";
+import DeleteIcon from '@material-ui/icons/Delete'
 
 const styles = {
   pickBox: {
@@ -32,6 +33,9 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column'
+  },
+  deleteIcon: {
+    color: '#737373'
   }
 };
 
@@ -49,12 +53,21 @@ export default class Ticket extends Component {
             <span style={styles.AvatarContent}></span>
           </Avatar>
         </Grid>
-        <Grid item xs={10} style={styles.textBox}>
+        <Grid item xs={this.props.isManager ? 8 : 10} style={styles.textBox}>
           <Typography style={styles.title}>{this.props.info.title}</Typography>
           <Typography style={styles.rearInfo}>
             {this.props.info.description}
           </Typography>
         </Grid>
+        {
+          this.props.isManager ? (
+            <Grid item xs={2}>
+              <IconButton onClick={() => {this.props.delete(this.props.info.id)}} style={styles.deleteIcon} edge="start" color="inherit" >
+                  <DeleteIcon />
+              </IconButton>
+            </Grid>
+        ) : ""
+        }
       </Grid>
     );
   }

@@ -65,7 +65,7 @@ export default class MainPage extends Component {
             default:
                 break;
         }
-        return <Board tickets={tickets} moveNext={moveNext} movePrev={movePrev} name={boardName}/>
+        return <Board tickets={tickets} moveNext={moveNext} movePrev={movePrev} name={boardName} />
     }
 
     render() {

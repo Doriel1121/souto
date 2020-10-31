@@ -25,7 +25,7 @@ export default class Board extends Component {
     }
     result.push((
       <div key={"ticket"}>
-        <Ticket info={ticket} />
+        <Ticket info={ticket} isManager={false} delete={this.props.deleteTicket}/>
       </div>
     ))
     if(this.props.moveNext !== undefined) {
@@ -33,6 +33,7 @@ export default class Board extends Component {
     }
     return result
   }
+
   render() {
     return (
       <div>

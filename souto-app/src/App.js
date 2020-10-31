@@ -6,6 +6,7 @@ import {
 } from "@material-ui/core/styles";
 import './App.css';
 import ClientApp from "./ClientApp"
+import ManagerApp from './ManagerApp';
 
 const mainTheme = createMuiTheme({
   palette: {
@@ -38,6 +39,7 @@ function App() {
         <Router>
           <Switch>
             <Route path="/client"><ClientApp /></Route>
+            <Route path="/manager"><ManagerApp /></Route>
           </Switch>
         </Router>
       </ThemeProvider>
