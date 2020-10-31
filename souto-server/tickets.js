@@ -54,7 +54,7 @@ exports.addTicket = (boardId, ticket, callback) => {
         let userRows = registeredUser.map(usr => {
           return [usr.id, newTicket.id, "TODO", (new Date()).toISOString()]
         })
-        connection.query("INSERT INTO UserTicketMigration (user_id, ticket_id, statud, last_update) VALUES ?", [userRows], (error) => {
+        connection.query("INSERT INTO UserTicketMigration (user_id, ticket_id, status, last_update) VALUES ?", [userRows], (error) => {
           if(error) throw error;
           callback(newTicket)
         })
