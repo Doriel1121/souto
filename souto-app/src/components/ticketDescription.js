@@ -64,6 +64,13 @@ export default class TicketDescription extends Component {
         }
     }
 
+    clean = () => {
+      this.setState({
+        title: "",
+        description: ""
+      }, this.props.close)
+    }
+
     renderTicketData = () => {
         if(this.props.isManager) {
             return (
@@ -104,7 +111,7 @@ export default class TicketDescription extends Component {
                         </Fab>
                     </Grid>
                     <Grid item xs={6}>
-                        <Fab disabled={!this.isChangedFromInit()} color="primary" onClick={() => {this.props.update(this.getTicket(), this.props.close)}}>
+                        <Fab disabled={!this.isChangedFromInit()} color="primary" onClick={() => {this.props.update(this.getTicket(), this.clean)}}>
                             <SaveIcon />
                         </Fab>
                     </Grid>

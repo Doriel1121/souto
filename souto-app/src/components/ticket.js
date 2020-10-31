@@ -57,14 +57,14 @@ export default class Ticket extends Component {
         justify="flex-start"
         alignItems="center"
         spacing={3}
-        style={styles.pickBox}
-        onClick={() => {this.setState({isOpen: true})}}>
+        style={styles.pickBox}>
           <Grid item xs={2} style={styles.avatarBox}>
             <Avatar style={styles.avatar}>
               <span style={styles.AvatarContent}></span>
             </Avatar>
           </Grid>
-          <Grid item xs={this.props.isManager ? 8 : 10} style={styles.textBox}>
+          <Grid item xs={this.props.isManager ? 8 : 10} style={styles.textBox}
+        onClick={() => {this.setState({isOpen: true})}}>
             <Typography style={styles.title}>{this.props.info.title}</Typography>
             <Typography style={styles.rearInfo}>
               {this.props.info.description}

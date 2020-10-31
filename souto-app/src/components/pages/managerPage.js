@@ -28,7 +28,7 @@ export default class ManagerPage extends Component {
                     {(ctx) => {
                         return (
                         <div>
-                            <ManagerTools />
+                            <ManagerTools addTicket={ctx.newTicket}/>
                             {this.renderTickets(ctx)}
                         </div>
                         )
