@@ -43,4 +43,10 @@ app
     tickets.getAllTicketByBoardId(request.params.boardId, (tickets) => {
       response.send(tickets)
     })
+  })
+  .post("/board/tickets/update", (request, response) => {
+    console.log("Change ticket request")
+    tickets.updateTicket(request.body.id, request.body, () => {
+      response.sendStatus(200)
+    })
   });

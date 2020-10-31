@@ -14,8 +14,8 @@ exports.getAllTicketsByUserId = (userId, callback) => {
 };
 
 exports.updateTicket = (ticketId, ticket, callback) => {
-    connection.query("UPDATE Tickets SET title = ?, description = ?, status = ?, last_update_time = ? WHERE id = ?", 
-    [ticket.title, ticket.description, ticket.status, (new Date()).toISOString(), ticketId], (error, _) => {
+    connection.query("UPDATE Tickets SET title = ?, description = ? WHERE id = ?", 
+    [ticket.title, ticket.description, ticketId], (error, _) => {
         if(error) throw error;
         callback()
     })
