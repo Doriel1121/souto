@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const tickets = require("./tickets");
+const boards = require("./boards");
 var https = require("https");
 var fs = require("fs");
 
@@ -54,5 +55,11 @@ app
     console.log("New ticket request")
     tickets.addTicket(request.params.boardId, request.body, (ticket) => {
       response.send(ticket)
+    })
+  })
+  .post("/boards/add", (request, response) => {
+    console.log("New board request")
+    boards.addBoard(request.body, (board) => {
+      response.send(board)
     })
   });
