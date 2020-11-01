@@ -21,7 +21,7 @@ const styles = {
     width: "5vh",
     height: "5vh",
     backgroundColor: "grey",
-    display: "inline-block",
+    // display: "inline-block",
   },
   rearInfo: {
     fontSize: "x-small",

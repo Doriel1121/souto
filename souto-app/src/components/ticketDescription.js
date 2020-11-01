@@ -5,13 +5,12 @@ import {
   TextField,
   Grid,
   Fab,
-  Menu,
-  MenuItem,
   Popover,
   Button,
 } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import CancelIcon from "@material-ui/icons/Cancel";
+import EditIcon from "@material-ui/icons/Edit";
 
 const styles = {
   modal: {
@@ -22,8 +21,6 @@ const styles = {
     marginTop: "15vh",
     borderRadius: "10px",
     textAlign: "center",
-    backdropFilter: "blur(3px)",
-    opacity: "0.7",
     boxShadow: "0 0 16px 5px black",
   },
 
@@ -50,13 +47,16 @@ const styles = {
     paddingTop: "2vh",
   },
   icons: {
-    width: "10vw",
-    height: "7vh",
+    width: "8vh",
+    height: "8vh",
   },
   iconsPop: {
     width: "100%",
     height: "max-content",
-    backgroundColor: "white",
+    backgroundColor: "#EDEDED",
+    backdropFilter: "opacity(0.4)",
+    margin: "0",
+    borderRadius: "8px",
   },
 };
 
@@ -121,12 +121,27 @@ export default class TicketDescription extends Component {
               onClick={(event) => this.handleClick(event)}
             >
               <Avatar
-                src={`icon${this.state.icon}.png`}
+                src={
+                  this.props.ticket !== null
+                    ? `icon${this.props.ticket.icon}.png`
+                    : `icon${this.state.icon}.png`
+                }
                 style={styles.avatar}
               ></Avatar>
+
+              <EditIcon
+                style={{
+                  width: "8vw",
+                  height: "8vh",
+                  position: "relative",
+                  bottom: 0,
+                  filter: "opacity(0.5)",
+                }}
+              />
             </Button>
 
             <Popover
+              style={{ padding: "90px" }}
               open={Boolean(this.state.anchorEl)}
               anchorEl={this.state.anchorEl}
               onClose={() => this.setState({ anchorEl: null })}
@@ -240,9 +255,32 @@ export default class TicketDescription extends Component {
       );
     } else {
       return (
-        <div style={styles.modalContent}>
-          <h3 style={styles.title}>{this.props.ticket.title}</h3>
-          <p style={styles.description}>{this.props.ticket.description}</p>
+        <div>
+          <div style={styles.avatarDiv}>
+            <Avatar
+              src={
+                this.props.ticket !== null
+                  ? `icon${this.props.ticket.icon}.png`
+                  : `icon${this.state.icon}.png`
+              }
+              style={styles.avatar}
+            ></Avatar>
+          </div>
+          <Grid
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="center"
+            spacing={3}
+            style={styles.modalContent}
+          >
+            <Grid item xs={12}>
+              <h3>{this.state.title}</h3>
+            </Grid>
+            <Grid item xs={12}>
+              <p>{this.state.description}</p>
+            </Grid>
+          </Grid>
         </div>
       );
     }
