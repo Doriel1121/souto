@@ -1,7 +1,17 @@
 import React, { Component } from "react";
-import { Avatar, Modal, TextField, Grid, Fab } from "@material-ui/core";
-import SaveIcon from "@material-ui/icons/Save"
-import CancelIcon from "@material-ui/icons/Cancel"
+import {
+  Avatar,
+  Modal,
+  TextField,
+  Grid,
+  Fab,
+  Menu,
+  MenuItem,
+  Popover,
+  Button,
+} from "@material-ui/core";
+import SaveIcon from "@material-ui/icons/Save";
+import CancelIcon from "@material-ui/icons/Cancel";
 
 const styles = {
   modal: {
@@ -12,9 +22,9 @@ const styles = {
     marginTop: "15vh",
     borderRadius: "10px",
     textAlign: "center",
-    backdropFilter: 'blur(3px)',
-    opacity: '0.7',
-    boxShadow: '0 0 16px 5px black'
+    backdropFilter: "blur(3px)",
+    opacity: "0.7",
+    boxShadow: "0 0 16px 5px black",
   },
 
   avatar: {
@@ -28,7 +38,7 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    background: 'linear-gradient(to right, #2193b0, #6dd5ed)'
+    background: "linear-gradient(to right, #2193b0, #6dd5ed)",
   },
   description: {
     fontSize: "small",
@@ -37,96 +47,208 @@ const styles = {
   modalContent: {
     width: "90%",
     margin: "auto",
-    paddingTop: '2vh'
+    paddingTop: "2vh",
+  },
+  icons: {
+    width: "10vw",
+    height: "7vh",
+  },
+  iconsPop: {
+    width: "100%",
+    height: "max-content",
+    backgroundColor: "white",
   },
 };
 
 export default class TicketDescription extends Component {
-    constructor(props) {
-        super(props)
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            id: this.props.ticket.id,
-            title: this.props.ticket.title,
-            description: this.props.ticket.description
-        }
-    }
+    this.state = {
+      id: this.props.ticket.id,
+      title: this.props.ticket.title,
+      description: this.props.ticket.description,
+      icon: null,
+      anchorEl: null,
+    };
+  }
 
-    isChangedFromInit = () => {
-      return this.state.title !== this.props.ticket.title || this.state.description !== this.props.ticket.description
-    }
+  isChangedFromInit = () => {
+    return (
+      this.state.title !== this.props.ticket.title ||
+      this.state.description !== this.props.ticket.description ||
+      this.state.icon !== this.props.ticket.icon
+    );
+  };
 
-    getTicket = () => {
-        return {
-            id: this.state.id,
-            title: this.state.title,
-            description: this.state.description
-        }
-    }
+  getTicket = () => {
+    return {
+      id: this.state.id,
+      title: this.state.title,
+      description: this.state.description,
+      icon: this.state.icon,
+    };
+  };
 
-    clean = () => {
-      this.setState({
+  clean = () => {
+    this.setState(
+      {
         title: "",
-        description: ""
-      }, this.props.close)
-    }
+        description: "",
+        icon: "",
+      },
+      this.props.close
+    );
+  };
 
-    renderTicketData = () => {
-        if(this.props.isManager) {
-            return (
-                <Grid container
-                direction="row"
-                justify="flex-start"
-                alignItems="center"
-                spacing={3}
-                style={styles.modalContent} >
-                    <Grid item xs={12}>
-                    <TextField 
-                    id="title" 
-                    label="Title" 
-                    variant="outlined" 
-                    value={this.state.title}
-                    fullWidth
-                    onChange={(event) => {
-                        this.setState({ title: event.target.value })
-                    }} />
-                    </Grid>
-                    <Grid item xs={12}>
-                    <TextField 
-                    id="description" 
-                    label="Description" 
-                    variant="outlined" 
-                    value={this.state.description}
-                    fullWidth
-                    onChange={(event) => {
-                        this.setState({ description: event.target.value })
+  handleClick = (event) => {
+    this.setState({ anchorEl: event.currentTarget });
+    console.log(event.currentTarget);
+  };
+
+  GetImgValue = (value) => {
+    this.setState({ icon: value, anchorEl: null });
+  };
+
+  renderTicketData = () => {
+    if (this.props.isManager) {
+      return (
+        <div>
+          <div style={styles.avatarDiv}>
+            <Button
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={(event) => this.handleClick(event)}
+            >
+              <Avatar
+                src={`icon${this.state.icon}.png`}
+                style={styles.avatar}
+              ></Avatar>
+            </Button>
+
+            <Popover
+              open={Boolean(this.state.anchorEl)}
+              anchorEl={this.state.anchorEl}
+              onClose={() => this.setState({ anchorEl: null })}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "center",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "center",
+              }}
+            >
+              <Grid style={styles.iconsPop} container spacing={1}>
+                <Grid item xs={4}>
+                  <img
+                    onClick={() => {
+                      this.GetImgValue(4);
                     }}
-                    multiline
-                    rows={6}
-                    rowsMax={6} />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Fab onClick={() => {this.props.close()}}>
-                            <CancelIcon />
-                        </Fab>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Fab disabled={!this.isChangedFromInit()} color="primary" onClick={() => {this.props.update(this.getTicket(), this.clean)}}>
-                            <SaveIcon />
-                        </Fab>
-                    </Grid>
+                    style={styles.icons}
+                    src={`icon4.png`}
+                  />
                 </Grid>
-            )
-        } else {
-            return (
-              <div style={styles.modalContent}>
-                <h3 style={styles.title}>{this.props.ticket.title}</h3>
-                <p style={styles.description}>{this.props.ticket.description}</p>
-              </div>
-            )
-        }
+
+                <Grid item xs={4}>
+                  <img
+                    onClick={() => {
+                      this.GetImgValue(5);
+                    }}
+                    style={styles.icons}
+                    src="icon5.png"
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <img
+                    onClick={() => {
+                      this.GetImgValue(6);
+                    }}
+                    style={styles.icons}
+                    src="icon6.png"
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <img
+                    onClick={() => {
+                      this.GetImgValue(6);
+                    }}
+                    style={styles.icons}
+                    src="icon1.png"
+                  />
+                </Grid>
+              </Grid>
+            </Popover>
+          </div>
+          <Grid
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="center"
+            spacing={3}
+            style={styles.modalContent}
+          >
+            <Grid item xs={12}>
+              <TextField
+                id="title"
+                label="Title"
+                variant="outlined"
+                value={this.state.title}
+                fullWidth
+                onChange={(event) => {
+                  this.setState({ title: event.target.value });
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                id="description"
+                label="Description"
+                variant="outlined"
+                value={this.state.description}
+                fullWidth
+                onChange={(event) => {
+                  this.setState({ description: event.target.value });
+                }}
+                multiline
+                rows={6}
+                rowsMax={6}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Fab
+                onClick={() => {
+                  this.props.close();
+                }}
+              >
+                <CancelIcon />
+              </Fab>
+            </Grid>
+            <Grid item xs={6}>
+              <Fab
+                disabled={!this.isChangedFromInit()}
+                color="primary"
+                onClick={() => {
+                  this.props.update(this.getTicket(), this.clean);
+                }}
+              >
+                <SaveIcon />
+              </Fab>
+            </Grid>
+          </Grid>
+        </div>
+      );
+    } else {
+      return (
+        <div style={styles.modalContent}>
+          <h3 style={styles.title}>{this.props.ticket.title}</h3>
+          <p style={styles.description}>{this.props.ticket.description}</p>
+        </div>
+      );
     }
+  };
   render() {
+    console.log(this.state.icon);
     return (
       <Modal
         onClose={() => this.props.close()}
@@ -134,12 +256,7 @@ export default class TicketDescription extends Component {
         aria-labelledby="server-modal-title"
         aria-describedby="server-modal-description"
       >
-        <div style={styles.modal}>
-          <div style={styles.avatarDiv}>
-            <Avatar style={styles.avatar}></Avatar>
-          </div>
-          {this.renderTicketData()}
-        </div>
+        <div style={styles.modal}>{this.renderTicketData()}</div>
       </Modal>
     );
   }
