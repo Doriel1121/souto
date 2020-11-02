@@ -57,6 +57,7 @@ export default class LoginPage extends Component {
       imageIndex: 0,
       viewIndex: 0,
       captainBoardName: '',
+      captainBoardSecret: '',
       captainBoardFromServer: {},
       redirectCaptain: false,
       sailorBoardKey: '',
@@ -91,7 +92,7 @@ export default class LoginPage extends Component {
       .then((response) => {
         this.setState({
           sailorBoardKey: '',
-          viewIndex: 4,
+          viewIndex: 5,
           sailorBoardFromServer: response.data,
         })
       })
@@ -108,8 +109,24 @@ export default class LoginPage extends Component {
         this.setState({
           captainBoardName: '',
           captainBoardFromServer: response.data,
-          viewIndex: 2,
+          viewIndex: 3,
         })
+      })
+      .catch((error) => {
+        alert(error)
+      })
+  }
+
+  loginACaptainBoard = () => {
+    axios
+      .get(config.server + '/board/secret/' + this.state.captainBoardSecret)
+      .then((response) => {
+        this.setState(
+          {
+            captainBoardFromServer: response.data,
+          },
+          this.loginCaptain
+        )
       })
       .catch((error) => {
         alert(error)
@@ -181,7 +198,7 @@ export default class LoginPage extends Component {
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                  this.setState({ viewIndex: 3 })
+                  this.setState({ viewIndex: 4 })
                 }}
               >
                 I am a Sailor
@@ -229,6 +246,67 @@ export default class LoginPage extends Component {
                     disabled={this.state.captainBoardName.length === 0}
                     onClick={() => {
                       this.registerABoard()
+                    }}
+                  >
+                    Let's go!
+                  </Button>
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    color="primary"
+                    fullWidth
+                    onClick={() => {
+                      this.setState({ viewIndex: 2 })
+                    }}
+                  >
+                    I have a board secret
+                  </Button>
+                </Grid>
+              </Grid>
+            </div>
+            <div style={styles.singleView}>
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+                style={styles.form}
+                spacing={3}
+              >
+                <Grid item xs={12}>
+                  <Typography variant={'h6'} style={styles.text}>
+                    What is your board secret?
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Input
+                    type="number"
+                    fullWidth
+                    variant="outlined"
+                    onChange={(event) => {
+                      this.setState({ captainBoardSecret: event.target.value })
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    onClick={() => {
+                      this.setState({ viewIndex: 1 })
+                    }}
+                  >
+                    Go back
+                  </Button>
+                </Grid>
+                <Grid item xs={6}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    disabled={this.state.captainBoardSecret.length === 0}
+                    onClick={() => {
+                      this.loginACaptainBoard()
                     }}
                   >
                     Let's go!
