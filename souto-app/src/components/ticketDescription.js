@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Avatar, Modal, TextField, Grid, Fab } from '@material-ui/core'
 import SaveIcon from '@material-ui/icons/Save'
 import CancelIcon from '@material-ui/icons/Cancel'
+import { IconsImages } from './ticket'
+import config from '../config'
 
 const styles = {
   modal: {
@@ -156,7 +158,7 @@ export default class TicketDescription extends Component {
       >
         <div style={styles.modal}>
           <div style={styles.avatarDiv}>
-            <Avatar style={styles.avatar}></Avatar>
+            <Avatar src={config.iconImages[this.props.ticket.icon]} />
           </div>
           {this.renderTicketData()}
         </div>

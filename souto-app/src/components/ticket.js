@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Typography, Avatar, Grid, IconButton } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import TicketDescription from './ticketDescription'
+import config from '../config'
 
 const styles = {
   pickBox: {
@@ -61,9 +62,10 @@ export default class Ticket extends Component {
           style={styles.pickBox}
         >
           <Grid item xs={2} style={styles.avatarBox}>
-            <Avatar style={styles.avatar}>
-              <span style={styles.AvatarContent}></span>
-            </Avatar>
+            <Avatar
+              src={config.iconImages[this.props.info.icon]}
+              style={styles.avatar}
+            />
           </Grid>
           <Grid
             item
