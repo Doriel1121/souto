@@ -10,6 +10,7 @@ export class ManagerAppDataProvider extends Component {
 
     this.state = {
       tickets: [],
+      updatedT: null,
     };
   }
 
@@ -32,7 +33,6 @@ export class ManagerAppDataProvider extends Component {
   };
 
   newTicket = (ticket, callback) => {
-    console.log(ticket);
     axios
       .post(config.server + "/board/tickets/add/" + config.boardId, ticket)
       .then((response) => {
@@ -51,9 +51,11 @@ export class ManagerAppDataProvider extends Component {
   };
 
   updateTicket = (ticket, callback) => {
+    console.log(ticket);
     axios
       .post(config.server + "/board/tickets/update", ticket)
       .then(() => {
+        this.sync();
         callback();
       })
       .catch((error) => {

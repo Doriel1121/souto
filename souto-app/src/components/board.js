@@ -7,36 +7,32 @@ const styles = {
   hiddenTicket: {
     display: "none",
   },
-  board: {
-    height: "60vh",
-    margin: "3vh",
-    borderRadius: "15px",
-    background: "linear-gradient(45deg, #00B4DB, rgb(28 111 140))",
-    boxShadow: "0px 0px 20px 1px rgb(78 78 78)",
-    marginTop: "5vw",
-  },
 };
 
 export default class Board extends Component {
   renderViews = (ticket) => {
-    let result = []
-    if(this.props.movePrev !== undefined) {
-      result.push(<div key={"prev"} style={styles.hiddenTicket}></div>)
+    let result = [];
+    if (this.props.movePrev !== undefined) {
+      result.push(<div key={"prev"} style={styles.hiddenTicket}></div>);
     }
-    result.push((
+    result.push(
       <div key={"ticket"}>
-        <Ticket info={ticket} isManager={false} delete={this.props.deleteTicket}/>
+        <Ticket
+          info={ticket}
+          isManager={false}
+          delete={this.props.deleteTicket}
+        />
       </div>
-    ))
-    if(this.props.moveNext !== undefined) {
-      result.push(<div key={"next"} style={styles.hiddenTicket}></div>)
+    );
+    if (this.props.moveNext !== undefined) {
+      result.push(<div key={"next"} style={styles.hiddenTicket}></div>);
     }
-    return result
-  }
+    return result;
+  };
 
   render() {
     return (
-      <div>
+      <div style={{ height: "80%" }}>
         <FlipMove
           typeName={null}
           maintainContainerHeight={true}
@@ -51,10 +47,10 @@ export default class Board extends Component {
                 axis="x-reverse"
                 onChangeIndex={(a, b) => {
                   setTimeout(() => {
-                    if (a > b && (this.props.moveNext !== undefined)) {
-                        this.props.moveNext(ticket);
+                    if (a > b && this.props.moveNext !== undefined) {
+                      this.props.moveNext(ticket);
                     } else if (this.props.movePrev !== undefined) {
-                      this.props.movePrev(ticket)
+                      this.props.movePrev(ticket);
                     }
                   }, 500);
                 }}

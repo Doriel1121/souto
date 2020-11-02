@@ -27,6 +27,7 @@ const styles = {
   avatar: {
     width: "8vh",
     height: "8vh",
+    border: "1px #E9E9E9  solid",
   },
   avatarDiv: {
     backgroundColor: "#CFCDCC",
@@ -49,6 +50,8 @@ const styles = {
   icons: {
     width: "8vh",
     height: "8vh",
+    border: "1px white  solid",
+    borderRadius: "30px",
   },
   iconsPop: {
     width: "100%",
@@ -108,6 +111,7 @@ export default class TicketDescription extends Component {
 
   GetImgValue = (value) => {
     this.setState({ icon: value, anchorEl: null });
+    this.forceUpdate();
   };
 
   renderTicketData = () => {
@@ -122,9 +126,9 @@ export default class TicketDescription extends Component {
             >
               <Avatar
                 src={
-                  this.props.ticket !== null
-                    ? `icon${this.props.ticket.icon}.png`
-                    : `icon${this.state.icon}.png`
+                  this.state.icon !== null
+                    ? `icon${this.state.icon}.png`
+                    : `icon${this.props.ticket.icon}.png`
                 }
                 style={styles.avatar}
               ></Avatar>
@@ -141,7 +145,6 @@ export default class TicketDescription extends Component {
             </Button>
 
             <Popover
-              style={{ padding: "90px" }}
               open={Boolean(this.state.anchorEl)}
               anchorEl={this.state.anchorEl}
               onClose={() => this.setState({ anchorEl: null })}
@@ -186,10 +189,19 @@ export default class TicketDescription extends Component {
                 <Grid item xs={4}>
                   <img
                     onClick={() => {
-                      this.GetImgValue(6);
+                      this.GetImgValue(7);
                     }}
                     style={styles.icons}
-                    src="icon1.png"
+                    src="icon7.png"
+                  />
+                </Grid>
+                <Grid item xs={4}>
+                  <img
+                    onClick={() => {
+                      this.GetImgValue(8);
+                    }}
+                    style={styles.icons}
+                    src="icon8.png"
                   />
                 </Grid>
               </Grid>
@@ -286,7 +298,6 @@ export default class TicketDescription extends Component {
     }
   };
   render() {
-    console.log(this.state.icon);
     return (
       <Modal
         onClose={() => this.props.close()}

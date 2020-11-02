@@ -21,7 +21,6 @@ const styles = {
     width: "5vh",
     height: "5vh",
     backgroundColor: "grey",
-    // display: "inline-block",
   },
   rearInfo: {
     fontSize: "x-small",
@@ -54,7 +53,6 @@ export default class Ticket extends Component {
   }
 
   render() {
-    console.log(this.props.info);
     return (
       <React.Fragment>
         <Grid
