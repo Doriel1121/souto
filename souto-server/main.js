@@ -73,6 +73,10 @@ app
   .get("/board/key/:boardKey", (request, response) => {
     console.log("Board by key request")
     boards.getBoardByKey(request.params.boardKey, (board) => {
-      response.send(board)
+      if(board !== undefined) {
+        response.send(board)
+        return;
+      }
+      response.sendStatus(500)
     })
   });
