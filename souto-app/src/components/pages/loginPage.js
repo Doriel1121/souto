@@ -1,16 +1,26 @@
 import React, { Component } from 'react'
-import { Button, TextField, Grid, Typography } from "@material-ui/core"
+import { Button, TextField, Grid, Typography, Input } from "@material-ui/core"
 import SwipeableViews from "react-swipeable-views";
 import axios from 'axios'
 import config from '../../config'
 import { Redirect } from 'react-router-dom';
+import { autoPlay } from 'react-swipeable-views-utils';
+import loginImage0 from '../../resources/login-image-0.jpg'
+import loginImage1 from '../../resources/login-image-1.jpg'
+import loginImage2 from '../../resources/login-image-2.jpg'
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const styles = {
+    imagesGallery: {
+        height: '60vh'
+    },
+    loginImage: {
+        height: '60vh'
+    },
     login: {
         position: 'absolute',
         bottom: '0',
-        border: 'solid 1px',
-        height: '45vh',
+        height: '40vh',
         width: '100vw',
     },
     typeButton: {
@@ -44,6 +54,7 @@ export default class LoginPage extends Component {
         super(props) 
 
         this.state = {
+            imageIndex: 0,
             viewIndex: 0,
             captainBoardName: "",
             captainBoardFromServer: {},
@@ -116,7 +127,19 @@ export default class LoginPage extends Component {
 
         return (
             <div>
-                <div>UP</div>
+                <div style={styles.imagesGallery}>
+                    <AutoPlaySwipeableViews
+                            index={this.state.imageIndex}
+                            axis="x"
+                            interval={"5000"}
+                            onChangeIndex={(index) => {this.setState({imageIndex: index})}}
+                            style={styles.views}
+                    >
+                    <div><img src={loginImage0} alt={"image0"} style={styles.loginImage}/></div>
+                    <div><img src={loginImage1} alt={"image1"} style={styles.loginImage} /></div>
+                    <div><img src={loginImage2} alt={"image2"} style={styles.loginImage} /></div>
+                    </AutoPlaySwipeableViews>
+                </div>
                 <div style={styles.login}>
                     <SwipeableViews
                         index={this.state.viewIndex}
@@ -168,6 +191,7 @@ export default class LoginPage extends Component {
                                     variant="contained"
                                     color="primary"
                                     fullWidth
+                                    disabled={this.state.captainBoardName.length === 0}
                                     onClick={() => {
                                         this.registerABoard()
                                     }}
@@ -235,7 +259,7 @@ export default class LoginPage extends Component {
                                 <Typography variant={"h6"} style={styles.text}>What is your board key?</Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField fullWidth variant="outlined" onChange={(event) => {
+                                <Input type="number" fullWidth variant="outlined" onChange={(event) => {
                                     this.setState({ sailorBoardKey: event.target.value })
                                 }}/>
                             </Grid>
@@ -255,11 +279,12 @@ export default class LoginPage extends Component {
                                     variant="contained"
                                     color="primary"
                                     fullWidth
+                                    disabled={this.state.sailorBoardKey.length  === 0}
                                     onClick={() => {
                                         this.findABoardByKey()
                                     }}
                                     >
-                                        Start!
+                                        Start
                                     </Button>
                                 </Grid>
                             </Grid>
@@ -284,11 +309,12 @@ export default class LoginPage extends Component {
                                     variant="contained"
                                     color="primary"
                                     fullWidth
+                                    disabled={this.state.sailorName.length === 0}
                                     onClick={() => {
                                         this.registerUser()
                                     }}
                                     >
-                                        Start!
+                                        Start
                                     </Button>
                                 </Grid>
                             </Grid>
