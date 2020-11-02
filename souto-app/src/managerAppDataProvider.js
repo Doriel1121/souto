@@ -61,7 +61,17 @@ export class ManagerAppDataProvider extends Component {
     axios
       .post(config.server + '/board/tickets/update', ticket)
       .then(() => {
-        callback()
+        this.setState((prevState) => {
+          let oldTickets = prevState.tickets
+          for (let i = 0; i < oldTickets.length; i++) {
+            if (oldTickets[i].id === ticket.id) {
+              oldTickets[i] = ticket
+            }
+          }
+          return {
+            tickets: oldTickets,
+          }
+        }, callback)
       })
       .catch((error) => {
         alert(error)

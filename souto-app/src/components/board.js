@@ -8,12 +8,8 @@ const styles = {
     display: 'none',
   },
   board: {
-    height: '60vh',
-    margin: '3vh',
-    borderRadius: '15px',
-    background: 'linear-gradient(45deg, #00B4DB, rgb(28 111 140))',
-    boxShadow: '0px 0px 20px 1px rgb(78 78 78)',
-    marginTop: '5vw',
+    height: '75vh',
+    overflow: 'auto',
   },
 }
 
@@ -40,7 +36,7 @@ export default class Board extends Component {
 
   render() {
     return (
-      <div>
+      <div style={styles.board}>
         <FlipMove
           typeName={null}
           maintainContainerHeight={true}

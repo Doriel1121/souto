@@ -11,7 +11,10 @@ const styles = {
     height: '85vh',
     overflow: 'auto',
     bottom: '0px',
+    display: 'inline-block',
+    width: '-webkit-fill-available',
   },
+  ticket: {},
 }
 
 export default class ManagerPage extends Component {

@@ -6,8 +6,9 @@ import config from '../config'
 
 const styles = {
   pickBox: {
-    margin: '2.5vh',
-    width: '92.5vw',
+    margin: '1.5vh',
+    width: 'auto',
+    height: '10vh',
     borderRadius: '15px',
     backgroundColor: 'white',
     boxShadow: '0 0 10px 1px #3e3e3e',
@@ -21,8 +22,8 @@ const styles = {
   avatar: {
     width: '5vh',
     height: '5vh',
-    backgroundColor: 'purple',
-    display: 'inline-block',
+    backgroundColor: '#50acce',
+    border: 'solid 1px',
   },
   rearInfo: {
     fontSize: 'x-small',
