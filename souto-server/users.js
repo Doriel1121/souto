@@ -11,15 +11,19 @@ exports.addUser = (boardId, user, callback) => {
             let user = rows[0]
 
             tickets.getAllTicketByBoardId(boardId, (tickets) => {
-                //TODO: Bring also the inactive tickets
-                let userTickets = tickets.map(ticket => {
-                    return [user.id, ticket.id, "TODO", (new Date()).toISOString()]
-                })
-                tickets
-                connection.query("INSERT INTO UserTicketMigration (user_id, ticket_id, status, last_update) VALUES ?", [userTickets], (error) => {
-                    if(error) throw error
+                if (tickets.length > 0) {
+                    //TODO: Bring also the inactive tickets
+                    let userTickets = tickets.map(ticket => {
+                        return [user.id, ticket.id, "TODO", (new Date()).toISOString()]
+                    })
+                    tickets
+                    connection.query("INSERT INTO UserTicketMigration (user_id, ticket_id, status, last_update) VALUES ?", [userTickets], (error) => {
+                        if(error) throw error
+                        callback(user)
+                    })
+                } else {
                     callback(user)
-                })
+                }
             })
         })
     })
