@@ -4,7 +4,7 @@ const connection = dal.connection;
 
 exports.getAllTicketsByUserId = (userId, callback) => {
   connection.query(
-    "SELECT utm.id as id, t.title, t.description, utm.status FROM UserTicketMigration utm JOIN Tickets t ON t.id = utm.ticket_id WHERE utm.user_id = ? AND t.active = 1",
+    "SELECT utm.id as id, t.title, t.description, t.icon, utm.status FROM UserTicketMigration utm JOIN Tickets t ON t.id = utm.ticket_id WHERE utm.user_id = ? AND t.active = 1",
     [userId],
     (error, rows) => {
       if (error) throw error;
