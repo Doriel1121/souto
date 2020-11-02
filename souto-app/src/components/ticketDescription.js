@@ -132,8 +132,8 @@ export default class TicketDescription extends Component {
                 }
                 style={styles.avatar}
               ></Avatar>
-
-              <EditIcon
+            </Button>
+            <EditIcon
                 style={{
                   width: "8vw",
                   height: "8vh",
@@ -142,7 +142,6 @@ export default class TicketDescription extends Component {
                   filter: "opacity(0.5)",
                 }}
               />
-            </Button>
 
             <Popover
               open={Boolean(this.state.anchorEl)}
