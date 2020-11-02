@@ -31,7 +31,7 @@ export class ClientAppDataProvider extends Component {
   }
 
   sync = (callback) => {
-    axios.get(config.server + "/tickets/" + config.userId)
+    axios.get(config.server + "/tickets/" + window.localStorage.getItem("sailorUserId"))
     .then((response) => {
       let data = lodash.groupBy(response.data, item => item.status)
       let todoT = data["TODO"] === undefined ? [] : data["TODO"]

@@ -5,6 +5,15 @@ import ManagerTools from "../managerTools"
 import FlipMove from "react-flip-move";
 import Menu from "../menu"
 
+const styles = {
+    ticketsHolder: {
+        position: 'absolute',
+        height: '85vh',
+        overflow: 'auto',
+        bottom: '0px'
+    }
+}
+
 export default class ManagerPage extends Component {
     renderTickets = (ctx) => {
         return (
@@ -29,7 +38,9 @@ export default class ManagerPage extends Component {
                         return (
                         <div>
                             <ManagerTools addTicket={ctx.newTicket}/>
-                            {this.renderTickets(ctx)}
+                            <div style={styles.ticketsHolder}>
+                                {this.renderTickets(ctx)}
+                            </div>
                         </div>
                         )
                     }}
