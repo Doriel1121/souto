@@ -14,6 +14,17 @@ exports.addBoard = (board, callback) => {
     })
 }
 
+exports.getBoardByKey = (boardKey, callback) => {
+    connection.query("SELECT * FROM Boards where public_key = ?", [boardKey], (error, rows) => {
+        if(error) throw error;
+        if (rows.length > 0) {
+            callback(rows[0])
+        } else {
+            callback(undefined)
+        }
+    })
+}
+
 let genetateKey = () => {
     return (Math.floor(Math.random() * 8999) + 1000).toString()
 }

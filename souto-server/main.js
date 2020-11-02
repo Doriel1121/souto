@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const tickets = require("./tickets");
+const users = require("./users");
 const boards = require("./boards");
 var https = require("https");
 var fs = require("fs");
@@ -60,6 +61,18 @@ app
   .post("/boards/add", (request, response) => {
     console.log("New board request")
     boards.addBoard(request.body, (board) => {
+      response.send(board)
+    })
+  })
+  .post("/users/add/:boardId", (request, response) => {
+    console.log("New register user request")
+    users.addUser(request.params.boardId, request.body, (user) => {
+      response.send(user)
+    })
+  })
+  .get("/board/key/:boardKey", (request, response) => {
+    console.log("Board by key request")
+    boards.getBoardByKey(request.params.boardKey, (board) => {
       response.send(board)
     })
   });
