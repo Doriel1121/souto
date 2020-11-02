@@ -32,25 +32,21 @@ export class ClientAppDataProvider extends Component {
 
   sync = (callback) => {
     axios.get(config.server + "/tickets/" + window.localStorage.getItem("sailorUserId"))
-      .then((response) => {
-        let data = lodash.groupBy(response.data, (item) => item.status);
-        let todoT = data["TODO"] === undefined ? [] : data["TODO"];
-        let inProgressT =
-          data["INPROGRESS"] === undefined ? [] : data["INPROGRESS"];
-        let doneT = data["DONE"] === undefined ? [] : data["DONE"];
-        this.setState(
-          {
-            todoTickets: todoT,
-            inProgressTickets: inProgressT,
-            doneTickets: doneT,
-          },
-          callback
-        );
-      })
-      .catch((error) => {
-        alert(error);
-      });
-  };
+    .then((response) => {
+      let data = lodash.groupBy(response.data, item => item.status)
+      let todoT = data["TODO"] === undefined ? [] : data["TODO"]
+      let inProgressT = data["INPROGRESS"] === undefined ? [] : data["INPROGRESS"]
+      let doneT = data["DONE"] === undefined ? [] : data["DONE"]
+      this.setState({
+        todoTickets: todoT,
+        inProgressTickets: inProgressT,
+        doneTickets: doneT
+      }, callback)
+    })
+    .catch((error) => {
+      alert(error)
+    })
+  }
 
   moveTicket = (ticket, next) => {
     switch (ticket.status) {

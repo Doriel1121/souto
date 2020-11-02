@@ -20,9 +20,9 @@ export class ManagerAppDataProvider extends Component {
 
   sync = () => {
     axios.get(config.server + "/board/tickets/" + window.localStorage.getItem("captainBoardId"))
-      .then((response) => {
-        this.setState({
-          tickets: response.data,
+    .then((response) => {
+      this.setState({
+        tickets: response.data
         });
       })
       .catch((error) => {
@@ -32,20 +32,20 @@ export class ManagerAppDataProvider extends Component {
 
   newTicket = (ticket, callback) => {
     axios.post(config.server + "/board/tickets/add/" + window.localStorage.getItem("captainBoardId"), ticket)
-      .then((response) => {
-        let newTicket = response.data;
-        this.setState((prevState) => {
-          let tickets = prevState.tickets;
-          tickets.push(newTicket);
-          return {
-            tickets: tickets,
-          };
-        }, callback);
-      })
-      .catch((error) => {
-        alert(error);
-      });
-  };
+    .then((response) => {
+      let newTicket = response.data
+      this.setState((prevState) => {
+        let tickets = prevState.tickets
+        tickets.push(newTicket)
+        return {
+          tickets: tickets
+        }
+      }, callback)
+    })
+    .catch((error) => {
+      alert(error)
+    })
+  }
 
   updateTicket = (ticket, callback) => {
     console.log(ticket);
