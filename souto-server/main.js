@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const tickets = require("./tickets");
+const users = require("./users");
+const boards = require("./boards");
 var https = require("https");
 var fs = require("fs");
 
@@ -16,9 +18,7 @@ const port = 3002;
 https.createServer(httpsOptions, app).listen(port, () => {
   console.log(`Server started at port ${port}`);
 });
-// app.listen(port, () => {
-//   console.log(`Server started at port ${port}`);
-// });
+
 app
   .use(bodyParser.json())
   .use(cors())
@@ -55,7 +55,28 @@ app
   .post("/board/tickets/add/:boardId", (request, response) => {
     console.log("New ticket request")
     tickets.addTicket(request.params.boardId, request.body, (ticket) => {
-      console.log(ticket);
       response.send(ticket)
+    })
+  })
+  .post("/boards/add", (request, response) => {
+    console.log("New board request")
+    boards.addBoard(request.body, (board) => {
+      response.send(board)
+    })
+  })
+  .post("/users/add/:boardId", (request, response) => {
+    console.log("New register user request")
+    users.addUser(request.params.boardId, request.body, (user) => {
+      response.send(user)
+    })
+  })
+  .get("/board/key/:boardKey", (request, response) => {
+    console.log("Board by key request")
+    boards.getBoardByKey(request.params.boardKey, (board) => {
+      if(board !== undefined) {
+        response.send(board)
+        return;
+      }
+      response.sendStatus(500)
     })
   });

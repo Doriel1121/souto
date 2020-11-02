@@ -14,7 +14,7 @@ exports.getAllTicketsByUserId = (userId, callback) => {
 };
 
 exports.updateTicket = (ticketId, ticket, callback) => {
-  connection.query("UPDATE Tickets SET title = ?, description = ? , icon = ? WHERE id = ?",
+  connection.query("UPDATE Tickets SET title = ?, description = ?, icon = ?  WHERE id = ?",
     [ticket.title, ticket.description, ticket.icon, ticketId], (error, _) => {
       if (error) throw error;
       callback()
@@ -43,7 +43,7 @@ exports.getAllTicketByBoardId = (boardId, callback) => {
 }
 
 exports.addTicket = (boardId, ticket, callback) => {
-  connection.query("INSERT INTO Tickets (board_id, title, description, creation_time, active , icon) VALUES (?, ?, ?, ?, 1,?)",
+  connection.query("INSERT INTO Tickets (board_id, title, description, creation_time, active , icon) VALUES (?, ?, ?, ?, 1 , ?)",
     [boardId, ticket.title, ticket.description, (new Date()).toISOString(), ticket.icon], (error) => {
       if (error) throw error;
       connection.query("SELECT * FROM Tickets WHERE board_id = ? AND title = ? ORDER BY creation_time DESC", [boardId, ticket.title], (error, rows) => {
@@ -51,13 +51,17 @@ exports.addTicket = (boardId, ticket, callback) => {
         let newTicket = rows[0]
         connection.query("SELECT * FROM Users WHERE board_id = ?", [boardId], (error, registeredUser) => {
           if (error) throw error;
-          let userRows = registeredUser.map(usr => {
-            return [usr.id, newTicket.id, "TODO", (new Date()).toISOString()]
-          })
-          connection.query("INSERT INTO UserTicketMigration (user_id, ticket_id, status, last_update) VALUES ?", [userRows], (error) => {
-            if (error) throw error;
+          if (registeredUser.length > 0) {
+            let userRows = registeredUser.map(usr => {
+              return [usr.id, newTicket.id, "TODO", (new Date()).toISOString()]
+            })
+            connection.query("INSERT INTO UserTicketMigration (user_id, ticket_id, status, last_update) VALUES ?", [userRows], (error) => {
+              if (error) throw error;
+              callback(newTicket)
+            })
+          } else {
             callback(newTicket)
-          })
+          }
         })
       })
     })
