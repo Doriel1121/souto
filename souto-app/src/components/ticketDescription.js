@@ -1,62 +1,62 @@
-import React, { Component } from 'react'
-import { Avatar, Modal, TextField, Grid, Fab, Select } from '@material-ui/core'
-import SaveIcon from '@material-ui/icons/Save'
-import CancelIcon from '@material-ui/icons/Cancel'
-import config from '../config'
+import React, { Component } from "react";
+import { Avatar, Modal, TextField, Grid, Fab, Select } from "@material-ui/core";
+import SaveIcon from "@material-ui/icons/Save";
+import CancelIcon from "@material-ui/icons/Cancel";
+import config from "../config";
 
 const styles = {
   modal: {
-    backgroundColor: 'white',
-    width: '80vw',
-    height: '70vh',
-    margin: 'auto',
-    marginTop: '15vh',
-    borderRadius: '10px',
-    textAlign: 'center',
-    backdropFilter: 'blur(3px)',
-    opacity: '0.7',
-    boxShadow: '0 0 16px 5px black',
-    outline: 'none',
+    backgroundColor: "white",
+    width: "80vw",
+    height: "70vh",
+    margin: "auto",
+    marginTop: "15vh",
+    borderRadius: "10px",
+    textAlign: "center",
+    backdropFilter: "blur(3px)",
+    opacity: "0.7",
+    boxShadow: "0 0 16px 5px black",
+    outline: "none",
   },
   avatar: {
-    width: '8vh',
-    height: '8vh',
-    margin: '0 auto',
-    backgroundColor: 'white',
-    border: 'solid 1px black',
-    marginTop: '3vh',
+    width: "8vh",
+    height: "8vh",
+    margin: "0 auto",
+    backgroundColor: "white",
+    border: "solid 1px black",
+    marginTop: "3vh",
   },
   avatarDiv: {
-    backgroundColor: '#CFCDCC',
-    borderRadius: '10px 10px 0 0',
-    background: 'linear-gradient(45deg, #00B4DB, rgb(28 111 140))',
-    minHeight: '15vh',
-    display: 'flex',
+    backgroundColor: "#CFCDCC",
+    borderRadius: "10px 10px 0 0",
+    background: "linear-gradient(45deg, #00B4DB, rgb(28 111 140))",
+    minHeight: "15vh",
+    display: "flex",
   },
   description: {
-    fontSize: 'small',
-    textAlign: 'left',
+    fontSize: "small",
+    textAlign: "left",
   },
   modalContent: {
-    width: '90%',
-    margin: 'auto',
-    paddingTop: '2vh',
+    width: "90%",
+    margin: "auto",
+    paddingTop: "2vh",
   },
   changeIconSelect: {
-    color: '#464646',
+    color: "#464646",
   },
-}
+};
 
 export default class TicketDescription extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       id: this.props.ticket.id,
       title: this.props.ticket.title,
       description: this.props.ticket.description,
       icon: this.props.ticket.icon,
-    }
+    };
   }
 
   isChangedFromInit = () => {
@@ -64,8 +64,8 @@ export default class TicketDescription extends Component {
       this.state.title !== this.props.ticket.title ||
       this.state.description !== this.props.ticket.description ||
       this.state.icon !== this.props.ticket.icon
-    )
-  }
+    );
+  };
 
   getTicket = () => {
     return {
@@ -73,18 +73,18 @@ export default class TicketDescription extends Component {
       title: this.state.title,
       description: this.state.description,
       icon: this.state.icon,
-    }
-  }
+    };
+  };
 
   clean = () => {
     this.setState(
       {
-        title: '',
-        description: '',
+        title: "",
+        description: "",
       },
       this.props.close
-    )
-  }
+    );
+  };
 
   renderTicketData = () => {
     if (this.props.isManager) {
@@ -109,7 +109,7 @@ export default class TicketDescription extends Component {
                   native
                   value={this.state.icon}
                   onChange={(e) => {
-                    this.setState({ icon: e.target.value })
+                    this.setState({ icon: e.target.value });
                   }}
                 >
                   <option style={styles.changeIconSelect} value={0}>
@@ -144,8 +144,11 @@ export default class TicketDescription extends Component {
                 variant="outlined"
                 value={this.state.title}
                 fullWidth
+                inputProps={{
+                  maxLength: 20,
+                }}
                 onChange={(event) => {
-                  this.setState({ title: event.target.value })
+                  this.setState({ title: event.target.value });
                 }}
               />
             </Grid>
@@ -157,17 +160,20 @@ export default class TicketDescription extends Component {
                 value={this.state.description}
                 fullWidth
                 onChange={(event) => {
-                  this.setState({ description: event.target.value })
+                  this.setState({ description: event.target.value });
                 }}
                 multiline
                 rows={6}
                 rowsMax={6}
+                inputProps={{
+                  maxLength: 80,
+                }}
               />
             </Grid>
             <Grid item xs={6}>
               <Fab
                 onClick={() => {
-                  this.props.close()
+                  this.props.close();
                 }}
               >
                 <CancelIcon />
@@ -178,7 +184,7 @@ export default class TicketDescription extends Component {
                 disabled={!this.isChangedFromInit()}
                 color="primary"
                 onClick={() => {
-                  this.props.update(this.getTicket(), this.props.close)
+                  this.props.update(this.getTicket(), this.props.close);
                 }}
               >
                 <SaveIcon />
@@ -186,7 +192,7 @@ export default class TicketDescription extends Component {
             </Grid>
           </Grid>
         </div>
-      )
+      );
     } else {
       return (
         <div>
@@ -201,9 +207,9 @@ export default class TicketDescription extends Component {
             <p style={styles.description}>{this.props.ticket.description}</p>
           </div>
         </div>
-      )
+      );
     }
-  }
+  };
   render() {
     return (
       <Modal
@@ -213,6 +219,6 @@ export default class TicketDescription extends Component {
       >
         <div style={styles.modal}>{this.renderTicketData()}</div>
       </Modal>
-    )
+    );
   }
 }

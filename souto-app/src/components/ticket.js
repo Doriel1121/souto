@@ -1,54 +1,54 @@
-import React, { Component } from 'react'
-import { Typography, Avatar, Grid, IconButton } from '@material-ui/core'
-import DeleteIcon from '@material-ui/icons/Delete'
-import TicketDescription from './ticketDescription'
-import config from '../config'
+import React, { Component } from "react";
+import { Typography, Avatar, Grid, IconButton } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
+import TicketDescription from "./ticketDescription";
+import config from "../config";
 
 const styles = {
   pickBox: {
-    margin: '1.5vh',
-    width: 'auto',
-    height: '10vh',
-    borderRadius: '15px',
-    backgroundColor: 'white',
-    boxShadow: '0 0 10px 1px #3e3e3e',
+    margin: "1.5vh",
+    width: "auto",
+    height: "10vh",
+    borderRadius: "15px",
+    backgroundColor: "white",
+    boxShadow: "0 0 10px 1px #3e3e3e",
   },
   title: {
-    fontSize: 'small',
-    color: '#646261',
-    display: 'inline-block',
-    fontWeight: 'bolder',
+    fontSize: "small",
+    color: "#646261",
+    display: "inline-block",
+    fontWeight: "bolder",
   },
   avatar: {
-    width: '5vh',
-    height: '5vh',
-    backgroundColor: '#50acce',
-    border: 'solid 1px',
+    width: "5vh",
+    height: "5vh",
+    backgroundColor: "#50acce",
+    border: "solid 1px",
   },
   rearInfo: {
-    fontSize: 'x-small',
-    color: '#BFBAB8 ',
+    fontSize: "x-small",
+    color: "#BFBAB8 ",
   },
   textBox: {
-    paddingLeft: '0px',
+    paddingLeft: "0px",
   },
   avatarBox: {
-    display: 'flex',
-    justifyContent: 'center',
-    flexDirection: 'column',
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
   },
   deleteIcon: {
-    color: '#737373',
+    color: "#737373",
   },
-}
+};
 
 export default class Ticket extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       isOpen: false,
-    }
+    };
   }
 
   render() {
@@ -69,17 +69,18 @@ export default class Ticket extends Component {
             />
           </Grid>
           <Grid
+            zeroMinWidth
             item
             xs={this.props.isManager ? 8 : 10}
             style={styles.textBox}
             onClick={() => {
-              this.setState({ isOpen: true })
+              this.setState({ isOpen: true });
             }}
           >
-            <Typography style={styles.title}>
+            <Typography maxLength="2" style={styles.title}>
               {this.props.info.title}
             </Typography>
-            <Typography style={styles.rearInfo}>
+            <Typography noWrap style={styles.rearInfo}>
               {this.props.info.description}
             </Typography>
           </Grid>
@@ -87,7 +88,7 @@ export default class Ticket extends Component {
             <Grid item xs={2}>
               <IconButton
                 onClick={() => {
-                  this.props.delete(this.props.info.id)
+                  this.props.delete(this.props.info.id);
                 }}
                 style={styles.deleteIcon}
                 edge="start"
@@ -97,19 +98,19 @@ export default class Ticket extends Component {
               </IconButton>
             </Grid>
           ) : (
-            ''
+            ""
           )}
         </Grid>
         <TicketDescription
           isOpen={this.state.isOpen}
           ticket={this.props.info}
           close={() => {
-            this.setState({ isOpen: false })
+            this.setState({ isOpen: false });
           }}
           isManager={this.props.isManager}
           update={this.props.update}
         />
       </React.Fragment>
-    )
+    );
   }
 }

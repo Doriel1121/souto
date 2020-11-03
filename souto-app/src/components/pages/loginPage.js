@@ -1,154 +1,154 @@
-import React, { Component } from 'react'
-import { Button, TextField, Grid, Typography, Input } from '@material-ui/core'
-import SwipeableViews from 'react-swipeable-views'
-import axios from 'axios'
-import config from '../../config'
-import { Redirect } from 'react-router-dom'
-import { autoPlay } from 'react-swipeable-views-utils'
-import loginImage0 from '../../resources/login-image-0.jpg'
-import loginImage1 from '../../resources/login-image-1.jpg'
-import loginImage2 from '../../resources/login-image-2.jpg'
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
+import React, { Component } from "react";
+import { Button, TextField, Grid, Typography, Input } from "@material-ui/core";
+import SwipeableViews from "react-swipeable-views";
+import axios from "axios";
+import config from "../../config";
+import { Redirect } from "react-router-dom";
+import { autoPlay } from "react-swipeable-views-utils";
+import loginImage0 from "../../resources/login-image-0.jpg";
+import loginImage1 from "../../resources/login-image-1.jpg";
+import loginImage2 from "../../resources/login-image-2.jpg";
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const styles = {
   imagesGallery: {
-    height: '60vh',
+    height: "60vh",
   },
   loginImage: {
-    height: '60vh',
+    height: "60vh",
   },
   login: {
-    position: 'absolute',
-    bottom: '0',
-    height: '40vh',
-    width: '100vw',
+    position: "absolute",
+    bottom: "0",
+    height: "40vh",
+    width: "100vw",
   },
   typeButton: {
-    width: '50vw',
+    width: "50vw",
   },
   singleView: {
-    height: '40vh',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    height: "40vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
   views: {
-    overflowX: 'hidden',
-    width: 'inherit',
-    height: 'inherit',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
+    overflowX: "hidden",
+    width: "inherit",
+    height: "inherit",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
   },
   form: {
-    width: '65vw',
+    width: "65vw",
   },
   text: {
-    color: '#484848',
+    color: "#484848",
   },
-}
+};
 
 export default class LoginPage extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       imageIndex: 0,
       viewIndex: 0,
-      captainBoardName: '',
-      captainBoardSecret: '',
+      captainBoardName: "",
+      captainBoardSecret: "",
       captainBoardFromServer: {},
       redirectCaptain: false,
-      sailorBoardKey: '',
-      sailorName: '',
+      sailorBoardKey: "",
+      sailorName: "",
       sailorBoardFromServer: {},
       redirectSailor: false,
-    }
+    };
   }
 
   registerUser = () => {
-    let user = { name: this.state.sailorName }
+    let user = { name: this.state.sailorName };
     axios
       .post(
-        config.server + '/users/add/' + this.state.sailorBoardFromServer.id,
+        config.server + "/users/add/" + this.state.sailorBoardFromServer.id,
         user
       )
       .then((response) => {
-        window.localStorage.setItem('sailorUserId', response.data.id)
+        window.localStorage.setItem("sailorUserId", response.data.id);
         this.setState({
-          sailorName: '',
+          sailorName: "",
           redirectSailor: true,
-        })
+        });
       })
       .catch((error) => {
-        alert(error)
-      })
-  }
+        alert(error);
+      });
+  };
 
   findABoardByKey = () => {
     axios
-      .get(config.server + '/board/key/' + this.state.sailorBoardKey)
+      .get(config.server + "/board/key/" + this.state.sailorBoardKey)
       .then((response) => {
         this.setState({
-          sailorBoardKey: '',
+          sailorBoardKey: "",
           viewIndex: 5,
           sailorBoardFromServer: response.data,
-        })
+        });
       })
       .catch((error) => {
-        alert(error)
-      })
-  }
+        alert(error);
+      });
+  };
 
   registerABoard = () => {
-    let board = { name: this.state.captainBoardName }
+    let board = { name: this.state.captainBoardName };
     axios
-      .post(config.server + '/boards/add', board)
+      .post(config.server + "/boards/add", board)
       .then((response) => {
         this.setState({
-          captainBoardName: '',
+          captainBoardName: "",
           captainBoardFromServer: response.data,
           viewIndex: 3,
-        })
+        });
       })
       .catch((error) => {
-        alert(error)
-      })
-  }
+        alert(error);
+      });
+  };
 
   loginACaptainBoard = () => {
     axios
-      .get(config.server + '/board/secret/' + this.state.captainBoardSecret)
+      .get(config.server + "/board/secret/" + this.state.captainBoardSecret)
       .then((response) => {
         this.setState(
           {
             captainBoardFromServer: response.data,
           },
           this.loginCaptain
-        )
+        );
       })
       .catch((error) => {
-        alert(error)
-      })
-  }
+        alert(error);
+      });
+  };
 
   loginCaptain = () => {
     window.localStorage.setItem(
-      'captainBoardId',
+      "captainBoardId",
       this.state.captainBoardFromServer.id
-    )
+    );
 
     this.setState({
       redirectCaptain: true,
-    })
-  }
+    });
+  };
 
   render() {
     if (this.state.redirectCaptain) {
-      return <Redirect to="/manager/main" />
+      return <Redirect to="/manager/main" />;
     } else if (this.state.redirectSailor) {
-      return <Redirect to="/client/main" />
+      return <Redirect to="/client/main" />;
     }
 
     return (
@@ -157,20 +157,20 @@ export default class LoginPage extends Component {
           <AutoPlaySwipeableViews
             index={this.state.imageIndex}
             axis="x"
-            interval={'5000'}
+            interval={"5000"}
             onChangeIndex={(index) => {
-              this.setState({ imageIndex: index })
+              this.setState({ imageIndex: index });
             }}
             style={styles.views}
           >
             <div>
-              <img src={loginImage0} alt={'image0'} style={styles.loginImage} />
+              <img src={loginImage0} alt={"image0"} style={styles.loginImage} />
             </div>
             <div>
-              <img src={loginImage1} alt={'image1'} style={styles.loginImage} />
+              <img src={loginImage1} alt={"image1"} style={styles.loginImage} />
             </div>
             <div>
-              <img src={loginImage2} alt={'image2'} style={styles.loginImage} />
+              <img src={loginImage2} alt={"image2"} style={styles.loginImage} />
             </div>
           </AutoPlaySwipeableViews>
         </div>
@@ -187,7 +187,7 @@ export default class LoginPage extends Component {
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                  this.setState({ viewIndex: 1 })
+                  this.setState({ viewIndex: 1 });
                 }}
               >
                 I am a Captain
@@ -198,7 +198,7 @@ export default class LoginPage extends Component {
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                  this.setState({ viewIndex: 4 })
+                  this.setState({ viewIndex: 4 });
                 }}
               >
                 I am a Sailor
@@ -214,16 +214,19 @@ export default class LoginPage extends Component {
                 spacing={3}
               >
                 <Grid item xs={12}>
-                  <Typography variant={'h6'} style={styles.text}>
+                  <Typography variant={"h6"} style={styles.text}>
                     What is your board name?
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    inputProps={{
+                      maxLength: 20,
+                    }}
                     fullWidth
                     variant="outlined"
                     onChange={(event) => {
-                      this.setState({ captainBoardName: event.target.value })
+                      this.setState({ captainBoardName: event.target.value });
                     }}
                   />
                 </Grid>
@@ -232,7 +235,7 @@ export default class LoginPage extends Component {
                     variant="contained"
                     fullWidth
                     onClick={() => {
-                      this.setState({ viewIndex: 0 })
+                      this.setState({ viewIndex: 0 });
                     }}
                   >
                     Go back
@@ -245,7 +248,7 @@ export default class LoginPage extends Component {
                     fullWidth
                     disabled={this.state.captainBoardName.length === 0}
                     onClick={() => {
-                      this.registerABoard()
+                      this.registerABoard();
                     }}
                   >
                     Let's go!
@@ -256,7 +259,7 @@ export default class LoginPage extends Component {
                     color="primary"
                     fullWidth
                     onClick={() => {
-                      this.setState({ viewIndex: 2 })
+                      this.setState({ viewIndex: 2 });
                     }}
                   >
                     I have a board secret
@@ -274,17 +277,22 @@ export default class LoginPage extends Component {
                 spacing={3}
               >
                 <Grid item xs={12}>
-                  <Typography variant={'h6'} style={styles.text}>
+                  <Typography variant={"h6"} style={styles.text}>
                     What is your board secret?
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
-                  <Input
+                  <TextField
+                    onInput={(e) => {
+                      e.target.value = Math.max(0, parseInt(e.target.value))
+                        .toString()
+                        .slice(0, 4);
+                    }}
                     type="number"
                     fullWidth
                     variant="outlined"
                     onChange={(event) => {
-                      this.setState({ captainBoardSecret: event.target.value })
+                      this.setState({ captainBoardSecret: event.target.value });
                     }}
                   />
                 </Grid>
@@ -293,7 +301,7 @@ export default class LoginPage extends Component {
                     variant="contained"
                     fullWidth
                     onClick={() => {
-                      this.setState({ viewIndex: 1 })
+                      this.setState({ viewIndex: 1 });
                     }}
                   >
                     Go back
@@ -306,7 +314,7 @@ export default class LoginPage extends Component {
                     fullWidth
                     disabled={this.state.captainBoardSecret.length === 0}
                     onClick={() => {
-                      this.loginACaptainBoard()
+                      this.loginACaptainBoard();
                     }}
                   >
                     Let's go!
@@ -325,8 +333,8 @@ export default class LoginPage extends Component {
               >
                 <Grid item xs={12}>
                   <Typography
-                    variant={'h5'}
-                    style={{ ...styles.text, textAlign: 'center' }}
+                    variant={"h5"}
+                    style={{ ...styles.text, textAlign: "center" }}
                   >
                     Your board is ready!
                   </Typography>
@@ -336,8 +344,8 @@ export default class LoginPage extends Component {
                   xs={12}
                   style={{
                     ...styles.text,
-                    textAlign: 'center',
-                    padding: '0px',
+                    textAlign: "center",
+                    padding: "0px",
                   }}
                 >
                   Key:
@@ -346,11 +354,11 @@ export default class LoginPage extends Component {
                   item
                   xs={12}
                   style={{
-                    textAlign: 'center',
-                    fontSize: 'xxx-large',
-                    fontWeight: '800',
-                    color: '#0056b1',
-                    paddingTop: '0px',
+                    textAlign: "center",
+                    fontSize: "xxx-large",
+                    fontWeight: "800",
+                    color: "#0056b1",
+                    paddingTop: "0px",
                   }}
                 >
                   {this.state.captainBoardFromServer.public_key}
@@ -360,8 +368,8 @@ export default class LoginPage extends Component {
                   xs={12}
                   style={{
                     ...styles.text,
-                    textAlign: 'center',
-                    padding: '0px',
+                    textAlign: "center",
+                    padding: "0px",
                   }}
                 >
                   Secret:
@@ -371,8 +379,8 @@ export default class LoginPage extends Component {
                   xs={12}
                   style={{
                     ...styles.text,
-                    textAlign: 'center',
-                    padding: '0px',
+                    textAlign: "center",
+                    padding: "0px",
                   }}
                 >
                   {this.state.captainBoardFromServer.secret}
@@ -380,13 +388,13 @@ export default class LoginPage extends Component {
                 <Grid
                   item
                   xs={6}
-                  style={{ ...styles.text, textAlign: 'center' }}
+                  style={{ ...styles.text, textAlign: "center" }}
                 >
                   <Button
                     variant="contained"
                     fullWidth
                     onClick={() => {
-                      this.setState({ viewIndex: 0 })
+                      this.setState({ viewIndex: 0 });
                     }}
                   >
                     Go back
@@ -395,14 +403,14 @@ export default class LoginPage extends Component {
                 <Grid
                   item
                   xs={6}
-                  style={{ ...styles.text, textAlign: 'center' }}
+                  style={{ ...styles.text, textAlign: "center" }}
                 >
                   <Button
                     variant="contained"
                     color="primary"
                     fullWidth
                     onClick={() => {
-                      this.loginCaptain()
+                      this.loginCaptain();
                     }}
                   >
                     Start
@@ -420,17 +428,22 @@ export default class LoginPage extends Component {
                 spacing={3}
               >
                 <Grid item xs={12}>
-                  <Typography variant={'h6'} style={styles.text}>
+                  <Typography variant={"h6"} style={styles.text}>
                     What is your board key?
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
-                  <Input
+                  <TextField
+                    onInput={(e) => {
+                      e.target.value = Math.max(0, parseInt(e.target.value))
+                        .toString()
+                        .slice(0, 4);
+                    }}
                     type="number"
                     fullWidth
                     variant="outlined"
                     onChange={(event) => {
-                      this.setState({ sailorBoardKey: event.target.value })
+                      this.setState({ sailorBoardKey: event.target.value });
                     }}
                   />
                 </Grid>
@@ -439,7 +452,7 @@ export default class LoginPage extends Component {
                     variant="contained"
                     fullWidth
                     onClick={() => {
-                      this.setState({ viewIndex: 0 })
+                      this.setState({ viewIndex: 0 });
                     }}
                   >
                     Go back
@@ -452,7 +465,7 @@ export default class LoginPage extends Component {
                     fullWidth
                     disabled={this.state.sailorBoardKey.length === 0}
                     onClick={() => {
-                      this.findABoardByKey()
+                      this.findABoardByKey();
                     }}
                   >
                     Start
@@ -470,16 +483,19 @@ export default class LoginPage extends Component {
                 spacing={3}
               >
                 <Grid item xs={12}>
-                  <Typography variant={'h6'} style={styles.text}>
+                  <Typography variant={"h6"} style={styles.text}>
                     What is your name?
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    inputProps={{
+                      maxLength: 30,
+                    }}
                     fullWidth
                     variant="outlined"
                     onChange={(event) => {
-                      this.setState({ sailorName: event.target.value })
+                      this.setState({ sailorName: event.target.value });
                     }}
                   />
                 </Grid>
@@ -490,7 +506,7 @@ export default class LoginPage extends Component {
                     fullWidth
                     disabled={this.state.sailorName.length === 0}
                     onClick={() => {
-                      this.registerUser()
+                      this.registerUser();
                     }}
                   >
                     Start
@@ -501,6 +517,6 @@ export default class LoginPage extends Component {
           </SwipeableViews>
         </div>
       </div>
-    )
+    );
   }
 }
