@@ -70,6 +70,17 @@ app
       response.send(user)
     })
   })
+  .get('/users/secret/:secretNumber', (request, response) => {
+    console.log('user login by secret')
+    users.logInUserBySecret(request.params.userSecret, (user) => {
+      if (user !== null) {
+        response.send(user)
+      } else {
+        response.sendStatus(500)
+      }
+
+    })
+  })
   .get('/board/key/:boardKey', (request, response) => {
     console.log('Board by key request')
     boards.getBoardByKey(request.params.boardKey, (board) => {
