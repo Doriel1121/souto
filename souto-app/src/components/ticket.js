@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Typography, Avatar, Grid, IconButton } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import TicketDescription from "./ticketDescription";
-import config from "../config";
+import React, { Component } from "react"
+import { Typography, Avatar, Grid, IconButton } from "@material-ui/core"
+import DeleteIcon from "@material-ui/icons/Delete"
+import TicketDescription from "./ticketDescription"
+import config from "../config"
 
 const styles = {
   pickBox: {
@@ -40,15 +40,15 @@ const styles = {
   deleteIcon: {
     color: "#737373",
   },
-};
+}
 
 export default class Ticket extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       isOpen: false,
-    };
+    }
   }
 
   render() {
@@ -69,18 +69,17 @@ export default class Ticket extends Component {
             />
           </Grid>
           <Grid
-            zeroMinWidth
             item
             xs={this.props.isManager ? 8 : 10}
             style={styles.textBox}
             onClick={() => {
-              this.setState({ isOpen: true });
+              this.setState({ isOpen: true })
             }}
           >
-            <Typography maxLength="2" style={styles.title}>
+            <Typography style={styles.title}>
               {this.props.info.title}
             </Typography>
-            <Typography noWrap style={styles.rearInfo}>
+            <Typography style={styles.rearInfo}>
               {this.props.info.description}
             </Typography>
           </Grid>
@@ -88,7 +87,7 @@ export default class Ticket extends Component {
             <Grid item xs={2}>
               <IconButton
                 onClick={() => {
-                  this.props.delete(this.props.info.id);
+                  this.props.delete(this.props.info.id)
                 }}
                 style={styles.deleteIcon}
                 edge="start"
@@ -105,12 +104,12 @@ export default class Ticket extends Component {
           isOpen={this.state.isOpen}
           ticket={this.props.info}
           close={() => {
-            this.setState({ isOpen: false });
+            this.setState({ isOpen: false })
           }}
           isManager={this.props.isManager}
           update={this.props.update}
         />
       </React.Fragment>
-    );
+    )
   }
 }

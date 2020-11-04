@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Avatar, Modal, TextField, Grid, Fab, Select } from "@material-ui/core";
-import SaveIcon from "@material-ui/icons/Save";
-import CancelIcon from "@material-ui/icons/Cancel";
-import config from "../config";
+import React, { Component } from "react"
+import { Avatar, Modal, TextField, Grid, Fab, Select } from "@material-ui/core"
+import SaveIcon from "@material-ui/icons/Save"
+import CancelIcon from "@material-ui/icons/Cancel"
+import config from "../config"
 
 const styles = {
   modal: {
@@ -45,18 +45,18 @@ const styles = {
   changeIconSelect: {
     color: "#464646",
   },
-};
+}
 
 export default class TicketDescription extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       id: this.props.ticket.id,
       title: this.props.ticket.title,
       description: this.props.ticket.description,
       icon: this.props.ticket.icon,
-    };
+    }
   }
 
   isChangedFromInit = () => {
@@ -64,8 +64,8 @@ export default class TicketDescription extends Component {
       this.state.title !== this.props.ticket.title ||
       this.state.description !== this.props.ticket.description ||
       this.state.icon !== this.props.ticket.icon
-    );
-  };
+    )
+  }
 
   getTicket = () => {
     return {
@@ -73,8 +73,8 @@ export default class TicketDescription extends Component {
       title: this.state.title,
       description: this.state.description,
       icon: this.state.icon,
-    };
-  };
+    }
+  }
 
   clean = () => {
     this.setState(
@@ -83,8 +83,8 @@ export default class TicketDescription extends Component {
         description: "",
       },
       this.props.close
-    );
-  };
+    )
+  }
 
   renderTicketData = () => {
     if (this.props.isManager) {
@@ -109,7 +109,7 @@ export default class TicketDescription extends Component {
                   native
                   value={this.state.icon}
                   onChange={(e) => {
-                    this.setState({ icon: e.target.value });
+                    this.setState({ icon: e.target.value })
                   }}
                 >
                   <option style={styles.changeIconSelect} value={0}>
@@ -145,10 +145,10 @@ export default class TicketDescription extends Component {
                 value={this.state.title}
                 fullWidth
                 inputProps={{
-                  maxLength: 20,
+                  maxLength: 40,
                 }}
                 onChange={(event) => {
-                  this.setState({ title: event.target.value });
+                  this.setState({ title: event.target.value })
                 }}
               />
             </Grid>
@@ -160,20 +160,20 @@ export default class TicketDescription extends Component {
                 value={this.state.description}
                 fullWidth
                 onChange={(event) => {
-                  this.setState({ description: event.target.value });
+                  this.setState({ description: event.target.value })
                 }}
                 multiline
                 rows={6}
                 rowsMax={6}
                 inputProps={{
-                  maxLength: 80,
+                  maxLength: 300,
                 }}
               />
             </Grid>
             <Grid item xs={6}>
               <Fab
                 onClick={() => {
-                  this.props.close();
+                  this.props.close()
                 }}
               >
                 <CancelIcon />
@@ -184,7 +184,7 @@ export default class TicketDescription extends Component {
                 disabled={!this.isChangedFromInit()}
                 color="primary"
                 onClick={() => {
-                  this.props.update(this.getTicket(), this.props.close);
+                  this.props.update(this.getTicket(), this.props.close)
                 }}
               >
                 <SaveIcon />
@@ -192,7 +192,7 @@ export default class TicketDescription extends Component {
             </Grid>
           </Grid>
         </div>
-      );
+      )
     } else {
       return (
         <div>
@@ -207,9 +207,9 @@ export default class TicketDescription extends Component {
             <p style={styles.description}>{this.props.ticket.description}</p>
           </div>
         </div>
-      );
+      )
     }
-  };
+  }
   render() {
     return (
       <Modal
@@ -219,6 +219,6 @@ export default class TicketDescription extends Component {
       >
         <div style={styles.modal}>{this.renderTicketData()}</div>
       </Modal>
-    );
+    )
   }
 }

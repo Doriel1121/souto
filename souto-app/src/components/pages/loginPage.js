@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { Button, TextField, Grid, Typography, Input } from "@material-ui/core";
-import SwipeableViews from "react-swipeable-views";
-import axios from "axios";
-import config from "../../config";
-import { Redirect } from "react-router-dom";
-import { autoPlay } from "react-swipeable-views-utils";
-import loginImage0 from "../../resources/login-image-0.jpg";
-import loginImage1 from "../../resources/login-image-1.jpg";
-import loginImage2 from "../../resources/login-image-2.jpg";
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+import React, { Component } from "react"
+import { Button, TextField, Grid, Typography, Input } from "@material-ui/core"
+import SwipeableViews from "react-swipeable-views"
+import axios from "axios"
+import config from "../../config"
+import { Redirect } from "react-router-dom"
+import { autoPlay } from "react-swipeable-views-utils"
+import loginImage0 from "../../resources/login-image-0.jpg"
+import loginImage1 from "../../resources/login-image-1.jpg"
+import loginImage2 from "../../resources/login-image-2.jpg"
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 
 const styles = {
   imagesGallery: {
@@ -47,11 +47,11 @@ const styles = {
   text: {
     color: "#484848",
   },
-};
+}
 
 export default class LoginPage extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       imageIndex: 0,
@@ -64,27 +64,27 @@ export default class LoginPage extends Component {
       sailorName: "",
       sailorBoardFromServer: {},
       redirectSailor: false,
-    };
+    }
   }
 
   registerUser = () => {
-    let user = { name: this.state.sailorName };
+    let user = { name: this.state.sailorName }
     axios
       .post(
         config.server + "/users/add/" + this.state.sailorBoardFromServer.id,
         user
       )
       .then((response) => {
-        window.localStorage.setItem("sailorUserId", response.data.id);
+        window.localStorage.setItem("sailorUserId", response.data.id)
         this.setState({
           sailorName: "",
           redirectSailor: true,
-        });
+        })
       })
       .catch((error) => {
-        alert(error);
-      });
-  };
+        alert(error)
+      })
+  }
 
   findABoardByKey = () => {
     axios
@@ -94,15 +94,15 @@ export default class LoginPage extends Component {
           sailorBoardKey: "",
           viewIndex: 5,
           sailorBoardFromServer: response.data,
-        });
+        })
       })
       .catch((error) => {
-        alert(error);
-      });
-  };
+        alert(error)
+      })
+  }
 
   registerABoard = () => {
-    let board = { name: this.state.captainBoardName };
+    let board = { name: this.state.captainBoardName }
     axios
       .post(config.server + "/boards/add", board)
       .then((response) => {
@@ -110,12 +110,12 @@ export default class LoginPage extends Component {
           captainBoardName: "",
           captainBoardFromServer: response.data,
           viewIndex: 3,
-        });
+        })
       })
       .catch((error) => {
-        alert(error);
-      });
-  };
+        alert(error)
+      })
+  }
 
   loginACaptainBoard = () => {
     axios
@@ -126,29 +126,29 @@ export default class LoginPage extends Component {
             captainBoardFromServer: response.data,
           },
           this.loginCaptain
-        );
+        )
       })
       .catch((error) => {
-        alert(error);
-      });
-  };
+        alert(error)
+      })
+  }
 
   loginCaptain = () => {
     window.localStorage.setItem(
       "captainBoardId",
       this.state.captainBoardFromServer.id
-    );
+    )
 
     this.setState({
       redirectCaptain: true,
-    });
-  };
+    })
+  }
 
   render() {
     if (this.state.redirectCaptain) {
-      return <Redirect to="/manager/main" />;
+      return <Redirect to="/manager/main" />
     } else if (this.state.redirectSailor) {
-      return <Redirect to="/client/main" />;
+      return <Redirect to="/client/main" />
     }
 
     return (
@@ -159,7 +159,7 @@ export default class LoginPage extends Component {
             axis="x"
             interval={"5000"}
             onChangeIndex={(index) => {
-              this.setState({ imageIndex: index });
+              this.setState({ imageIndex: index })
             }}
             style={styles.views}
           >
@@ -187,7 +187,7 @@ export default class LoginPage extends Component {
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                  this.setState({ viewIndex: 1 });
+                  this.setState({ viewIndex: 1 })
                 }}
               >
                 I am a Captain
@@ -198,7 +198,7 @@ export default class LoginPage extends Component {
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                  this.setState({ viewIndex: 4 });
+                  this.setState({ viewIndex: 4 })
                 }}
               >
                 I am a Sailor
@@ -221,12 +221,12 @@ export default class LoginPage extends Component {
                 <Grid item xs={12}>
                   <TextField
                     inputProps={{
-                      maxLength: 20,
+                      maxLength: 40,
                     }}
                     fullWidth
                     variant="outlined"
                     onChange={(event) => {
-                      this.setState({ captainBoardName: event.target.value });
+                      this.setState({ captainBoardName: event.target.value })
                     }}
                   />
                 </Grid>
@@ -235,7 +235,7 @@ export default class LoginPage extends Component {
                     variant="contained"
                     fullWidth
                     onClick={() => {
-                      this.setState({ viewIndex: 0 });
+                      this.setState({ viewIndex: 0 })
                     }}
                   >
                     Go back
@@ -248,7 +248,7 @@ export default class LoginPage extends Component {
                     fullWidth
                     disabled={this.state.captainBoardName.length === 0}
                     onClick={() => {
-                      this.registerABoard();
+                      this.registerABoard()
                     }}
                   >
                     Let's go!
@@ -259,7 +259,7 @@ export default class LoginPage extends Component {
                     color="primary"
                     fullWidth
                     onClick={() => {
-                      this.setState({ viewIndex: 2 });
+                      this.setState({ viewIndex: 2 })
                     }}
                   >
                     I have a board secret
@@ -286,13 +286,13 @@ export default class LoginPage extends Component {
                     onInput={(e) => {
                       e.target.value = Math.max(0, parseInt(e.target.value))
                         .toString()
-                        .slice(0, 4);
+                        .slice(0, 4)
                     }}
                     type="number"
                     fullWidth
                     variant="outlined"
                     onChange={(event) => {
-                      this.setState({ captainBoardSecret: event.target.value });
+                      this.setState({ captainBoardSecret: event.target.value })
                     }}
                   />
                 </Grid>
@@ -301,7 +301,7 @@ export default class LoginPage extends Component {
                     variant="contained"
                     fullWidth
                     onClick={() => {
-                      this.setState({ viewIndex: 1 });
+                      this.setState({ viewIndex: 1 })
                     }}
                   >
                     Go back
@@ -314,7 +314,7 @@ export default class LoginPage extends Component {
                     fullWidth
                     disabled={this.state.captainBoardSecret.length === 0}
                     onClick={() => {
-                      this.loginACaptainBoard();
+                      this.loginACaptainBoard()
                     }}
                   >
                     Let's go!
@@ -394,7 +394,7 @@ export default class LoginPage extends Component {
                     variant="contained"
                     fullWidth
                     onClick={() => {
-                      this.setState({ viewIndex: 0 });
+                      this.setState({ viewIndex: 0 })
                     }}
                   >
                     Go back
@@ -410,7 +410,7 @@ export default class LoginPage extends Component {
                     color="primary"
                     fullWidth
                     onClick={() => {
-                      this.loginCaptain();
+                      this.loginCaptain()
                     }}
                   >
                     Start
@@ -437,13 +437,13 @@ export default class LoginPage extends Component {
                     onInput={(e) => {
                       e.target.value = Math.max(0, parseInt(e.target.value))
                         .toString()
-                        .slice(0, 4);
+                        .slice(0, 4)
                     }}
                     type="number"
                     fullWidth
                     variant="outlined"
                     onChange={(event) => {
-                      this.setState({ sailorBoardKey: event.target.value });
+                      this.setState({ sailorBoardKey: event.target.value })
                     }}
                   />
                 </Grid>
@@ -452,7 +452,7 @@ export default class LoginPage extends Component {
                     variant="contained"
                     fullWidth
                     onClick={() => {
-                      this.setState({ viewIndex: 0 });
+                      this.setState({ viewIndex: 0 })
                     }}
                   >
                     Go back
@@ -465,7 +465,7 @@ export default class LoginPage extends Component {
                     fullWidth
                     disabled={this.state.sailorBoardKey.length === 0}
                     onClick={() => {
-                      this.findABoardByKey();
+                      this.findABoardByKey()
                     }}
                   >
                     Start
@@ -495,7 +495,7 @@ export default class LoginPage extends Component {
                     fullWidth
                     variant="outlined"
                     onChange={(event) => {
-                      this.setState({ sailorName: event.target.value });
+                      this.setState({ sailorName: event.target.value })
                     }}
                   />
                 </Grid>
@@ -506,7 +506,7 @@ export default class LoginPage extends Component {
                     fullWidth
                     disabled={this.state.sailorName.length === 0}
                     onClick={() => {
-                      this.registerUser();
+                      this.registerUser()
                     }}
                   >
                     Start
@@ -517,6 +517,6 @@ export default class LoginPage extends Component {
           </SwipeableViews>
         </div>
       </div>
-    );
+    )
   }
 }
