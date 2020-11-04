@@ -157,7 +157,7 @@ export default class LoginPage extends Component {
           <AutoPlaySwipeableViews
             index={this.state.imageIndex}
             axis="x"
-            interval={'5000'}
+            interval={5000}
             onChangeIndex={(index) => {
               this.setState({ imageIndex: index })
             }}
