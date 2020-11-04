@@ -59,6 +59,7 @@ export default class Ticket extends Component {
           direction="row"
           justify="flex-start"
           alignItems="center"
+          wrap="nowrap"
           spacing={3}
           style={styles.pickBox}
         >
@@ -79,7 +80,7 @@ export default class Ticket extends Component {
             <Typography style={styles.title}>
               {this.props.info.title}
             </Typography>
-            <Typography style={styles.rearInfo}>
+            <Typography noWrap style={styles.rearInfo}>
               {this.props.info.description}
             </Typography>
           </Grid>
