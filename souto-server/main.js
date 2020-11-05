@@ -73,12 +73,11 @@ app
   .get('/users/secret/:secretNumber', (request, response) => {
     console.log('user login by secret')
     users.logInUserBySecret(request.params.userSecret, (user) => {
-      if (user !== null) {
+      if (user !== undefined) {
         response.send(user)
       } else {
         response.sendStatus(500)
       }
-
     })
   })
   .get('/board/key/:boardKey', (request, response) => {
