@@ -72,7 +72,7 @@ app
   })
   .get('/users/secret/:secretNumber', (request, response) => {
     console.log('user login by secret')
-    users.logInUserBySecret(request.params.userSecret, (user) => {
+    users.logInUserBySecret(request.params.secretNumber, (user) => {
       if (user !== undefined) {
         response.send(user)
       } else {
