@@ -62,6 +62,7 @@ export default class LoginPage extends Component {
       redirectCaptain: false,
       sailorBoardKey: "",
       sailorName: "",
+      sailorSecret: "",
       sailorBoardFromServer: {},
       redirectSailor: false,
     }
@@ -75,6 +76,23 @@ export default class LoginPage extends Component {
         user
       )
       .then((response) => {
+        window.localStorage.setItem("sailorUserId", response.data.id)
+        this.setState({
+          sailorName: "",
+          redirectSailor: true,
+        })
+      })
+      .catch((error) => {
+        alert(error)
+      })
+  }
+
+  checkYourSecret = () => {
+    console.log("im in")
+    axios
+      .get(config.server + "/users/secret/" + this.state.sailorSecret)
+      .then((response) => {
+        console.log(response)
         window.localStorage.setItem("sailorUserId", response.data.id)
         this.setState({
           sailorName: "",
@@ -471,8 +489,20 @@ export default class LoginPage extends Component {
                     Start
                   </Button>
                 </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    color="primary"
+                    fullWidth
+                    onClick={() => {
+                      this.setState({ viewIndex: 6 })
+                    }}
+                  >
+                    I have a user secret
+                  </Button>
+                </Grid>
               </Grid>
             </div>
+
             <div style={styles.singleView}>
               <Grid
                 container
@@ -507,6 +537,50 @@ export default class LoginPage extends Component {
                     disabled={this.state.sailorName.length === 0}
                     onClick={() => {
                       this.registerUser()
+                    }}
+                  >
+                    Start
+                  </Button>
+                </Grid>
+              </Grid>
+            </div>
+            <div style={styles.singleView}>
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+                style={styles.form}
+                spacing={3}
+              >
+                <Grid item xs={12}>
+                  <Typography variant={"h6"} style={styles.text}>
+                    What is your user Secret?
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    onInput={(e) => {
+                      e.target.value = Math.max(0, parseInt(e.target.value))
+                        .toString()
+                        .slice(0, 4)
+                    }}
+                    type="number"
+                    fullWidth
+                    variant="outlined"
+                    onChange={(event) => {
+                      this.setState({ sailorSecret: event.target.value })
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    disabled={this.state.sailorSecret.length === 0}
+                    onClick={() => {
+                      this.checkYourSecret()
                     }}
                   >
                     Start
