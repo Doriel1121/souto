@@ -8,7 +8,7 @@ const styles = {
   modal: {
     backgroundColor: "white",
     width: "80vw",
-    height: "70vh",
+    height: "fit-content",
     margin: "auto",
     marginTop: "15vh",
     borderRadius: "10px",
@@ -45,6 +45,9 @@ const styles = {
   changeIconSelect: {
     color: "#464646",
   },
+  cancelSaveIcons:{
+    
+  }
 }
 
 export default class TicketDescription extends Component {
@@ -171,7 +174,8 @@ export default class TicketDescription extends Component {
               />
             </Grid>
             <Grid item xs={6}>
-              <Fab
+              <Fab 
+              style={styles.cancelSaveIcons}
                 onClick={() => {
                   this.props.close()
                 }}
@@ -181,6 +185,7 @@ export default class TicketDescription extends Component {
             </Grid>
             <Grid item xs={6}>
               <Fab
+              style={styles.cancelSaveIcons}
                 disabled={!this.isChangedFromInit()}
                 color="primary"
                 onClick={() => {

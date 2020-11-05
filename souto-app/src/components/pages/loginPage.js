@@ -16,6 +16,7 @@ const styles = {
   },
   loginImage: {
     height: "60vh",
+    width: "100%",
   },
   login: {
     position: "absolute",
