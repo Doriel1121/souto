@@ -45,9 +45,6 @@ const styles = {
   changeIconSelect: {
     color: "#464646",
   },
-  cancelSaveIcons:{
-    
-  }
 }
 
 export default class TicketDescription extends Component {
