@@ -1,44 +1,45 @@
-import React, { Component } from "react"
-import { Typography, Avatar, Grid, IconButton } from "@material-ui/core"
-import DeleteIcon from "@material-ui/icons/Delete"
-import TicketDescription from "./ticketDescription"
-import config from "../config"
+import React, { Component } from 'react'
+import { Typography, Avatar, Grid, IconButton } from '@material-ui/core'
+import DeleteIcon from '@material-ui/icons/Delete'
+import TicketDescription from './ticketDescription'
+import config from '../config'
 
 const styles = {
   pickBox: {
-    margin: "1.5vh",
-    width: "auto",
-    height: "10vh",
-    borderRadius: "15px",
-    backgroundColor: "white",
-    boxShadow: "0 0 10px 1px #3e3e3e",
+    margin: '1.5vh',
+    width: 'auto',
+    height: '10vh',
+    borderRadius: '15px',
+    backgroundColor: 'white',
+    boxShadow: '0 0 10px 1px #3e3e3e',
+    textAlign: 'left',
   },
   title: {
-    fontSize: "small",
-    color: "#646261",
-    display: "inline-block",
-    fontWeight: "bolder",
+    fontSize: 'small',
+    color: '#646261',
+    display: 'inline-block',
+    fontWeight: 'bolder',
   },
   avatar: {
-    width: "5vh",
-    height: "5vh",
-    backgroundColor: "#50acce",
-    border: "solid 1px",
+    width: '5vh',
+    height: '5vh',
+    backgroundColor: '#50acce',
+    border: 'solid 1px',
   },
   rearInfo: {
-    fontSize: "x-small",
-    color: "#BFBAB8 ",
+    fontSize: 'x-small',
+    color: '#BFBAB8 ',
   },
   textBox: {
-    paddingLeft: "0px",
+    paddingLeft: '0px',
   },
   avatarBox: {
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column",
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
   },
   deleteIcon: {
-    color: "#737373",
+    color: '#737373',
   },
 }
 
@@ -98,7 +99,7 @@ export default class Ticket extends Component {
               </IconButton>
             </Grid>
           ) : (
-            ""
+            ''
           )}
         </Grid>
         <TicketDescription

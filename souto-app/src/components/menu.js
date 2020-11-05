@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import { Redirect } from 'react-router-dom'
 
 const styles = {
   menu: {
@@ -25,10 +26,23 @@ export default class Menu extends Component {
 
     this.state = {
       isOpen: false,
+      redirectToLogin: false,
     }
   }
 
+  logout = () => {
+    window.localStorage.removeItem('captainBoardId')
+    window.localStorage.removeItem('sailorUserId')
+    this.setState({
+      redirectToLogin: true,
+    })
+  }
+
   render() {
+    if (this.state.redirectToLogin) {
+      return <Redirect to="/" />
+    }
+
     return (
       <div>
         <AppBar position="static">
@@ -54,7 +68,13 @@ export default class Menu extends Component {
         >
           <div style={styles.menu}>
             <List>
-              <ListItem button key={'logout'} disabled>
+              <ListItem
+                button
+                key={'logout'}
+                onClick={() => {
+                  this.logout()
+                }}
+              >
                 <ListItemIcon>
                   <ExitToAppIcon />
                 </ListItemIcon>
