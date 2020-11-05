@@ -80,11 +80,11 @@ export default class MainPage extends Component {
   render() {
     return (
       <div>
-        <Menu title={this.getBoardName(this.state.currentBoard)} />
         <ClientContext.Consumer>
           {(ctx) => {
             return (
               <React.Fragment>
+                <Menu title={ctx.state.board.name} />
                 <Progress
                   steps={this.countAllTickets(ctx)}
                   currentStep={ctx.state.doneTickets.length}

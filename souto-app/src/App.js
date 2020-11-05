@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Switch, HashRouter as Router, Route, Redirect } from 'react-router-dom'
+import { Switch, HashRouter as Router, Route } from 'react-router-dom'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import './App.css'
 import ClientApp from './ClientApp'
