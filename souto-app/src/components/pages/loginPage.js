@@ -6,16 +6,14 @@ import config from '../../config'
 import { Redirect } from 'react-router-dom'
 import { autoPlay } from 'react-swipeable-views-utils'
 import loginImage0 from '../../resources/login-image-0.jpg'
-import loginImage1 from '../../resources/login-image-1.jpg'
-import loginImage2 from '../../resources/login-image-2.jpg'
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 
 const styles = {
-  imagesGallery: {
-    height: '60vh',
-  },
   loginImage: {
     height: '60vh',
+    position: 'relative',
+    left: '50%',
+    transform: 'translateX(-50%)',
   },
   login: {
     position: 'absolute',
@@ -54,7 +52,6 @@ export default class LoginPage extends Component {
     super(props)
 
     this.state = {
-      imageIndex: 0,
       viewIndex: 0,
       captainBoardName: '',
       captainBoardSecret: '',
@@ -178,26 +175,8 @@ export default class LoginPage extends Component {
 
     return (
       <div>
-        <div style={styles.imagesGallery}>
-          <AutoPlaySwipeableViews
-            index={this.state.imageIndex}
-            axis="x"
-            interval={5000}
-            onChangeIndex={(index) => {
-              this.setState({ imageIndex: index })
-            }}
-            style={styles.views}
-          >
-            <div>
-              <img src={loginImage0} alt={'image0'} style={styles.loginImage} />
-            </div>
-            <div>
-              <img src={loginImage1} alt={'image1'} style={styles.loginImage} />
-            </div>
-            <div>
-              <img src={loginImage2} alt={'image2'} style={styles.loginImage} />
-            </div>
-          </AutoPlaySwipeableViews>
+        <div style={styles.logoImage}>
+          <img src={loginImage0} alt={'image0'} style={styles.loginImage} />
         </div>
         <div style={styles.login}>
           <SwipeableViews
