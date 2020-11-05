@@ -59,7 +59,7 @@ exports.getBoardById = (boardId, callback) => {
     (error, rows) => {
       if (error) throw error
       if (rows.length > 0) {
-        callback(row[0])
+        callback(rows[0])
       } else {
         callback(null)
       }
