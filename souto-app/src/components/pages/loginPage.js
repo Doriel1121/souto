@@ -87,15 +87,14 @@ export default class LoginPage extends Component {
       })
   }
 
-  checkYourSecret = () => {
-    console.log("im in")
+  loginBySecret = () => {
+    console.log(this.state.sailorSecret)
     axios
       .get(config.server + "/users/secret/" + this.state.sailorSecret)
       .then((response) => {
-        console.log(response)
         window.localStorage.setItem("sailorUserId", response.data.id)
         this.setState({
-          sailorName: "",
+          sailorSecret: "",
           redirectSailor: true,
         })
       })
@@ -555,7 +554,7 @@ export default class LoginPage extends Component {
               >
                 <Grid item xs={12}>
                   <Typography variant={"h6"} style={styles.text}>
-                    What is your user Secret?
+                    What is your secret?
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -580,7 +579,7 @@ export default class LoginPage extends Component {
                     fullWidth
                     disabled={this.state.sailorSecret.length === 0}
                     onClick={() => {
-                      this.checkYourSecret()
+                      this.loginBySecret()
                     }}
                   >
                     Start
