@@ -100,3 +100,13 @@ app
       response.sendStatus(500)
     })
   })
+  .get('/board/id/:boardId', (request, response) => {
+    console.log('Board by id request')
+    boards.getBoardById(request.params.boardId, (board) => {
+      if (board !== null) {
+        response.send(board)
+      } else {
+        response.sendStatus(500)
+      }
+    })
+  })
