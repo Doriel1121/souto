@@ -37,7 +37,7 @@ export class ClientAppDataProvider extends Component {
         })
       })
       .catch((error) => {
-        alert(error)
+        console.log(error)
       })
   }
 
@@ -72,7 +72,10 @@ export class ClientAppDataProvider extends Component {
         )
       })
       .catch((error) => {
-        alert(error)
+        console.log(error)
+        alert(
+          'Sorry! Could not find your tickets. Please make sure you are well connected to the internet!'
+        )
       })
   }
 
@@ -101,7 +104,8 @@ export class ClientAppDataProvider extends Component {
         this.moveTicketOffline(ticket, next)
       })
       .catch((error) => {
-        alert(error)
+        console.log(error)
+        alert('Sorry! Could not move ticket. Please try again later')
       })
   }
 

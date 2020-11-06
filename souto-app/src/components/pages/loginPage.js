@@ -88,7 +88,8 @@ export default class LoginPage extends Component {
         })
       })
       .catch((error) => {
-        alert(error)
+        console.log(error)
+        alert('Sorry! could not register. Please try again later')
       })
   }
 
@@ -104,7 +105,12 @@ export default class LoginPage extends Component {
         })
       })
       .catch((error) => {
-        alert(error)
+        console.log(error)
+        if (error.response.status === '500') {
+          alert('Seems like your secret is not correct')
+        } else {
+          alert('Sorry! Could not log in. Please try again later')
+        }
       })
   }
 
@@ -119,7 +125,12 @@ export default class LoginPage extends Component {
         })
       })
       .catch((error) => {
-        alert(error)
+        console.log(error)
+        if (error.response.status === '500') {
+          alert('Could not find a board with this key')
+        } else {
+          alert('Sorry! could not search for the board. Please try again later')
+        }
       })
   }
 
@@ -135,7 +146,8 @@ export default class LoginPage extends Component {
         })
       })
       .catch((error) => {
-        alert(error)
+        console.log(error)
+        alert('Sorry! could not register a board. Please try again later')
       })
   }
 
@@ -151,7 +163,8 @@ export default class LoginPage extends Component {
         )
       })
       .catch((error) => {
-        alert(error)
+        console.log(error)
+        alert('Sorry! could not log you in. Please try again later')
       })
   }
 

@@ -30,7 +30,10 @@ export class ManagerAppDataProvider extends Component {
         })
       })
       .catch((error) => {
-        alert(error)
+        console.log(error)
+        alert(
+          'Oops! Seems like there is error! Make sure your device is well connected to the internet!'
+        )
       })
   }
 
@@ -53,7 +56,8 @@ export class ManagerAppDataProvider extends Component {
         }, callback)
       })
       .catch((error) => {
-        alert(error)
+        console.log(error)
+        alert('Sorry! Could not add the ticket. Please try again later')
       })
   }
 
@@ -74,7 +78,8 @@ export class ManagerAppDataProvider extends Component {
         }, callback)
       })
       .catch((error) => {
-        alert(error)
+        console.log(error)
+        alert('Sorry! Could not change ticket. Please try again later')
       })
   }
 
@@ -85,7 +90,8 @@ export class ManagerAppDataProvider extends Component {
         this.deleteTicketByIdOffline(id)
       })
       .catch((error) => {
-        alert(error)
+        console.log(error)
+        alert('Sorry! Could not delete ticket. Please try again later')
       })
   }
 
