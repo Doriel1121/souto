@@ -13,13 +13,32 @@ export class ClientAppDataProvider extends Component {
       todoTickets: [],
       inProgressTickets: [],
       doneTickets: [],
+      board: {},
     }
   }
 
   componentDidMount = () => {
+    this.getBoard()
     this.sync(() => {
       this.syncInterval(5000)
     })
+  }
+
+  getBoard = () => {
+    axios
+      .get(
+        config.server +
+          '/board/id/' +
+          window.localStorage.getItem('sailorUserId')
+      )
+      .then((response) => {
+        this.setState({
+          board: response.data,
+        })
+      })
+      .catch((error) => {
+        alert(error)
+      })
   }
 
   syncInterval = (interval) => {

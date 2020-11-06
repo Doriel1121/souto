@@ -24,7 +24,7 @@ exports.addBoard = (board, callback) => {
 
 exports.getBoardByKey = (boardKey, callback) => {
   connection.query(
-    'SELECT * FROM Boards where public_key = ?',
+    'SELECT * FROM Boards WHERE public_key = ?',
     [boardKey],
     (error, rows) => {
       if (error) throw error
@@ -39,7 +39,7 @@ exports.getBoardByKey = (boardKey, callback) => {
 
 exports.getBoardBySecret = (boardSecret, callback) => {
   connection.query(
-    'SELECT * FROM Boards where secret = ?',
+    'SELECT * FROM Boards WHERE secret = ?',
     [boardSecret],
     (error, rows) => {
       if (error) throw error
@@ -47,6 +47,21 @@ exports.getBoardBySecret = (boardSecret, callback) => {
         callback(rows[0])
       } else {
         callback(undefined)
+      }
+    }
+  )
+}
+
+exports.getBoardById = (boardId, callback) => {
+  connection.query(
+    'SELECT * FROM Boards WHERE id = ?',
+    [boardId],
+    (error, rows) => {
+      if (error) throw error
+      if (rows.length > 0) {
+        callback(rows[0])
+      } else {
+        callback(null)
       }
     }
   )

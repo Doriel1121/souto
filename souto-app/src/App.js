@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Switch, HashRouter as Router, Route } from 'react-router-dom'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import './App.css'
 import ClientApp from './ClientApp'
 import ManagerApp from './ManagerApp'
 import LoginPage from './components/pages/loginPage'
+import UnsupportedDevicePage from './components/pages/unsupportedDevicePage'
 
 const mainTheme = createMuiTheme({
   palette: {
@@ -30,26 +31,30 @@ const styles = {
   },
 }
 
-function App() {
-  return (
-    <div style={styles.background}>
-      <ThemeProvider theme={mainTheme}>
-        <Router>
-          <Switch>
-            <Route path="/client">
-              <ClientApp />
-            </Route>
-            <Route path="/manager">
-              <ManagerApp />
-            </Route>
-            <Route exact path="/">
-              <LoginPage />
-            </Route>
-          </Switch>
-        </Router>
-      </ThemeProvider>
-    </div>
-  )
-}
+export default class App extends Component {
+  render() {
+    if (window.innerWidth > 800) {
+      return <UnsupportedDevicePage />
+    }
 
-export default App
+    return (
+      <div style={styles.background}>
+        <ThemeProvider theme={mainTheme}>
+          <Router>
+            <Switch>
+              <Route path="/client">
+                <ClientApp />
+              </Route>
+              <Route path="/manager">
+                <ManagerApp />
+              </Route>
+              <Route exact path="/">
+                <LoginPage />
+              </Route>
+            </Switch>
+          </Router>
+        </ThemeProvider>
+      </div>
+    )
+  }
+}

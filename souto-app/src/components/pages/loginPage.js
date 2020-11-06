@@ -1,52 +1,49 @@
-import React, { Component } from "react"
-import { Button, TextField, Grid, Typography } from "@material-ui/core"
-import SwipeableViews from "react-swipeable-views"
-import axios from "axios"
-import config from "../../config"
-import { Redirect } from "react-router-dom"
-import { autoPlay } from "react-swipeable-views-utils"
-import loginImage0 from "../../resources/login-image-0.jpg"
-import loginImage1 from "../../resources/login-image-1.jpg"
-import loginImage2 from "../../resources/login-image-2.jpg"
+import React, { Component } from 'react'
+import { Button, TextField, Grid, Typography } from '@material-ui/core'
+import SwipeableViews from 'react-swipeable-views'
+import axios from 'axios'
+import config from '../../config'
+import { Redirect } from 'react-router-dom'
+import { autoPlay } from 'react-swipeable-views-utils'
+import loginImage0 from '../../resources/login-image-0.jpg'
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 
 const styles = {
-  imagesGallery: {
-    height: "60vh",
-  },
   loginImage: {
-    height: "60vh",
-    width: "100%",
+    height: '60vh',
+    minHeight: '380px',
+    position: 'relative',
+    left: '50%',
+    transform: 'translateX(-50%)',
   },
   login: {
-    position: "absolute",
-    bottom: "0",
-    height: "40vh",
-    width: "100vw",
+    bottom: '0',
+    height: '40vh',
+    width: '100vw',
   },
   typeButton: {
-    width: "50vw",
+    width: '50vw',
   },
   singleView: {
-    height: "40vh",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+    height: '40vh',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   views: {
-    overflowX: "hidden",
-    width: "inherit",
-    height: "inherit",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
+    overflowX: 'hidden',
+    width: 'inherit',
+    height: 'inherit',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   form: {
-    width: "65vw",
+    width: '65vw',
   },
   text: {
-    color: "#484848",
+    color: '#484848',
   },
 }
 
@@ -55,17 +52,24 @@ export default class LoginPage extends Component {
     super(props)
 
     this.state = {
-      imageIndex: 0,
       viewIndex: 0,
-      captainBoardName: "",
-      captainBoardSecret: "",
+      captainBoardName: '',
+      captainBoardSecret: '',
       captainBoardFromServer: {},
       redirectCaptain: false,
-      sailorBoardKey: "",
-      sailorName: "",
-      sailorSecret: "",
+      sailorBoardKey: '',
+      sailorName: '',
+      sailorSecret: '',
       sailorBoardFromServer: {},
       redirectSailor: false,
+    }
+  }
+
+  componentDidMount = () => {
+    if (window.localStorage.getItem('sailorUserId')) {
+      this.setState({ redirectSailor: true })
+    } else if (window.localStorage.getItem('captainBoardId')) {
+      this.setState({ redirectCaptain: true })
     }
   }
 
@@ -73,13 +77,13 @@ export default class LoginPage extends Component {
     let user = { name: this.state.sailorName }
     axios
       .post(
-        config.server + "/users/add/" + this.state.sailorBoardFromServer.id,
+        config.server + '/users/add/' + this.state.sailorBoardFromServer.id,
         user
       )
       .then((response) => {
-        window.localStorage.setItem("sailorUserId", response.data.id)
+        window.localStorage.setItem('sailorUserId', response.data.id)
         this.setState({
-          sailorName: "",
+          sailorName: '',
           redirectSailor: true,
         })
       })
@@ -91,11 +95,11 @@ export default class LoginPage extends Component {
   loginBySecret = () => {
     console.log(this.state.sailorSecret)
     axios
-      .get(config.server + "/users/secret/" + this.state.sailorSecret)
+      .get(config.server + '/users/secret/' + this.state.sailorSecret)
       .then((response) => {
-        window.localStorage.setItem("sailorUserId", response.data.id)
+        window.localStorage.setItem('sailorUserId', response.data.id)
         this.setState({
-          sailorSecret: "",
+          sailorSecret: '',
           redirectSailor: true,
         })
       })
@@ -106,10 +110,10 @@ export default class LoginPage extends Component {
 
   findABoardByKey = () => {
     axios
-      .get(config.server + "/board/key/" + this.state.sailorBoardKey)
+      .get(config.server + '/board/key/' + this.state.sailorBoardKey)
       .then((response) => {
         this.setState({
-          sailorBoardKey: "",
+          sailorBoardKey: '',
           viewIndex: 5,
           sailorBoardFromServer: response.data,
         })
@@ -122,10 +126,10 @@ export default class LoginPage extends Component {
   registerABoard = () => {
     let board = { name: this.state.captainBoardName }
     axios
-      .post(config.server + "/boards/add", board)
+      .post(config.server + '/boards/add', board)
       .then((response) => {
         this.setState({
-          captainBoardName: "",
+          captainBoardName: '',
           captainBoardFromServer: response.data,
           viewIndex: 3,
         })
@@ -137,7 +141,7 @@ export default class LoginPage extends Component {
 
   loginACaptainBoard = () => {
     axios
-      .get(config.server + "/board/secret/" + this.state.captainBoardSecret)
+      .get(config.server + '/board/secret/' + this.state.captainBoardSecret)
       .then((response) => {
         this.setState(
           {
@@ -153,7 +157,7 @@ export default class LoginPage extends Component {
 
   loginCaptain = () => {
     window.localStorage.setItem(
-      "captainBoardId",
+      'captainBoardId',
       this.state.captainBoardFromServer.id
     )
 
@@ -171,26 +175,8 @@ export default class LoginPage extends Component {
 
     return (
       <div>
-        <div style={styles.imagesGallery}>
-          <AutoPlaySwipeableViews
-            index={this.state.imageIndex}
-            axis="x"
-            interval={5000}
-            onChangeIndex={(index) => {
-              this.setState({ imageIndex: index })
-            }}
-            style={styles.views}
-          >
-            <div>
-              <img src={loginImage0} alt={"image0"} style={styles.loginImage} />
-            </div>
-            <div>
-              <img src={loginImage1} alt={"image1"} style={styles.loginImage} />
-            </div>
-            <div>
-              <img src={loginImage2} alt={"image2"} style={styles.loginImage} />
-            </div>
-          </AutoPlaySwipeableViews>
+        <div style={styles.logoImage}>
+          <img src={loginImage0} alt={'image0'} style={styles.loginImage} />
         </div>
         <div style={styles.login}>
           <SwipeableViews
@@ -232,7 +218,7 @@ export default class LoginPage extends Component {
                 spacing={3}
               >
                 <Grid item xs={12}>
-                  <Typography variant={"h6"} style={styles.text}>
+                  <Typography variant={'h6'} style={styles.text}>
                     What is your board name?
                   </Typography>
                 </Grid>
@@ -295,7 +281,7 @@ export default class LoginPage extends Component {
                 spacing={3}
               >
                 <Grid item xs={12}>
-                  <Typography variant={"h6"} style={styles.text}>
+                  <Typography variant={'h6'} style={styles.text}>
                     What is your board secret?
                   </Typography>
                 </Grid>
@@ -351,8 +337,8 @@ export default class LoginPage extends Component {
               >
                 <Grid item xs={12}>
                   <Typography
-                    variant={"h5"}
-                    style={{ ...styles.text, textAlign: "center" }}
+                    variant={'h5'}
+                    style={{ ...styles.text, textAlign: 'center' }}
                   >
                     Your board is ready!
                   </Typography>
@@ -362,8 +348,8 @@ export default class LoginPage extends Component {
                   xs={12}
                   style={{
                     ...styles.text,
-                    textAlign: "center",
-                    padding: "0px",
+                    textAlign: 'center',
+                    padding: '0px',
                   }}
                 >
                   Key:
@@ -372,11 +358,11 @@ export default class LoginPage extends Component {
                   item
                   xs={12}
                   style={{
-                    textAlign: "center",
-                    fontSize: "xxx-large",
-                    fontWeight: "800",
-                    color: "#0056b1",
-                    paddingTop: "0px",
+                    textAlign: 'center',
+                    fontSize: 'xxx-large',
+                    fontWeight: '800',
+                    color: '#0056b1',
+                    paddingTop: '0px',
                   }}
                 >
                   {this.state.captainBoardFromServer.public_key}
@@ -386,8 +372,8 @@ export default class LoginPage extends Component {
                   xs={12}
                   style={{
                     ...styles.text,
-                    textAlign: "center",
-                    padding: "0px",
+                    textAlign: 'center',
+                    padding: '0px',
                   }}
                 >
                   Secret:
@@ -397,8 +383,8 @@ export default class LoginPage extends Component {
                   xs={12}
                   style={{
                     ...styles.text,
-                    textAlign: "center",
-                    padding: "0px",
+                    textAlign: 'center',
+                    padding: '0px',
                   }}
                 >
                   {this.state.captainBoardFromServer.secret}
@@ -406,7 +392,7 @@ export default class LoginPage extends Component {
                 <Grid
                   item
                   xs={6}
-                  style={{ ...styles.text, textAlign: "center" }}
+                  style={{ ...styles.text, textAlign: 'center' }}
                 >
                   <Button
                     variant="contained"
@@ -421,7 +407,7 @@ export default class LoginPage extends Component {
                 <Grid
                   item
                   xs={6}
-                  style={{ ...styles.text, textAlign: "center" }}
+                  style={{ ...styles.text, textAlign: 'center' }}
                 >
                   <Button
                     variant="contained"
@@ -446,7 +432,7 @@ export default class LoginPage extends Component {
                 spacing={3}
               >
                 <Grid item xs={12}>
-                  <Typography variant={"h6"} style={styles.text}>
+                  <Typography variant={'h6'} style={styles.text}>
                     What is your board key?
                   </Typography>
                 </Grid>
@@ -513,7 +499,7 @@ export default class LoginPage extends Component {
                 spacing={3}
               >
                 <Grid item xs={12}>
-                  <Typography variant={"h6"} style={styles.text}>
+                  <Typography variant={'h6'} style={styles.text}>
                     What is your name?
                   </Typography>
                 </Grid>
@@ -554,7 +540,7 @@ export default class LoginPage extends Component {
                 spacing={3}
               >
                 <Grid item xs={12}>
-                  <Typography variant={"h6"} style={styles.text}>
+                  <Typography variant={'h6'} style={styles.text}>
                     What is your secret?
                   </Typography>
                 </Grid>
