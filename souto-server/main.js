@@ -100,9 +100,9 @@ app
       response.sendStatus(500)
     })
   })
-  .get('/board/id/:boardId', (request, response) => {
+  .get('/board/userid/:userId', (request, response) => {
     console.log('Board by id request')
-    boards.getBoardById(request.params.boardId, (board) => {
+    boards.getBoardByUserId(request.params.userId, (board) => {
       if (board !== null) {
         response.send(board)
       } else {
