@@ -1,49 +1,48 @@
-import React, { Component } from "react"
-import { Avatar, Modal, TextField, Grid, Fab, Select } from "@material-ui/core"
-import SaveIcon from "@material-ui/icons/Save"
-import CancelIcon from "@material-ui/icons/Cancel"
-import config from "../config"
+import React, { Component } from 'react'
+import { Avatar, Modal, TextField, Grid, Fab, Select } from '@material-ui/core'
+import SaveIcon from '@material-ui/icons/Save'
+import CancelIcon from '@material-ui/icons/Cancel'
+import config from '../config'
 
 const styles = {
   modal: {
-    backgroundColor: "white",
-    width: "80vw",
-    height: "70vh",
-    margin: "auto",
-    marginTop: "15vh",
-    borderRadius: "10px",
-    textAlign: "center",
-    backdropFilter: "blur(3px)",
-    opacity: "0.7",
-    boxShadow: "0 0 16px 5px black",
-    outline: "none",
+    backgroundColor: 'white',
+    width: '80vw',
+    margin: 'auto',
+    marginTop: '15vh',
+    borderRadius: '10px',
+    textAlign: 'center',
+    backdropFilter: 'blur(3px)',
+    opacity: '0.7',
+    boxShadow: '0 0 16px 5px black',
+    outline: 'none',
   },
   avatar: {
-    width: "8vh",
-    height: "8vh",
-    margin: "0 auto",
-    backgroundColor: "white",
-    border: "solid 1px black",
-    marginTop: "3vh",
+    width: '15vw',
+    height: '15vw',
+    margin: '0 auto',
+    backgroundColor: 'white',
+    border: 'solid 1px black',
+    marginTop: '3vh',
   },
   avatarDiv: {
-    backgroundColor: "#CFCDCC",
-    borderRadius: "10px 10px 0 0",
-    background: "linear-gradient(45deg, #00B4DB, rgb(28 111 140))",
-    minHeight: "15vh",
-    display: "flex",
+    backgroundColor: '#CFCDCC',
+    borderRadius: '10px 10px 0 0',
+    background: 'linear-gradient(45deg, #00B4DB, rgb(28 111 140))',
+    minHeight: '15vh',
+    display: 'flex',
   },
   description: {
-    fontSize: "small",
-    textAlign: "left",
+    fontSize: 'small',
+    textAlign: 'left',
   },
   modalContent: {
-    width: "90%",
-    margin: "auto",
-    paddingTop: "2vh",
+    width: '90%',
+    margin: 'auto',
+    paddingTop: '2vh',
   },
   changeIconSelect: {
-    color: "#464646",
+    color: '#464646',
   },
 }
 
@@ -79,8 +78,8 @@ export default class TicketDescription extends Component {
   clean = () => {
     this.setState(
       {
-        title: "",
-        description: "",
+        title: '',
+        description: '',
       },
       this.props.close
     )

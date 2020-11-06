@@ -11,12 +11,12 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 const styles = {
   loginImage: {
     height: '60vh',
+    minHeight: '380px',
     position: 'relative',
     left: '50%',
     transform: 'translateX(-50%)',
   },
   login: {
-    position: 'absolute',
     bottom: '0',
     height: '40vh',
     width: '100vw',
