@@ -172,7 +172,6 @@ export default class TicketDescription extends Component {
             </Grid>
             <Grid item xs={6}>
               <Fab 
-              style={styles.cancelSaveIcons}
                 onClick={() => {
                   this.props.close()
                 }}
@@ -182,7 +181,6 @@ export default class TicketDescription extends Component {
             </Grid>
             <Grid item xs={6}>
               <Fab
-              style={styles.cancelSaveIcons}
                 disabled={!this.isChangedFromInit()}
                 color="primary"
                 onClick={() => {
