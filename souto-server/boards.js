@@ -52,9 +52,9 @@ exports.getBoardBySecret = (boardSecret, callback) => {
   )
 }
 
-exports.getBoardById = (boardId, callback) => {
+exports.getBoardByUserId = (userId, callback) => {
   connection.query(
-    'SELECT * FROM Boards WHERE id = ?',
+    'SELECT b.* FROM Boards b JOIN Users u ON b.id = u.board_id WHERE u.id = ?',
     [boardId],
     (error, rows) => {
       if (error) throw error
