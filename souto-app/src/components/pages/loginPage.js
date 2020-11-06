@@ -6,6 +6,7 @@ import config from '../../config'
 import { Redirect } from 'react-router-dom'
 import { autoPlay } from 'react-swipeable-views-utils'
 import loginImage0 from '../../resources/login-image-0.jpg'
+import OnBoarding from '../onBoarding'
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 
 const styles = {
@@ -52,6 +53,7 @@ export default class LoginPage extends Component {
     super(props)
 
     this.state = {
+      onBoard: true,
       viewIndex: 0,
       captainBoardName: '',
       captainBoardSecret: '',
@@ -188,6 +190,15 @@ export default class LoginPage extends Component {
 
     return (
       <div>
+        {this.state.onBoard ? (
+          <OnBoarding
+            close={() => {
+              this.setState({ onBoard: false })
+            }}
+          />
+        ) : (
+          ''
+        )}
         <div style={styles.logoImage}>
           <img src={loginImage0} alt={'image0'} style={styles.loginImage} />
         </div>
