@@ -87,6 +87,12 @@ export default class OnBoarding extends Component {
       currentIndex: 0,
     }
   }
+
+  successfullyClose = () => {
+    window.localStorage.setItem('soutoOnBoarded', 'true')
+    this.props.close()
+  }
+
   renderPageByIndex = (index) => {
     return (
       <React.Fragment>
@@ -143,7 +149,7 @@ export default class OnBoarding extends Component {
                 variant="contained"
                 color="secondary"
                 endIcon={<CloseIcon />}
-                onClick={this.props.close}
+                onClick={this.successfullyClose}
               >
                 Close
               </Button>

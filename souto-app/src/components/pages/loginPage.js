@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import { Button, TextField, Grid, Typography } from '@material-ui/core'
+import { Button, TextField, Grid, Typography, Fab } from '@material-ui/core'
 import SwipeableViews from 'react-swipeable-views'
 import axios from 'axios'
 import config from '../../config'
 import { Redirect } from 'react-router-dom'
-import { autoPlay } from 'react-swipeable-views-utils'
 import loginImage0 from '../../resources/login-image-0.jpg'
 import OnBoarding from '../onBoarding'
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
+import InfoIcon from '@material-ui/icons/Info'
 
 const styles = {
   loginImage: {
@@ -46,6 +45,11 @@ const styles = {
   text: {
     color: '#484848',
   },
+  openOnBoarding: {
+    position: 'absolute',
+    top: '20px',
+    right: '20px',
+  },
 }
 
 export default class LoginPage extends Component {
@@ -53,7 +57,7 @@ export default class LoginPage extends Component {
     super(props)
 
     this.state = {
-      onBoard: true,
+      onBoard: false,
       viewIndex: 0,
       captainBoardName: '',
       captainBoardSecret: '',
@@ -72,6 +76,8 @@ export default class LoginPage extends Component {
       this.setState({ redirectSailor: true })
     } else if (window.localStorage.getItem('captainBoardId')) {
       this.setState({ redirectCaptain: true })
+    } else if (!window.localStorage.getItem('soutoOnBoarded')) {
+      this.setState({ onBoard: true })
     }
   }
 
@@ -201,6 +207,15 @@ export default class LoginPage extends Component {
         )}
         <div style={styles.logoImage}>
           <img src={loginImage0} alt={'image0'} style={styles.loginImage} />
+          <Fab
+            size="small"
+            style={styles.openOnBoarding}
+            onClick={() => {
+              this.setState({ onBoard: true })
+            }}
+          >
+            <InfoIcon />
+          </Fab>
         </div>
         <div style={styles.login}>
           <SwipeableViews
