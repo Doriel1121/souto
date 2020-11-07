@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { Typography, Avatar, Grid, IconButton } from '@material-ui/core'
+import { Typography, Avatar, Grid, IconButton, Fab } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import TicketDescription from './ticketDescription'
 import config from '../config'
+import WhiteFlagImage from '../resources/white-flag.png'
+import RedFlagImage from '../resources/red-flag.png'
 
 const styles = {
   pickBox: {
@@ -41,6 +43,9 @@ const styles = {
   deleteIcon: {
     color: '#737373',
   },
+  flag: {
+    height: '4vh',
+  },
 }
 
 export default class Ticket extends Component {
@@ -72,7 +77,7 @@ export default class Ticket extends Component {
           </Grid>
           <Grid
             item
-            xs={this.props.isManager ? 8 : 10}
+            xs={8}
             style={styles.textBox}
             onClick={() => {
               this.setState({ isOpen: true })
@@ -85,8 +90,8 @@ export default class Ticket extends Component {
               {this.props.info.description}
             </Typography>
           </Grid>
-          {this.props.isManager ? (
-            <Grid item xs={2}>
+          <Grid item xs={2}>
+            {this.props.isManager ? (
               <IconButton
                 onClick={() => {
                   this.props.delete(this.props.info.id)
@@ -97,10 +102,21 @@ export default class Ticket extends Component {
               >
                 <DeleteIcon />
               </IconButton>
-            </Grid>
-          ) : (
-            ''
-          )}
+            ) : (
+              <Fab
+                size={'small'}
+                onClick={() => {
+                  this.props.flag(this.props.info.id, !this.props.info.flag)
+                }}
+              >
+                <img
+                  alt="flag"
+                  src={this.props.info.flag ? RedFlagImage : WhiteFlagImage}
+                  style={styles.flag}
+                />
+              </Fab>
+            )}
+          </Grid>
         </Grid>
         <TicketDescription
           isOpen={this.state.isOpen}
