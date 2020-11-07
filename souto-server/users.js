@@ -21,11 +21,11 @@ exports.addUser = (boardId, user, callback) => {
             if (tickets.length > 0) {
               //TODO: Bring also the inactive tickets
               let userTickets = tickets.map((ticket) => {
-                return [user.id, ticket.id, 'TODO', new Date().toISOString()]
+                return [user.id, ticket.id, 'TODO', new Date().toISOString(), 0]
               })
               tickets
               connection.query(
-                'INSERT INTO UserTicketMigration (user_id, ticket_id, status, last_update) VALUES ?',
+                'INSERT INTO UserTicketMigration (user_id, ticket_id, status, last_update, flag) VALUES ?',
                 [userTickets],
                 (error) => {
                   if (error) throw error

@@ -6,6 +6,7 @@ const users = require('./users')
 const boards = require('./boards')
 var https = require('https')
 var fs = require('fs')
+const { response } = require('express')
 
 var httpsOptions = {
   key: fs.readFileSync('/home/ubuntu/key.pem'),
@@ -108,5 +109,17 @@ app
       } else {
         response.sendStatus(500)
       }
+    })
+  })
+  .post('/ticket/flag/on/:userTicketId', (request, response) => {
+    console.log('Raise flag request')
+    tickets.updateFlag(request.params.userTicketId, true, () => {
+      response.sendStatus(200)
+    })
+  })
+  .post('/ticket/flag/off/:userTicketId', (request, response) => {
+    console.log('Unraise flag request')
+    tickets.updateFlag(request.params.userTicketId, false, () => {
+      response.sendStatus(200)
     })
   })
