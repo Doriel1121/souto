@@ -27,6 +27,7 @@ export default class Menu extends Component {
     this.state = {
       isOpen: false,
       redirectToLogin: false,
+      redirectToUsersProgreesPage:false,
     }
   }
 
@@ -38,11 +39,19 @@ export default class Menu extends Component {
     })
   }
 
+  ShowUsersProgressPage= () => {
+    this.setState({redirectToUsersProgreesPage : true})
+  }
+
   render() {
+    console.log(this.props.isManager);
+
     if (this.state.redirectToLogin) {
       return <Redirect to="/" />
     }
-
+    if (this.state.redirectToUsersProgreesPage) {
+      return <Redirect to="/manager/userProgress" />
+    }
     return (
       <div>
         <AppBar position="static">
@@ -80,6 +89,19 @@ export default class Menu extends Component {
                 </ListItemIcon>
                 <ListItemText primary={'Logout'} />
               </ListItem>
+                 <ListItem
+                button
+                key={'logout'}
+                onClick={() => {
+                  this.ShowUsersProgressPage()
+                }}
+              >
+                <ListItemIcon>
+                  <ExitToAppIcon />
+                </ListItemIcon>
+                <ListItemText primary={'Users Progress'} />
+              </ListItem> 
+              
             </List>
           </div>
         </Drawer>

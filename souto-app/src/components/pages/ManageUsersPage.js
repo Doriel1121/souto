@@ -6,22 +6,21 @@ import { MobileStepper, Grid } from "@material-ui/core"
 
 const styles = {
   progressBar: {
-    width: "100vw",
+    width: "50vw",
     flexGrow: "1",
     backgroundColor: "transparent",
     paddingTop: "3vh",
-    width: "90%",
   },
-  Names: {
+  names: {
     textAlign: "center",
+    transform: "translateY(1.7vh)",
   },
   userProgressInfo: {
     marginTop: "5vh",
   },
-  proDiv: {},
 }
 
-export default class ManageUsers extends Component {
+export default class ManageUsersPage extends Component {
   constructor(props) {
     super(props)
 
@@ -43,23 +42,24 @@ export default class ManageUsers extends Component {
       })
       .catch((err) => {
         console.log(err)
+        alert("Sorry could not get the data ")
       })
   }
 
   render() {
     return (
       <div>
-        <Menu />
+        <Menu isManager={true} />
         {this.state.UsersProgress.map((element) => {
           return (
             <Grid style={styles.userProgressInfo} container spacing={3}>
-              <Grid style={styles.Names} item xs={4}>
+              <Grid style={styles.names} item xs={4}>
                 <b>{element.Name}</b>
               </Grid>
               <Grid style={styles.proDiv} item xs={8}>
                 <MobileStepper
                   variant="progress"
-                  steps={element.c}
+                  steps={element.c + 1}
                   position="static"
                   activeStep={element.o}
                   style={styles.progressBar}
