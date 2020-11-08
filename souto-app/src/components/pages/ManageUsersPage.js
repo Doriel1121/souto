@@ -6,10 +6,11 @@ import { MobileStepper, Grid } from "@material-ui/core"
 
 const styles = {
   progressBar: {
-    width: "50vw",
+    // width: "50vw",
     flexGrow: "1",
     backgroundColor: "transparent",
     paddingTop: "3vh",
+    marginRight: "0",
   },
   names: {
     textAlign: "center",
@@ -17,6 +18,9 @@ const styles = {
   },
   userProgressInfo: {
     marginTop: "5vh",
+  },
+  percent: {
+    transform: "translateY(1.7vh)",
   },
 }
 
@@ -49,15 +53,16 @@ export default class ManageUsersPage extends Component {
   render() {
     return (
       <div>
-        <Menu isManager={true} />
-        <Grid style={styles.userProgressInfo} container spacing={3}>
-          {this.state.UsersProgress.map((element) => {
+        <Menu isManager={true} title="My Crew Progress" />
+        <Grid style={styles.userProgressInfo} container spacing={1}>
+          {this.state.UsersProgress.map((element, index) => {
+            let percent = 100 / element.c + 1 * element.o
             return (
-              <React.Fragment>
-                <Grid style={styles.names} item xs={4}>
+              <React.Fragment key={index}>
+                <Grid style={styles.names} item xs={3}>
                   <b>{element.Name}</b>
                 </Grid>
-                <Grid style={styles.proDiv} item xs={8}>
+                <Grid style={styles.proDiv} item xs={7}>
                   <MobileStepper
                     variant="progress"
                     steps={element.c + 1}
@@ -65,6 +70,9 @@ export default class ManageUsersPage extends Component {
                     activeStep={element.o}
                     style={styles.progressBar}
                   />
+                </Grid>
+                <Grid style={styles.percent} item xs={2}>
+                  {percent.toFixed(0)}%
                 </Grid>
               </React.Fragment>
             )
