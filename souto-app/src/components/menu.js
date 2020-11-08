@@ -44,8 +44,6 @@ export default class Menu extends Component {
   }
 
   render() {
-    console.log(this.props.isManager);
-
     if (this.state.redirectToLogin) {
       return <Redirect to="/" />
     }
@@ -91,7 +89,7 @@ export default class Menu extends Component {
               </ListItem>
                  <ListItem
                 button
-                key={'logout'}
+                key={'crew'}
                 onClick={() => {
                   this.ShowUsersProgressPage()
                 }}
@@ -99,7 +97,7 @@ export default class Menu extends Component {
                 <ListItemIcon>
                   <ExitToAppIcon />
                 </ListItemIcon>
-                <ListItemText primary={'Users Progress'} />
+                <ListItemText primary={'My crew'} />
               </ListItem> 
               
             </List>

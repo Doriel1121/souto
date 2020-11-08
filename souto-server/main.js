@@ -19,10 +19,6 @@ https.createServer(httpsOptions, app).listen(port, () => {
   console.log(`Server started at port ${port}`)
 })
 
-// app.listen(port, () => {
-//   console.log(`Server started at port ${port}`)
-// })
-
 app
   .use(bodyParser.json())
   .use(cors())
@@ -119,5 +115,4 @@ app
     boards.getAllUsersProgress(request.params.boardId , (data) => {
       response.send(data)
     })
-
   })

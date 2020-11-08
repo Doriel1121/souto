@@ -50,24 +50,26 @@ export default class ManageUsersPage extends Component {
     return (
       <div>
         <Menu isManager={true} />
-        {this.state.UsersProgress.map((element) => {
-          return (
-            <Grid style={styles.userProgressInfo} container spacing={3}>
-              <Grid style={styles.names} item xs={4}>
-                <b>{element.Name}</b>
-              </Grid>
-              <Grid style={styles.proDiv} item xs={8}>
-                <MobileStepper
-                  variant="progress"
-                  steps={element.c + 1}
-                  position="static"
-                  activeStep={element.o}
-                  style={styles.progressBar}
-                />
-              </Grid>
-            </Grid>
-          )
-        })}
+        <Grid style={styles.userProgressInfo} container spacing={3}>
+          {this.state.UsersProgress.map((element) => {
+            return (
+              <React.Fragment>
+                <Grid style={styles.names} item xs={4}>
+                  <b>{element.Name}</b>
+                </Grid>
+                <Grid style={styles.proDiv} item xs={8}>
+                  <MobileStepper
+                    variant="progress"
+                    steps={element.c + 1}
+                    position="static"
+                    activeStep={element.o}
+                    style={styles.progressBar}
+                  />
+                </Grid>
+              </React.Fragment>
+            )
+          })}
+        </Grid>
       </div>
     )
   }
