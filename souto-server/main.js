@@ -7,15 +7,19 @@ const boards = require('./boards')
 var https = require('https')
 var fs = require('fs')
 
-var httpsOptions = {
-  key: fs.readFileSync('/home/ubuntu/key.pem'),
-  cert: fs.readFileSync('/home/ubuntu/cert.pem'),
-}
+// var httpsOptions = {
+//   key: fs.readFileSync('/home/ubuntu/key.pem'),
+//   cert: fs.readFileSync('/home/ubuntu/cert.pem'),
+// }
 
 const app = express()
 const port = 3002
 
-https.createServer(httpsOptions, app).listen(port, () => {
+// https.createServer(httpsOptions, app).listen(port, () => {
+//   console.log(`Server started at port ${port}`)
+// })
+
+app.listen(port, () => {
   console.log(`Server started at port ${port}`)
 })
 
@@ -109,4 +113,11 @@ app
         response.sendStatus(500)
       }
     })
+  })
+
+  .get('/board/allusers/:boardId' , (request , response) => {
+    boards.getAllUsersProgress(request.params.boardId , (data) => {
+      response.send(data)
+    })
+
   })
