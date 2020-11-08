@@ -67,13 +67,6 @@ exports.getBoardByUserId = (userId, callback) => {
   )
 }
 
-exports.getAllUsersProgress = (boardId , callback) => {
-  connection.query('SELECT a.id , a.Name , a.c , done.o FROM (SELECT u.id , u.Name , COUNT(*) AS c FROM UserTicketMigration AS utf JOIN Users AS u ON utf.user_id = u.id WHERE u.board_id = ? GROUP BY u.id) AS a JOIN (SELECT u.id , u.Name , COUNT(*) AS o FROM UserTicketMigration AS utm JOIN Users AS u ON utm.user_id = u.id WHERE u.board_id = ? AND utm.status = "DONE" GROUP BY u.id) AS done ON a.id = done.id' , [boardId , boardId] , (error , rows) => {
-    if (error) throw error
-    callback(rows)
-  })
-}
-
 let genetateKey = () => {
   return (Math.floor(Math.random() * 8999) + 1000).toString()
 }
