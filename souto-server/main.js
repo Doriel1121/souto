@@ -62,13 +62,21 @@ app
   .post('/boards/add', (request, response) => {
     console.log('New board request')
     boards.addBoard(request.body, (board) => {
-      response.send(board)
+      if (board === null) {
+        response.sendStatus(500)
+      } else {
+        response.send(board)
+      }
     })
   })
   .post('/users/add/:boardId', (request, response) => {
     console.log('New register user request')
     users.addUser(request.params.boardId, request.body, (user) => {
-      response.send(user)
+      if (user === null) {
+        response.sendStatus(500)
+      } else {
+        response.send(user)
+      }
     })
   })
   .get('/users/secret/:secretNumber', (request, response) => {
@@ -121,5 +129,10 @@ app
     console.log('Unraise flag request')
     tickets.updateFlag(request.params.userTicketId, false, () => {
       response.sendStatus(200)
+    })
+  })
+  .get('/board/allusers/:boardId', (request, response) => {
+    boards.getAllUsersProgress(request.params.boardId, (data) => {
+      response.send(data)
     })
   })

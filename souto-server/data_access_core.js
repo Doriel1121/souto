@@ -1,5 +1,7 @@
 const mysql = require('mysql')
 
+const keyGenerationRetries = 5
+
 const connection_details = {
   host: 'resort-mgr.coywnuinrvp3.eu-central-1.rds.amazonaws.com',
   user: 'admin',
@@ -16,6 +18,31 @@ exports.getConfigValue = (name, callback) => {
     (error, rows) => {
       if (error) throw error
       callback(rows[0].Value)
+    }
+  )
+}
+
+exports.generateUniqueKey = (table, column, callback) => {
+  this.generateUniqueKeyRecursive(keyGenerationRetries, table, column, callback)
+}
+
+exports.generateUniqueKeyRecursive = (retries, table, column, callback) => {
+  if (retries < 1) {
+    callback(null)
+    return
+  }
+
+  let key = this.genetateKey()
+  this.connection.query(
+    'SELECT * FROM ' + table + ' WHERE ? = ?',
+    [column, key],
+    (error, rows) => {
+      if (error) throw error
+      if (rows.length === 0) {
+        callback(key)
+      } else {
+        this.generateUniqueKey(retries - 1, table, column, callback)
+      }
     }
   )
 }
