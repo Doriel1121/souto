@@ -52,10 +52,10 @@ exports.getBoardBySecret = (boardSecret, callback) => {
   )
 }
 
-exports.getBoardById = (boardId, callback) => {
+exports.getBoardByUserId = (userId, callback) => {
   connection.query(
-    'SELECT * FROM Boards WHERE id = ?',
-    [boardId],
+    'SELECT b.* FROM Boards b JOIN Users u ON b.id = u.board_id WHERE u.id = ?',
+    [userId],
     (error, rows) => {
       if (error) throw error
       if (rows.length > 0) {
@@ -77,4 +77,3 @@ exports.getAllUsersProgress = (boardId , callback) => {
 let genetateKey = () => {
   return (Math.floor(Math.random() * 8999) + 1000).toString()
 }
-

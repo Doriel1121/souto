@@ -6,6 +6,7 @@ const users = require('./users')
 const boards = require('./boards')
 var https = require('https')
 var fs = require('fs')
+const { response } = require('express')
 
 var httpsOptions = {
   key: fs.readFileSync('/home/ubuntu/key.pem'),
@@ -100,9 +101,9 @@ app
       response.sendStatus(500)
     })
   })
-  .get('/board/id/:boardId', (request, response) => {
+  .get('/board/userid/:userId', (request, response) => {
     console.log('Board by id request')
-    boards.getBoardById(request.params.boardId, (board) => {
+    boards.getBoardByUserId(request.params.userId, (board) => {
       if (board !== null) {
         response.send(board)
       } else {
@@ -110,7 +111,18 @@ app
       }
     })
   })
-
+  .post('/ticket/flag/on/:userTicketId', (request, response) => {
+    console.log('Raise flag request')
+    tickets.updateFlag(request.params.userTicketId, true, () => {
+      response.sendStatus(200)
+    })
+  })
+  .post('/ticket/flag/off/:userTicketId', (request, response) => {
+    console.log('Unraise flag request')
+    tickets.updateFlag(request.params.userTicketId, false, () => {
+      response.sendStatus(200)
+    })
+  })
   .get('/board/allusers/:boardId' , (request , response) => {
     boards.getAllUsersProgress(request.params.boardId , (data) => {
       response.send(data)
