@@ -123,3 +123,10 @@ app
       response.sendStatus(200)
     })
   })
+
+  .get('/board/allusers/:boardId' , (request , response) => {
+    boards.getAllUsersProgress(request.params.boardId , (data) => {
+      response.send(data)
+    })
+  })
+ 
