@@ -6,18 +6,18 @@ import config from '../config'
 
 const styles = {
   modal: {
-    backgroundColor: "white",
-    width: "80vw",
-    height: "fit-content",
-    margin: "auto",
-    marginTop: "15vh",
-    borderRadius: "10px",
-    textAlign: "center",
-    backdropFilter: "blur(3px)",
-    opacity: "0.7",
-    boxShadow: "0 0 16px 5px black",
-    outline: "none",
-
+    backgroundColor: 'white',
+    width: '80vw',
+    minHeight: '70vh',
+    height: 'fit-content',
+    margin: 'auto',
+    marginTop: '15vh',
+    borderRadius: '10px',
+    textAlign: 'center',
+    backdropFilter: 'blur(3px)',
+    opacity: '0.7',
+    boxShadow: '0 0 16px 5px black',
+    outline: 'none',
   },
   avatar: {
     width: '15vw',
@@ -37,6 +37,7 @@ const styles = {
   description: {
     fontSize: 'small',
     textAlign: 'left',
+    whiteSpace: 'pre-line',
   },
   modalContent: {
     width: '90%',
@@ -172,7 +173,7 @@ export default class TicketDescription extends Component {
               />
             </Grid>
             <Grid item xs={6}>
-              <Fab 
+              <Fab
                 onClick={() => {
                   this.props.close()
                 }}

@@ -10,11 +10,24 @@ export class ManagerAppDataProvider extends Component {
 
     this.state = {
       tickets: [],
+      board: {},
     }
   }
 
   componentDidMount = () => {
-    this.sync()
+    axios
+      .get(
+        config.server +
+          '/board/id/' +
+          window.localStorage.getItem('captainBoardId')
+      )
+      .then((response) => {
+        this.setState({ board: response.data }, this.sync)
+      })
+      .catch((error) => {
+        console.log(error)
+        alert('Sorry, could not get the data! Please try again later')
+      })
   }
 
   sync = () => {

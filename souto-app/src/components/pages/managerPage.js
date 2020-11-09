@@ -44,11 +44,11 @@ export default class ManagerPage extends Component {
   render() {
     return (
       <div>
-        <Menu title={'Manager'} />
         <ManagerContext.Consumer>
           {(ctx) => {
             return (
               <div>
+                <Menu title={ctx.state.board.name} />
                 <ManagerTools addTicket={ctx.newTicket} />
                 <div style={styles.ticketsHolder}>
                   {this.renderTickets(ctx)}

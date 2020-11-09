@@ -4,7 +4,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import NavigateNextIcon from '@material-ui/icons/NavigateNext'
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore'
 import dragAnimation from '../resources/onBoardingDrag.gif'
-import welcomePageImage from '../resources/onBoardingWelcome.png'
+import welcomePageImage from '../resources/onBoardWelcome.png'
 import captainKeyImage from '../resources/onBoardCaptainKey.png'
 import sailorKeyImage from '../resources/onBoardSailorKey.png'
 

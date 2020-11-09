@@ -73,6 +73,7 @@ export default class MainPage extends Component {
         moveNext={moveNext}
         movePrev={movePrev}
         name={boardName}
+        flag={ctx.flagTicket}
       />
     )
   }

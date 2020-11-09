@@ -28,7 +28,7 @@ export class ClientAppDataProvider extends Component {
     axios
       .get(
         config.server +
-          '/board/id/' +
+          '/board/userId/' +
           window.localStorage.getItem('sailorUserId')
       )
       .then((response) => {
@@ -170,6 +170,51 @@ export class ClientAppDataProvider extends Component {
     }
   }
 
+  flagTicket = (ticketId, value) => {
+    let resourse = value ? '/ticket/flag/on/' : '/ticket/flag/off/'
+    axios
+      .post(config.server + resourse + ticketId)
+      .then(() => {
+        this.flagTicketOffline(ticketId, value)
+      })
+      .catch((error) => {
+        console.log(error)
+        alert('Sorry! seems like there is an error. Please try again later.')
+      })
+  }
+
+  flagTicketOffline = (ticketId, value) => {
+    this.setState((prevState) => {
+      let currentChunk = prevState.todoTickets
+      for (let i = 0; i < currentChunk.length; i++) {
+        if (currentChunk[i].id === ticketId) {
+          currentChunk[i].flag = value
+          return {
+            todoTickets: currentChunk,
+          }
+        }
+      }
+      currentChunk = prevState.inProgressTickets
+      for (let i = 0; i < currentChunk.length; i++) {
+        if (currentChunk[i].id === ticketId) {
+          currentChunk[i].flag = value
+          return {
+            inProgressTickets: currentChunk,
+          }
+        }
+      }
+      currentChunk = prevState.doneTickets
+      for (let i = 0; i < currentChunk.length; i++) {
+        if (currentChunk[i].id === ticketId) {
+          currentChunk[i].flag = value
+          return {
+            doneTickets: currentChunk,
+          }
+        }
+      }
+    })
+  }
+
   render() {
     return (
       <ClientContext.Provider
@@ -177,6 +222,7 @@ export class ClientAppDataProvider extends Component {
           state: this.state,
           moveTicket: this.moveTicket,
           sync: this.sync,
+          flagTicket: this.flagTicket,
         }}
       >
         {this.props.children}

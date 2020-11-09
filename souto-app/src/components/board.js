@@ -35,6 +35,7 @@ export default class Board extends Component {
           info={ticket}
           isManager={false}
           delete={this.props.deleteTicket}
+          flag={this.props.flag}
         />
       </div>
     )

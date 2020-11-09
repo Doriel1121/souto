@@ -7,7 +7,6 @@ import {
   Drawer,
   List,
   ListItem,
-  ListItemText,
   ListItemIcon,
 } from "@material-ui/core"
 import MenuIcon from "@material-ui/icons/Menu"
@@ -17,7 +16,8 @@ import { Redirect } from "react-router-dom"
 
 const styles = {
   menu: {
-    width: "45vw",
+    width: '45vw',
+    color: '#444444',
   },
 }
 
@@ -86,7 +86,7 @@ export default class Menu extends Component {
                 <ListItemIcon>
                   <ExitToAppIcon />
                 </ListItemIcon>
-                <ListItemText primary={"Logout"} />
+                Logout
               </ListItem>
               {this.props.isManager ? (
                 <ListItem
