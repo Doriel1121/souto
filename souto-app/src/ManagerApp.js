@@ -2,7 +2,7 @@ import { Switch, HashRouter as Router, Route } from 'react-router-dom'
 import React, { Component } from 'react'
 import { ManagerAppDataProvider } from './managerAppDataProvider'
 import ManagerPage from './components/pages/managerPage'
-import ManageUsersPage from './components/pages/ManageUsersPage'
+import ManageUsersPage from './components/pages/manageUsersPage.js'
 
 export default class ManagerApp extends Component {
   render() {

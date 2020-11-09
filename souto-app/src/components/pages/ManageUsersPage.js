@@ -2,6 +2,7 @@ import axios from "axios"
 import React, { Component } from "react"
 import Menu from "../menu"
 import config from "../../config"
+import ReactLoading from "react-loading"
 import { MobileStepper, Grid } from "@material-ui/core"
 
 const styles = {
@@ -20,6 +21,12 @@ const styles = {
   },
   percent: {
     transform: "translateY(1.7vh)",
+  },
+  svgLoading: {
+    display: "block",
+    width: "10vw",
+    height: "10vh",
+    margin: "auto",
   },
 }
 
@@ -40,7 +47,7 @@ export default class ManageUsersPage extends Component {
           window.localStorage.getItem("captainBoardId")
       )
       .then((res) => {
-        this.setState({ UsersProgress: res.data })
+        this.setState({ usersProgress: res.data })
       })
       .catch((err) => {
         console.log(err)
@@ -53,28 +60,38 @@ export default class ManageUsersPage extends Component {
       <div>
         <Menu isManager={true} title="My crew progress" />
         <Grid style={styles.userProgressInfo} container spacing={1}>
-          {this.state.UsersProgress.map((element, index) => {
-            let percent = 100 / element.c + 1 * element.o
-            return (
-              <React.Fragment key={index}>
-                <Grid style={styles.names} item xs={3}>
-                  <b>{element.Name}</b>
-                </Grid>
-                <Grid style={styles.proDiv} item xs={7}>
-                  <MobileStepper
-                    variant="progress"
-                    steps={element.c + 1}
-                    position="static"
-                    activeStep={element.o}
-                    style={styles.progressBar}
-                  />
-                </Grid>
-                <Grid style={styles.percent} item xs={2}>
-                  {percent.toFixed(0)}%
-                </Grid>
-              </React.Fragment>
-            )
-          })}
+          {this.state.usersProgress.length > 0 ? (
+            this.state.usersProgress.map((element, index) => {
+              let percent = 100 / element.c + 1 * element.o
+              return (
+                <React.Fragment key={index}>
+                  <Grid style={styles.names} item xs={3}>
+                    <b>{element.Name}</b>
+                  </Grid>
+                  <Grid style={styles.proDiv} item xs={7}>
+                    <MobileStepper
+                      variant="progress"
+                      steps={element.c + 1}
+                      position="static"
+                      activeStep={element.o}
+                      style={styles.progressBar}
+                    />
+                  </Grid>
+                  <Grid style={styles.percent} item xs={2}>
+                    {percent.toFixed(0)}%
+                  </Grid>
+                </React.Fragment>
+              )
+            })
+          ) : (
+            <Grid xs={12}>
+              <ReactLoading
+                style={styles.svgLoading}
+                type={"spinningBubbles"}
+                color="blue"
+              />
+            </Grid>
+          )}
         </Grid>
       </div>
     )

@@ -12,6 +12,7 @@ import {
 import MenuIcon from "@material-ui/icons/Menu"
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import GroupIcon from "@material-ui/icons/Group"
+import HomeIcon from "@material-ui/icons/Home"
 import { Redirect } from "react-router-dom"
 
 const styles = {
@@ -29,6 +30,7 @@ export default class Menu extends Component {
       isOpen: false,
       redirectToLogin: false,
       redirectToUsersProgreesPage: false,
+      redirectHome: false,
     }
   }
 
@@ -50,6 +52,9 @@ export default class Menu extends Component {
     }
     if (this.state.redirectToUsersProgreesPage) {
       return <Redirect to="/manager/userProgress" />
+    }
+    if (this.state.redirectHome) {
+      return <Redirect to="/manager/main" />
     }
     return (
       <div>
@@ -76,18 +81,20 @@ export default class Menu extends Component {
         >
           <div style={styles.menu}>
             <List>
-              <ListItem
-                button
-                key={"logout"}
-                onClick={() => {
-                  this.logout()
-                }}
-              >
-                <ListItemIcon>
-                  <ExitToAppIcon />
-                </ListItemIcon>
-                Logout
-              </ListItem>
+              {this.props.isManager ? (
+                <ListItem
+                  button
+                  key={"Home"}
+                  onClick={() => {
+                    this.setState({ redirectHome: true })
+                  }}
+                >
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  Home
+                </ListItem>
+              ) : null}
               {this.props.isManager ? (
                 <ListItem
                   button
@@ -102,6 +109,19 @@ export default class Menu extends Component {
                   My crew
                 </ListItem>
               ) : null}
+
+              <ListItem
+                button
+                key={"logout"}
+                onClick={() => {
+                  this.logout()
+                }}
+              >
+                <ListItemIcon>
+                  <ExitToAppIcon />
+                </ListItemIcon>
+                Logout
+              </ListItem>
             </List>
           </div>
         </Drawer>
