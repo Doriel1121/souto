@@ -6,7 +6,6 @@ import { MobileStepper, Grid } from "@material-ui/core"
 
 const styles = {
   progressBar: {
-    // width: "50vw",
     flexGrow: "1",
     backgroundColor: "transparent",
     paddingTop: "3vh",
@@ -29,7 +28,7 @@ export default class ManageUsersPage extends Component {
     super(props)
 
     this.state = {
-      UsersProgress: [],
+      usersProgress: [],
     }
   }
 
@@ -41,19 +40,18 @@ export default class ManageUsersPage extends Component {
           window.localStorage.getItem("captainBoardId")
       )
       .then((res) => {
-        console.log(res)
         this.setState({ UsersProgress: res.data })
       })
       .catch((err) => {
         console.log(err)
-        alert("Sorry could not get the data ")
+        alert("Sorry could not get the data please try again later ")
       })
   }
 
   render() {
     return (
       <div>
-        <Menu isManager={true} title="My Crew Progress" />
+        <Menu isManager={true} title="My crew progress" />
         <Grid style={styles.userProgressInfo} container spacing={1}>
           {this.state.UsersProgress.map((element, index) => {
             let percent = 100 / element.c + 1 * element.o
