@@ -6,7 +6,7 @@ const users = require('./users')
 const boards = require('./boards')
 var https = require('https')
 var fs = require('fs')
-const { response } = require('express')
+const { response, request } = require('express')
 
 var httpsOptions = {
   key: fs.readFileSync('/home/ubuntu/key.pem'),
@@ -132,7 +132,18 @@ app
     })
   })
   .get('/board/allusers/:boardId', (request, response) => {
+    console.log('All users progress request')
     boards.getAllUsersProgress(request.params.boardId, (data) => {
       response.send(data)
+    })
+  })
+  .get('/board/id/:boardId', (request, response) => {
+    console.log('Board by id request')
+    boards.getBoardById(request.params.boardId, (board) => {
+      if (board === null) {
+        response.sendStatus(404)
+      } else {
+        response.send(board)
+      }
     })
   })

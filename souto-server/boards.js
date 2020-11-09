@@ -87,3 +87,18 @@ exports.getAllUsersProgress = (boardId, callback) => {
     }
   )
 }
+
+exports.getBoardById = (boardId, callback) => {
+  connection.query(
+    'SELECT * FROM Boards WHERE id = ?',
+    [boardId],
+    (error, rows) => {
+      if (error) throw error
+      if (rows.length === 0) {
+        callback(null)
+      } else {
+        callback(rows[0])
+      }
+    }
+  )
+}
