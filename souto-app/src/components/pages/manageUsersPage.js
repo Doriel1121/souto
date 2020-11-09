@@ -28,6 +28,9 @@ const styles = {
     height: "10vh",
     margin: "auto",
   },
+  empty: {
+    textAlign: "center",
+  },
 }
 
 export default class ManageUsersPage extends Component {
@@ -36,6 +39,7 @@ export default class ManageUsersPage extends Component {
 
     this.state = {
       usersProgress: [],
+      display: "block",
     }
   }
 
@@ -47,7 +51,7 @@ export default class ManageUsersPage extends Component {
           window.localStorage.getItem("captainBoardId")
       )
       .then((res) => {
-        this.setState({ usersProgress: res.data })
+        this.setState({ usersProgress: res.data, display: "none" })
       })
       .catch((err) => {
         console.log(err)
@@ -60,6 +64,13 @@ export default class ManageUsersPage extends Component {
       <div>
         <Menu isManager={true} title="My crew progress" />
         <Grid style={styles.userProgressInfo} container spacing={1}>
+          <Grid style={{ display: `${this.state.display}` }} item xs={12}>
+            <ReactLoading
+              style={styles.svgLoading}
+              type={"spinningBubbles"}
+              color="blue"
+            />
+          </Grid>
           {this.state.usersProgress.length > 0 ? (
             this.state.usersProgress.map((element, index) => {
               let percent = 100 / element.c + 1 * element.o
@@ -83,15 +94,11 @@ export default class ManageUsersPage extends Component {
                 </React.Fragment>
               )
             })
-          ) : (
-            <Grid xs={12}>
-              <ReactLoading
-                style={styles.svgLoading}
-                type={"spinningBubbles"}
-                color="blue"
-              />
+          ) : this.state.display === "none" ? (
+            <Grid style={styles.empty} item xs={12}>
+              Empty
             </Grid>
-          )}
+          ) : null}
         </Grid>
       </div>
     )
