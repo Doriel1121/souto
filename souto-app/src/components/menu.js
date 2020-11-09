@@ -16,8 +16,8 @@ import { Redirect } from "react-router-dom"
 
 const styles = {
   menu: {
-    width: '45vw',
-    color: '#444444',
+    width: "45vw",
+    color: "#444444",
   },
 }
 
@@ -99,7 +99,7 @@ export default class Menu extends Component {
                   <ListItemIcon>
                     <GroupIcon />
                   </ListItemIcon>
-                  <ListItemText primary={"My crew"} />
+                  My crew
                 </ListItem>
               ) : null}
             </List>

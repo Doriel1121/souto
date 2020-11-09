@@ -48,7 +48,7 @@ export default class ManagerPage extends Component {
           {(ctx) => {
             return (
               <div>
-                <Menu title={ctx.state.board.name} />
+                <Menu isManager={true} title={ctx.state.board.name} />
                 <ManagerTools addTicket={ctx.newTicket} />
                 <div style={styles.ticketsHolder}>
                   {this.renderTickets(ctx)}
