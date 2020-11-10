@@ -49,21 +49,7 @@ export default class LinkValidator extends Component {
               alignItems="center"
               spacing={3}
             >
-              <Grid item xs={4}>
-                <Button
-                  fullWidth
-                  variant="contained"
-                  color="secondary"
-                  onClick={(e) => {
-                    if (this.props.action !== undefined) this.props.action(e)
-                    this.props.close()
-                  }}
-                >
-                  Continue
-                </Button>
-              </Grid>
-              <Grid item xs={4}></Grid>
-              <Grid item xs={4}>
+              <Grid item xs={5}>
                 <Button
                   fullWidth
                   variant="contained"
@@ -74,6 +60,20 @@ export default class LinkValidator extends Component {
                   }}
                 >
                   Cancel
+                </Button>
+              </Grid>
+              <Grid item xs={2}></Grid>
+              <Grid item xs={5}>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="secondary"
+                  onClick={(e) => {
+                    if (this.props.action !== undefined) this.props.action(e)
+                    this.props.close()
+                  }}
+                >
+                  Continue
                 </Button>
               </Grid>
             </Grid>

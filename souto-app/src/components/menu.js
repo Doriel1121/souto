@@ -12,6 +12,7 @@ import {
 import MenuIcon from '@material-ui/icons/Menu'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import { Redirect } from 'react-router-dom'
+import LinkValidator from './linkValidator'
 
 const styles = {
   menu: {
@@ -27,6 +28,7 @@ export default class Menu extends Component {
     this.state = {
       isOpen: false,
       redirectToLogin: false,
+      validatorOpen: false,
     }
   }
 
@@ -68,18 +70,26 @@ export default class Menu extends Component {
         >
           <div style={styles.menu}>
             <List>
-              <ListItem
-                button
-                key={'logout'}
-                onClick={() => {
-                  this.logout()
+              <LinkValidator
+                close={() => {
+                  this.setState({ validatorOpen: false })
                 }}
+                open={this.state.validatorOpen}
+                action={this.logout}
               >
-                <ListItemIcon>
-                  <ExitToAppIcon />
-                </ListItemIcon>
-                Logout
-              </ListItem>
+                <ListItem
+                  button
+                  onClick={() => {
+                    this.setState({ validatorOpen: true })
+                  }}
+                  key={'logout'}
+                >
+                  <ListItemIcon>
+                    <ExitToAppIcon />
+                  </ListItemIcon>
+                  Logout
+                </ListItem>
+              </LinkValidator>
             </List>
           </div>
         </Drawer>
