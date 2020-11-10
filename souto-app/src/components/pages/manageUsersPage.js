@@ -96,7 +96,7 @@ export default class ManageUsersPage extends Component {
             })
           ) : this.state.display === "none" ? (
             <Grid style={styles.empty} item xs={12}>
-              Empty
+              No crew members yet
             </Grid>
           ) : null}
         </Grid>
