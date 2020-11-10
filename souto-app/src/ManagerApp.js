@@ -13,6 +13,7 @@ export default class ManagerApp extends Component {
             <Route exact path="/manager/main">
               <ManagerPage />
             </Route>
+            
             <Route exact path ="/manager/userProgress">
               <ManageUsersPage/>
             </Route>
