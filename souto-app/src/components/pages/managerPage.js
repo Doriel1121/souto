@@ -4,6 +4,8 @@ import Ticket from '../ticket'
 import ManagerTools from '../managerTools'
 import FlipMove from 'react-flip-move'
 import Menu from '../menu'
+import { Typography } from '@material-ui/core'
+import EmptyBoard from '../../resources/board-empty.png'
 
 const styles = {
   ticketsHolder: {
@@ -14,7 +16,16 @@ const styles = {
     display: 'inline-block',
     width: '-webkit-fill-available',
   },
-  ticket: {},
+  emptyBoardHolder: {
+    textAlign: 'center',
+  },
+  emptyBoardImage: {
+    height: '60vh',
+    opacity: '15%',
+  },
+  emptyBoardText: {
+    color: '#464646',
+  },
 }
 
 export default class ManagerPage extends Component {
@@ -51,7 +62,20 @@ export default class ManagerPage extends Component {
                 <Menu isManager={true} title={ctx.state.board.name} />
                 <ManagerTools addTicket={ctx.newTicket} />
                 <div style={styles.ticketsHolder}>
-                  {this.renderTickets(ctx)}
+                  {ctx.state.tickets.length === 0 ? (
+                    <div style={styles.emptyBoardHolder}>
+                      <img
+                        src={EmptyBoard}
+                        style={styles.emptyBoardImage}
+                        alt="empty board"
+                      />
+                      <Typography variant="h5" style={styles.emptyBoardText}>
+                        Add tickets to your board!
+                      </Typography>
+                    </div>
+                  ) : (
+                    this.renderTickets(ctx)
+                  )}
                 </div>
               </div>
             )

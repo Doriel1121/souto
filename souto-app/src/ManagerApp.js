@@ -4,6 +4,7 @@ import { ManagerAppDataProvider } from './managerAppDataProvider'
 import ManagerPage from './components/pages/managerPage'
 import ManageUsersPage from './components/pages/manageUsersPage.js'
 
+
 export default class ManagerApp extends Component {
   render() {
     return (

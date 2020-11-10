@@ -52,7 +52,8 @@ export default class Board extends Component {
           typeName={null}
           maintainContainerHeight={true}
           duration={100}
-          staggerDurationBy={50}
+          staggerDurationBy={40}
+          delay={0}
         >
           {this.props.tickets.length === 0 ? (
             <div>

@@ -165,7 +165,6 @@ export default class TicketDescription extends Component {
                   this.setState({ description: event.target.value })
                 }}
                 multiline
-                rows={6}
                 rowsMax={6}
                 inputProps={{
                   maxLength: 300,
