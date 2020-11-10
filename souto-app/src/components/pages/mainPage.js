@@ -85,7 +85,7 @@ export default class MainPage extends Component {
           {(ctx) => {
             return (
               <React.Fragment>
-                <Menu title={ctx.state.board.name} />
+                <Menu title={ctx.state.board.name} isManager={false} />
                 <Progress
                   steps={this.countAllTickets(ctx)}
                   currentStep={ctx.state.doneTickets.length}

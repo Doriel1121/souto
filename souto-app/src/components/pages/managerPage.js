@@ -3,9 +3,9 @@ import ManagerContext from '../../managerAppDataProvider'
 import Ticket from '../ticket'
 import ManagerTools from '../managerTools'
 import FlipMove from 'react-flip-move'
-import Menu from '../menu'
 import { Typography } from '@material-ui/core'
 import EmptyBoard from '../../resources/board-empty.png'
+import Menu from '../menu'
 
 const styles = {
   ticketsHolder: {
@@ -59,7 +59,7 @@ export default class ManagerPage extends Component {
           {(ctx) => {
             return (
               <div>
-                <Menu title={ctx.state.board.name} />
+                <Menu title={ctx.state.board.name} isManager={true} />
                 <ManagerTools addTicket={ctx.newTicket} />
                 <div style={styles.ticketsHolder}>
                   {ctx.state.tickets.length === 0 ? (

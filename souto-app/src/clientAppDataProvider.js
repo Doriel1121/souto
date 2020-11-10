@@ -14,11 +14,13 @@ export class ClientAppDataProvider extends Component {
       inProgressTickets: [],
       doneTickets: [],
       board: {},
+      user: {},
     }
   }
 
   componentDidMount = () => {
     this.getBoard()
+    this.getUser()
     this.sync(() => {
       this.syncInterval(5000)
     })
@@ -38,6 +40,25 @@ export class ClientAppDataProvider extends Component {
       })
       .catch((error) => {
         console.log(error)
+        alert('Sorry, couldt get the data. Please try again later')
+      })
+  }
+
+  getUser = () => {
+    axios
+      .get(
+        config.server +
+          '/user/id/' +
+          window.localStorage.getItem('sailorUserId')
+      )
+      .then((response) => {
+        this.setState({
+          user: response.data,
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+        alert('Sorry, couldt get the data. Please try again later')
       })
   }
 

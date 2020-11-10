@@ -11,7 +11,9 @@ import {
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
-import { Redirect } from 'react-router-dom'
+import HomeIcon from '@material-ui/icons/Home'
+import SettingsIcon from '@material-ui/icons/Settings'
+import { Redirect, Link } from 'react-router-dom'
 import LinkValidator from './linkValidator'
 
 const styles = {
@@ -70,6 +72,28 @@ export default class Menu extends Component {
         >
           <div style={styles.menu}>
             <List>
+              <Link
+                to={this.props.isManager ? '/manager/main' : '/client/main'}
+              >
+                <ListItem button key={'home'}>
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  Home
+                </ListItem>
+              </Link>
+              <Link
+                to={
+                  this.props.isManager ? '/manager/summary' : '/client/summary'
+                }
+              >
+                <ListItem button key={'settings'}>
+                  <ListItemIcon>
+                    <SettingsIcon />
+                  </ListItemIcon>
+                  {this.props.isManager ? 'My board' : 'My user'}
+                </ListItem>
+              </Link>
               <LinkValidator
                 close={() => {
                   this.setState({ validatorOpen: false })
@@ -77,7 +101,9 @@ export default class Menu extends Component {
                 open={this.state.validatorOpen}
                 action={this.logout}
                 message={
-                  'Make sure you remember your secret for re-connect to your board as Captain'
+                  this.props.isManager
+                    ? 'Make sure you remember your secret for re-connect to your board as Captain'
+                    : 'Make sure you remember your secret so you connect again to your sailor'
                 }
               >
                 <ListItem

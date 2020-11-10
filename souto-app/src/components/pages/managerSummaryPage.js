@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Grid, Typography } from '@material-ui/core'
-import ClientContext from '../../clientAppDataProvider'
+import ManagerContext from '../../managerAppDataProvider'
 import LogoImage from '../../resources/logo-white.png'
 import Menu from '../menu'
 
@@ -30,12 +30,12 @@ const styles = {
   },
 }
 
-export default class SummaryPage extends Component {
+export default class ManagerSummaryPage extends Component {
   render() {
     return (
       <div>
-        <Menu title={'My user'} isManager={false} />
-        <ClientContext.Consumer>
+        <Menu title={'My board'} isManager={true} />
+        <ManagerContext.Consumer>
           {(ctx) => {
             return (
               <Grid
@@ -47,9 +47,6 @@ export default class SummaryPage extends Component {
                 style={styles.content}
               >
                 <Grid item xs={12} style={styles.item}>
-                  <Typography variant="h4" style={styles.topSubItem}>
-                    {ctx.state.user.name}
-                  </Typography>
                   <Typography variant="h4" style={styles.bottomSubItem}>
                     {ctx.state.board.name}
                   </Typography>
@@ -64,10 +61,10 @@ export default class SummaryPage extends Component {
                 </Grid>
                 <Grid item xs={12} style={styles.item}>
                   <Typography variant="h5" style={styles.topSubItem}>
-                    My secret
+                    Board secret
                   </Typography>
                   <Typography variant="h5" style={styles.bottomSubItem}>
-                    {ctx.state.user.secret}
+                    {ctx.state.board.secret}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} style={styles.item}>
@@ -76,7 +73,7 @@ export default class SummaryPage extends Component {
               </Grid>
             )
           }}
-        </ClientContext.Consumer>
+        </ManagerContext.Consumer>
       </div>
     )
   }
