@@ -5,6 +5,7 @@ import TicketDescription from './ticketDescription'
 import config from '../config'
 import WhiteFlagImage from '../resources/white-flag.png'
 import RedFlagImage from '../resources/red-flag.png'
+import LinkValidator from './linkValidator'
 
 const styles = {
   pickBox: {
@@ -54,6 +55,7 @@ export default class Ticket extends Component {
 
     this.state = {
       isOpen: false,
+      deleteValidationOpen: false,
     }
   }
 
@@ -92,16 +94,26 @@ export default class Ticket extends Component {
           </Grid>
           <Grid item xs={2}>
             {this.props.isManager ? (
-              <IconButton
-                onClick={() => {
+              <LinkValidator
+                open={this.state.deleteValidationOpen}
+                close={() => {
+                  this.setState({ deleteValidationOpen: false })
+                }}
+                action={() => {
                   this.props.delete(this.props.info.id)
                 }}
-                style={styles.deleteIcon}
-                edge="start"
-                color="inherit"
               >
-                <DeleteIcon />
-              </IconButton>
+                <IconButton
+                  onClick={() => {
+                    this.setState({ deleteValidationOpen: true })
+                  }}
+                  style={styles.deleteIcon}
+                  edge="start"
+                  color="inherit"
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </LinkValidator>
             ) : (
               <Fab
                 size={'small'}
