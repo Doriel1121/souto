@@ -147,3 +147,13 @@ app
       }
     })
   })
+  .get('/user/id/:userId', (request, response) => {
+    console.log('User by id request')
+    users.getUserById(request.params.userId, (user) => {
+      if (user === null) {
+        response.sendStatus(500)
+      } else {
+        response.send(user)
+      }
+    })
+  })

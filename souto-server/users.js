@@ -67,3 +67,18 @@ exports.logInUserBySecret = (secretNumber, callback) => {
     }
   )
 }
+
+exports.getUserById = (userId, callback) => {
+  connection.query(
+    'SELECT * FROM Users WHERE id = ?',
+    [userId],
+    (error, rows) => {
+      if (error) throw error
+      if (rows.length > 0) {
+        callback(rows[0])
+      } else {
+        callback(null)
+      }
+    }
+  )
+}
