@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import {
   AppBar,
   Toolbar,
@@ -14,6 +14,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import GroupIcon from "@material-ui/icons/Group"
 import HomeIcon from "@material-ui/icons/Home"
 import { Redirect } from "react-router-dom"
+
 
 const styles = {
   menu: {
@@ -31,19 +32,16 @@ export default class Menu extends Component {
       redirectToLogin: false,
       redirectToUsersProgreesPage: false,
       redirectHome: false,
+
     }
   }
 
   logout = () => {
-    window.localStorage.removeItem("captainBoardId")
-    window.localStorage.removeItem("sailorUserId")
+    window.localStorage.removeItem('captainBoardId')
+    window.localStorage.removeItem('sailorUserId')
     this.setState({
       redirectToLogin: true,
     })
-  }
-
-  ShowUsersProgressPage = () => {
-    this.setState({ redirectToUsersProgreesPage: true })
   }
 
   render() {
@@ -56,6 +54,7 @@ export default class Menu extends Component {
     if (this.state.redirectHome) {
       return <Redirect to="/manager/main" />
     }
+
     return (
       <div>
         <AppBar position="static">
@@ -113,6 +112,7 @@ export default class Menu extends Component {
               <ListItem
                 button
                 key={"logout"}
+
                 onClick={() => {
                   this.logout()
                 }}
