@@ -32,12 +32,15 @@ export default class LinkValidator extends Component {
               justify="center"
               alignItems="center"
               spacing={0}
+              style={{ width: '70vw' }}
             >
               <Grid item xs={12}>
                 <ErrorIcon style={styles.warningSign} />
               </Grid>
               <Grid item xs={12}>
-                Are you sure you want to continue?
+                {this.props.message === undefined
+                  ? 'Are you sure you want to continue?'
+                  : this.props.message}
               </Grid>
             </Grid>
           </CardContent>

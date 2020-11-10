@@ -76,6 +76,9 @@ export default class Menu extends Component {
                 }}
                 open={this.state.validatorOpen}
                 action={this.logout}
+                message={
+                  'Make sure you remember your secret for re-connect to your board as Captain'
+                }
               >
                 <ListItem
                   button
