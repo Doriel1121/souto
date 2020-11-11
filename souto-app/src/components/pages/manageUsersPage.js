@@ -98,7 +98,7 @@ export default class ManageUsersPage extends Component {
                 </React.Fragment>
               )
             })
-          ) : this.state.display === "none" ? (
+          ) : !this.state.open ? (
             <Grid style={styles.empty} item xs={12}>
               No crew members yet
             </Grid>
