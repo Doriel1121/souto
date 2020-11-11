@@ -103,7 +103,7 @@ export default class Menu extends Component {
                 message={
                   this.props.isManager
                     ? 'Make sure you remember your secret for re-connect to your board as Captain'
-                    : 'Make sure you remember your secret so you connect again to your sailor'
+                    : 'Please make sure you remember your secret key with whom you can log-in'
                 }
               >
                 <ListItem

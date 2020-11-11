@@ -168,7 +168,7 @@ export default class TicketDescription extends Component {
                 rows={6}
                 rowsMax={6}
                 inputProps={{
-                  maxLength: 300,
+                  maxLength: 600,
                 }}
               />
             </Grid>
