@@ -1,40 +1,40 @@
-import axios from "axios"
-import React, { Component } from "react"
-import Menu from "../menu"
-import config from "../../config"
-import CircularProgress from "@material-ui/core/CircularProgress"
-import Backdrop from "@material-ui/core/Backdrop"
-import { MobileStepper, Grid } from "@material-ui/core"
+import axios from 'axios'
+import React, { Component } from 'react'
+import Menu from '../menu'
+import config from '../../config'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import Backdrop from '@material-ui/core/Backdrop'
+import { MobileStepper, Grid } from '@material-ui/core'
 
 const styles = {
   progressBar: {
-    flexGrow: "1",
-    backgroundColor: "transparent",
-    paddingTop: "3vh",
-    marginRight: "0",
+    flexGrow: '1',
+    backgroundColor: 'transparent',
+    paddingTop: '3vh',
+    marginRight: '0',
   },
   names: {
-    textAlign: "center",
-    transform: "translateY(1.7vh)",
+    textAlign: 'center',
+    transform: 'translateY(1.7vh)',
   },
   userProgressInfo: {
-    marginTop: "5vh",
+    marginTop: '5vh',
   },
   percent: {
-    transform: "translateY(1.7vh)",
+    transform: 'translateY(1.7vh)',
   },
   svgLoading: {
-    display: "block",
-    width: "10vw",
-    height: "10vh",
-    margin: "auto",
+    display: 'block',
+    width: '10vw',
+    height: '10vh',
+    margin: 'auto',
   },
   empty: {
-    textAlign: "center",
+    textAlign: 'center',
   },
   backdrop: {
     zIndex: 1,
-    color: "#fff",
+    color: '#fff',
   },
 }
 
@@ -52,22 +52,19 @@ export default class ManageUsersPage extends Component {
     axios
       .get(
         config.server +
-          "/board/allusers/" +
-          window.localStorage.getItem("captainBoardId")
+          '/board/allusers/' +
+          window.localStorage.getItem('captainBoardId')
       )
       .then((res) => {
-        this.setState({ usersProgress: res.data })
+        this.setState({ usersProgress: res.data, open: false })
       })
       .catch((err) => {
         console.log(err)
-        alert("Sorry could not get the data please try again later ")
+        alert('Sorry could not get the data please try again later ')
       })
   }
 
   render() {
-    if (this.state.usersProgress.length > 0 && this.state.open == true) {
-      this.setState({ open: false })
-    }
     return (
       <div>
         <Menu isManager={true} title="My crew progress" />
