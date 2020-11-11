@@ -5,7 +5,6 @@ import ManagerPage from './components/pages/managerPage'
 import ManagerSummaryPage from './components/pages/managerSummaryPage'
 import ManageUsersPage from './components/pages/manageUsersPage.js'
 
-
 export default class ManagerApp extends Component {
   render() {
     return (

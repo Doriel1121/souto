@@ -27,6 +27,7 @@ const styles = {
     width: "10vw",
     height: "10vh",
     margin: "auto",
+    transform:"translateY(40)"
   },
   empty: {
     textAlign: "center",

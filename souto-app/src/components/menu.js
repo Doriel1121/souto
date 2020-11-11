@@ -31,7 +31,6 @@ export default class Menu extends Component {
     this.state = {
       isOpen: false,
       redirectToLogin: false,
-      redirectHome: false,
       validatorOpen: false,
     }
   }
