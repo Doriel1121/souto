@@ -3,10 +3,10 @@ import MobileImage from '../../resources/warning-mobile-device.png'
 
 const styles = {
   page: {
-    height: '100vh',
+    height: '90vh',
     background: 'linear-gradient(45deg, #00B4DB, #1C6F8C)',
     textAlign: 'center',
-    padding: '10vh',
+    paddingTop: '10vh',
     color: 'white',
   },
   title: {

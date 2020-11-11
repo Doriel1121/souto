@@ -53,7 +53,7 @@ export default class ManagerSummaryPage extends Component {
                 </Grid>
                 <Grid item xs={12} style={styles.item}>
                   <Typography variant="h5" style={styles.topSubItem}>
-                    Board key
+                    Key
                   </Typography>
                   <Typography variant="h5" style={styles.bottomSubItem}>
                     {ctx.state.board.public_key}
@@ -61,7 +61,7 @@ export default class ManagerSummaryPage extends Component {
                 </Grid>
                 <Grid item xs={12} style={styles.item}>
                   <Typography variant="h5" style={styles.topSubItem}>
-                    Board secret
+                    Secret
                   </Typography>
                   <Typography variant="h5" style={styles.bottomSubItem}>
                     {ctx.state.board.secret}
