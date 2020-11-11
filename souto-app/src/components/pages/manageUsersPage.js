@@ -2,7 +2,8 @@ import axios from "axios"
 import React, { Component } from "react"
 import Menu from "../menu"
 import config from "../../config"
-import ReactLoading from "react-loading"
+import CircularProgress from "@material-ui/core/CircularProgress"
+import Backdrop from "@material-ui/core/Backdrop"
 import { MobileStepper, Grid } from "@material-ui/core"
 
 const styles = {
@@ -27,10 +28,13 @@ const styles = {
     width: "10vw",
     height: "10vh",
     margin: "auto",
-    transform:"translateY(40)"
   },
   empty: {
     textAlign: "center",
+  },
+  backdrop: {
+    zIndex: 1,
+    color: "#fff",
   },
 }
 
@@ -41,6 +45,7 @@ export default class ManageUsersPage extends Component {
     this.state = {
       usersProgress: [],
       display: "block",
+      open: true,
     }
   }
 
@@ -60,17 +65,25 @@ export default class ManageUsersPage extends Component {
       })
   }
 
+  handleClose = () => {
+    if (this.state.usersProgress.length > 0) {
+      this.setState({ open: false })
+    }
+  }
+
   render() {
     return (
       <div>
         <Menu isManager={true} title="My crew progress" />
         <Grid style={styles.userProgressInfo} container spacing={1}>
           <Grid style={{ display: `${this.state.display}` }} item xs={12}>
-            <ReactLoading
-              style={styles.svgLoading}
-              type={"spinningBubbles"}
-              color="blue"
-            />
+            <Backdrop
+              style={styles.backdrop}
+              open={this.state.open}
+              onClick={() => this.handleClose()}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
           </Grid>
           {this.state.usersProgress.length > 0 ? (
             this.state.usersProgress.map((element, index) => {
