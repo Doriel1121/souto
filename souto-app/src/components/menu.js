@@ -12,7 +12,6 @@ import {
 import MenuIcon from '@material-ui/icons/Menu'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import HomeIcon from '@material-ui/icons/Home'
-import GroupIcon from "@material-ui/icons/Group"
 import SettingsIcon from '@material-ui/icons/Settings'
 import { Redirect, Link } from 'react-router-dom'
 import LinkValidator from './linkValidator'
@@ -83,19 +82,6 @@ export default class Menu extends Component {
                   Home
                 </ListItem>
               </Link>
-              {this.props.isManager ? (
-                <Link to ="/manager/userProgress">
-                <ListItem
-                  button
-                  key={"crew"}
-                >
-                  <ListItemIcon>
-                    <GroupIcon />
-                  </ListItemIcon>
-                  My crew
-                </ListItem>
-                </Link>
-              ) : null}
               <Link
                 to={
                   this.props.isManager ? '/manager/summary' : '/client/summary'
