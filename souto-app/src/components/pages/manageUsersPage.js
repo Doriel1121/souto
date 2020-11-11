@@ -44,7 +44,6 @@ export default class ManageUsersPage extends Component {
 
     this.state = {
       usersProgress: [],
-      display: "block",
       open: true,
     }
   }
@@ -57,7 +56,7 @@ export default class ManageUsersPage extends Component {
           window.localStorage.getItem("captainBoardId")
       )
       .then((res) => {
-        this.setState({ usersProgress: res.data, display: "none" })
+        this.setState({ usersProgress: res.data })
       })
       .catch((err) => {
         console.log(err)
@@ -65,26 +64,17 @@ export default class ManageUsersPage extends Component {
       })
   }
 
-  handleClose = () => {
-    if (this.state.usersProgress.length > 0) {
+  render() {
+    if (this.state.usersProgress.length > 0 && this.state.open == true) {
       this.setState({ open: false })
     }
-  }
-
-  render() {
     return (
       <div>
         <Menu isManager={true} title="My crew progress" />
         <Grid style={styles.userProgressInfo} container spacing={1}>
-          <Grid style={{ display: `${this.state.display}` }} item xs={12}>
-            <Backdrop
-              style={styles.backdrop}
-              open={this.state.open}
-              onClick={() => this.handleClose()}
-            >
-              <CircularProgress color="inherit" />
-            </Backdrop>
-          </Grid>
+          <Backdrop style={styles.backdrop} open={this.state.open}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
           {this.state.usersProgress.length > 0 ? (
             this.state.usersProgress.map((element, index) => {
               let percent = 100 / element.c + 1 * element.o
