@@ -157,3 +157,9 @@ app
       }
     })
   })
+  .get('/tickets/getFlag/:userId' , (request , response) => {
+    console.log("Flag is active or not")
+    tickets.getActivatedFlags(request.params.userId , (userActiveFlags) => {
+      response.send(userActiveFlags)
+    })
+  })
