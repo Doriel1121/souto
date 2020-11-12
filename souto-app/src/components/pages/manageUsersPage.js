@@ -18,12 +18,12 @@ const styles = {
     transform: 'translateY(1.7vh)',
   },
   userProgressInfo: {
-    marginTop: '5vh',
     overflow: 'auto',
     height: '40vh',
     position: 'absolute',
     bottom: '0px',
     borderTop: 'solid 1px',
+    width: '100vw',
   },
   percent: {
     transform: 'translateY(1.7vh)',
@@ -36,6 +36,7 @@ const styles = {
   },
   empty: {
     textAlign: 'center',
+    fontSize: '25px',
   },
   backdrop: {
     zIndex: 1,
@@ -63,6 +64,25 @@ const styles = {
     background: 'linear-gradient(45deg, rgb(167 167 167), rgb(124 124 124))',
     border: 'solid 1px',
     boxShadow: 'rgb(78, 78, 78) 4px 4px 15px 1px',
+  },
+  card: {
+    margin: '10vw',
+    width: '80vw',
+    height: '40vh',
+    borderRadius: '5px',
+    background: 'linear-gradient(45deg, #00B4DB, rgb(28 111 140))',
+    boxShadow: '0px 0px 20px 1px rgb(78 78 78)',
+    alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'center',
+    alignContent: 'center',
+    flexDirection: 'column',
+  },
+  circularCard: {
+    borderRadius: '40vw',
+    width: '60vw',
+    height: '60vw',
+    background: 'linear-gradient(225deg, #00B4DB, rgb(28 111 140))',
   },
 }
 
@@ -97,7 +117,7 @@ export default class ManageUsersPage extends Component {
     this.state = {
       usersProgress: [],
       open: true,
-      selectedPerson: { id: 38 },
+      selectedPersonId: -1,
     }
   }
 
@@ -144,10 +164,17 @@ export default class ManageUsersPage extends Component {
         {list.map((item) => {
           let percent = (100 / item.c) * item.o
           return (
-            <Grid item xs={3} key={item.id}>
+            <Grid
+              item
+              xs={3}
+              key={item.id}
+              onClick={() => {
+                this.setState({ selectedPersonId: item.id })
+              }}
+            >
               <div
                 style={
-                  item.id === this.state.selectedPerson.id
+                  item.id === this.state.selectedPersonId
                     ? styles.selectedPerson
                     : styles.singlePerson
                 }
@@ -165,10 +192,21 @@ export default class ManageUsersPage extends Component {
     )
   }
 
+  renderSelectedPerson = (person) => {
+    return (
+      <div style={styles.card}>
+        <div style={styles.circularCard}></div>
+      </div>
+    )
+  }
+
   render() {
     return (
       <div>
         <Menu isManager={true} title="My crew progress" />
+        {this.state.usersProgress.length > 0
+          ? this.renderSelectedPerson(this.state.selectedPerson)
+          : null}
         <div style={styles.userProgressInfo}>
           {this.state.usersProgress.length > 0 ? (
             this.renderCrew(this.state.usersProgress)
