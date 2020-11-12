@@ -598,7 +598,18 @@ export default class LoginPage extends Component {
                     }}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={6}>
+                <Button
+                    variant="contained"
+                    fullWidth
+                    onClick={() => {
+                      this.setState({ viewIndex: 4 })
+                    }}
+                  >
+                    Go back
+                  </Button>
+                </Grid>
+                <Grid item xs={6}>
                   <Button
                     variant="contained"
                     color="primary"
