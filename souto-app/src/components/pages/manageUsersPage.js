@@ -72,8 +72,7 @@ export default class ManageUsersPage extends Component {
           window.localStorage.getItem("captainBoardId")
       )
       .then((res) => {
-        this.setState({ usersProgress: res.data, open: false })
-        callback(5000)
+        this.setState({ usersProgress: res.data, open: false }, callback)
       })
       .catch((err) => {
         console.log(err)
@@ -91,8 +90,8 @@ export default class ManageUsersPage extends Component {
           </Backdrop>
           {this.state.usersProgress.length > 0 ? (
             this.state.usersProgress.map((element, index) => {
-              let numerator = 100 / element.c + 1
-              numerator = numerator * element.o
+              let percent = 100 / element.c
+              percent = percent * element.o
               return (
                 <React.Fragment key={index}>
                   <Grid style={styles.names} item xs={3}>
@@ -108,7 +107,7 @@ export default class ManageUsersPage extends Component {
                     />
                   </Grid>
                   <Grid style={styles.percent} item xs={2}>
-                    {numerator.toFixed(0)}%
+                    {percent.toFixed(0)}%
                   </Grid>
                 </React.Fragment>
               )
