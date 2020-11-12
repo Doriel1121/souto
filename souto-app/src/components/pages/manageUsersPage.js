@@ -19,6 +19,8 @@ const styles = {
   },
   userProgressInfo: {
     marginTop: "5vh",
+    overflow: "auto",
+    height: "80vh",
   },
   percent: {
     transform: "translateY(1.7vh)",
@@ -49,6 +51,20 @@ export default class ManageUsersPage extends Component {
   }
 
   componentDidMount = () => {
+    this.getUsersData(() => {
+      this.syncInterval(5000)
+    })
+  }
+
+  syncInterval = (interval) => {
+    setTimeout(() => {
+      this.getUsersData(() => {
+        this.syncInterval(interval)
+      })
+    }, interval)
+  }
+
+  getUsersData = (callback) => {
     axios
       .get(
         config.server +
@@ -57,6 +73,7 @@ export default class ManageUsersPage extends Component {
       )
       .then((res) => {
         this.setState({ usersProgress: res.data, open: false })
+        callback(5000)
       })
       .catch((err) => {
         console.log(err)
