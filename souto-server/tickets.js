@@ -120,7 +120,7 @@ exports.updateFlag = (userTicketId, value, callback) => {
   )
 }
 
-exports.getActivatedFlags = (userId , callback) => {
+exports.getFlaggedTicketsByUserId = (userId , callback) => {
   connection.query('SELECT * FROM UserTicketMigration WHERE user_id = ? AND flag = "1"' , [userId] , (error , rows) => {
     if (error) throw error
     callback(rows)
