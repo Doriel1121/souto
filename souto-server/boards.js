@@ -79,7 +79,7 @@ exports.getBoardByUserId = (userId, callback) => {
 
 exports.getAllUsersProgress = (boardId, callback) => {
   connection.query(
-    "SELECT a.id, a.Name, a.c, IFNULL(done.o, 0) as o FROM (SELECT u.id , u.Name , COUNT(*) AS c FROM UserTicketMigration AS utf JOIN Users AS u ON utf.user_id = u.id JOIN Tickets AS t ON t.id = utf.ticket_id WHERE t.active = 1 AND u.board_id = ? GROUP BY u.id) AS a LEFT JOIN (SELECT u.id , u.Name , COUNT(*) AS o FROM UserTicketMigration AS utm JOIN Users AS u ON utm.user_id = u.id JOIN Tickets AS t ON t.id = utm.ticket_id WHERE t.active = 1 AND u.board_id = ? AND utm.status = 'DONE' GROUP BY u.id) AS done ON a.id = done.id",
+    "SELECT a.id, a.Name, a.c, IFNULL(done.o, 0) as o, a.f AS f FROM (SELECT u.id , u.Name , COUNT(*) AS c, MAX(utf.flag) AS f FROM UserTicketMigration AS utf JOIN Users AS u ON utf.user_id = u.id JOIN Tickets AS t ON t.id = utf.ticket_id WHERE t.active = 1 AND u.board_id = ? GROUP BY u.id) AS a LEFT JOIN (SELECT u.id , u.Name , COUNT(*) AS o FROM UserTicketMigration AS utm JOIN Users AS u ON utm.user_id = u.id JOIN Tickets AS t ON t.id = utm.ticket_id WHERE t.active = 1 AND u.board_id = ? AND utm.status = 'DONE' GROUP BY u.id) AS done ON a.id = done.id",
     [boardId, boardId],
     (error, rows) => {
       if (error) throw error
