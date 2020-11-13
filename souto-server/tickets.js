@@ -120,10 +120,14 @@ exports.updateFlag = (userTicketId, value, callback) => {
   )
 }
 
-exports.getFlaggedTicketsByUserId = (userId , callback) => {
-  console.log("in");
-  connection.query('SELECT Tickets.id , Tickets.board_id , Tickets.title , Tickets.description , Tickets.active , Tickets.icon FROM Tickets JOIN UserTicketMigration ON Tickets.id = UserTicketMigration.ticket_id WHERE UserTicketMigration.user_id = ? AND UserTicketMigration.flag = "1"' , [userId] , (error , rows) => {
-    if (error) throw error
-    callback(rows)
-  })
+exports.getFlaggedTicketsByUserId = (userId, callback) => {
+  console.log('in')
+  connection.query(
+    'SELECT Tickets.id , Tickets.board_id , Tickets.title , Tickets.description , Tickets.active , Tickets.icon FROM Tickets JOIN UserTicketMigration ON Tickets.id = UserTicketMigration.ticket_id WHERE UserTicketMigration.user_id = ? AND UserTicketMigration.flag = "1" AND Tickets.active = 1',
+    [userId],
+    (error, rows) => {
+      if (error) throw error
+      callback(rows)
+    }
+  )
 }
