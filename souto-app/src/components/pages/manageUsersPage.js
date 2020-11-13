@@ -5,6 +5,9 @@ import config from '../../config'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Backdrop from '@material-ui/core/Backdrop'
 import { Grid, Box, Typography } from '@material-ui/core'
+import Progress from '../progress'
+import WhiteFlagImage from '../../resources/white-flag.png'
+import RedFlagImage from '../../resources/red-flag.png'
 
 const styles = {
   progressBar: {
@@ -65,24 +68,34 @@ const styles = {
     border: 'solid 1px',
     boxShadow: 'rgb(78, 78, 78) 4px 4px 15px 1px',
   },
+  singlePersonFlagged: {
+    textAlign: 'center',
+    margin: '3vw auto',
+    width: '20vw',
+    height: '20vw',
+    borderRadius: '15px',
+    background: 'linear-gradient(45deg, rgb(165 72 72), rgb(255 151 151))',
+    border: 'solid 1px',
+    boxShadow: 'rgb(78, 78, 78) 4px 4px 15px 1px',
+  },
+  selectedPersonFlagged: {
+    textAlign: 'center',
+    margin: '3vw auto',
+    width: '20vw',
+    height: '20vw',
+    borderRadius: '15px',
+    background: 'linear-gradient(45deg, rgb(165, 72, 72), rgb(156 96 96))',
+    border: 'solid 1px',
+    boxShadow: 'rgb(78, 78, 78) 4px 4px 15px 1px',
+  },
   card: {
     margin: '10vw',
-    width: '80vw',
     height: '40vh',
     borderRadius: '5px',
-    background: 'linear-gradient(45deg, #00B4DB, rgb(28 111 140))',
     boxShadow: '0px 0px 20px 1px rgb(78 78 78)',
-    alignItems: 'center',
-    display: 'flex',
-    justifyContent: 'center',
-    alignContent: 'center',
-    flexDirection: 'column',
   },
-  circularCard: {
-    borderRadius: '40vw',
-    width: '60vw',
-    height: '60vw',
-    background: 'linear-gradient(225deg, #00B4DB, rgb(28 111 140))',
+  flag: {
+    height: '4vh',
   },
 }
 
@@ -90,6 +103,12 @@ function CircularProgressWithLabel(props) {
   return (
     <Box position="relative" display="inline-flex">
       <CircularProgress color={'primary'} variant="static" {...props} />
+      <CircularProgress
+        style={{ position: 'absolute', top: '0', opacity: '0.5' }}
+        color={'primary'}
+        variant="static"
+        value={100}
+      />
       <Box
         top={0}
         left={0}
@@ -151,6 +170,24 @@ export default class ManageUsersPage extends Component {
       })
   }
 
+  getUserFlaggedTickets = (userId) => {
+    axios
+      .get(config.server + '/tickets/getflag/' + userId)
+      .then((response) => {
+        let user = this.state.usersProgress.filter((item) => {
+          return item.id === userId
+        })[0]
+        user.flagTickets = response.data
+        this.setState({ selectedPerson: user, selectedPersonId: userId })
+      })
+      .catch((error) => {
+        console.log(error)
+        alert(
+          'Sorry could not get the data about this user. Please try again later'
+        )
+      })
+  }
+
   renderCrew = (list) => {
     return (
       <Grid
@@ -169,20 +206,29 @@ export default class ManageUsersPage extends Component {
               xs={3}
               key={item.id}
               onClick={() => {
-                this.setState({ selectedPersonId: item.id })
+                this.getUserFlaggedTickets(item.id)
               }}
             >
               <div
                 style={
                   item.id === this.state.selectedPersonId
-                    ? styles.selectedPerson
+                    ? item.f
+                      ? styles.selectedPersonFlagged
+                      : styles.selectedPerson
+                    : item.f
+                    ? styles.singlePersonFlagged
                     : styles.singlePerson
                 }
               >
-                <div style={{ fontSize: '12px', marginTop: '5px' }}>
+                <div
+                  style={{
+                    fontSize: '12px',
+                    marginTop: '5px',
+                    marginBottom: '10px',
+                  }}
+                >
                   {item.Name}
                 </div>
-                <br />
                 <CircularProgressWithLabel value={percent} />
               </div>
             </Grid>
@@ -195,7 +241,38 @@ export default class ManageUsersPage extends Component {
   renderSelectedPerson = (person) => {
     return (
       <div style={styles.card}>
-        <div style={styles.circularCard}></div>
+        {person === undefined ? (
+          <Typography variant="h4" color={'primary'}>
+            Select a user
+          </Typography>
+        ) : (
+          <div style={{ padding: '2vh' }}>
+            <Typography variant="h4" color={'primary'}>
+              {this.state.selectedPerson.Name}
+            </Typography>
+            <Progress
+              steps={this.state.selectedPerson.c}
+              currentStep={this.state.selectedPerson.o}
+            />
+            <br />
+            {this.state.selectedPerson.f ? (
+              <img src={RedFlagImage} style={styles.flag} alt="flagRed" />
+            ) : (
+              <img src={WhiteFlagImage} style={styles.flag} alt="flagWhite" />
+            )}
+            <ul style={{ margin: '0px' }}>
+              {this.state.selectedPerson.flagTickets.map((ticket) => {
+                return (
+                  <li key={ticket.id}>
+                    <Typography variant="body1" color={'primary'}>
+                      {ticket.title}
+                    </Typography>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        )}
       </div>
     )
   }
