@@ -12,7 +12,7 @@ import {
 import MenuIcon from '@material-ui/icons/Menu'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import HomeIcon from '@material-ui/icons/Home'
-import GroupIcon from "@material-ui/icons/Group"
+import GroupIcon from '@material-ui/icons/Group'
 import SettingsIcon from '@material-ui/icons/Settings'
 import { Redirect, Link } from 'react-router-dom'
 import LinkValidator from './linkValidator'
@@ -21,6 +21,9 @@ const styles = {
   menu: {
     width: '45vw',
     color: '#444444',
+  },
+  appBar: {
+    background: 'linear-gradient(45deg, rgb(28, 111, 140), rgb(0, 180, 219))',
   },
 }
 
@@ -50,7 +53,7 @@ export default class Menu extends Component {
 
     return (
       <div>
-        <AppBar position="static">
+        <AppBar style={styles.appBar} position="static">
           <Toolbar>
             <IconButton
               edge="start"
@@ -84,16 +87,13 @@ export default class Menu extends Component {
                 </ListItem>
               </Link>
               {this.props.isManager ? (
-                <Link to ="/manager/userProgress">
-                <ListItem
-                  button
-                  key={"crew"}
-                >
-                  <ListItemIcon>
-                    <GroupIcon />
-                  </ListItemIcon>
-                  My crew
-                </ListItem>
+                <Link to="/manager/userProgress">
+                  <ListItem button key={'crew'}>
+                    <ListItemIcon>
+                      <GroupIcon />
+                    </ListItemIcon>
+                    My crew
+                  </ListItem>
                 </Link>
               ) : null}
               <Link
