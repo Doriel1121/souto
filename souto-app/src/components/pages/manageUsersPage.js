@@ -4,10 +4,21 @@ import Menu from '../menu'
 import config from '../../config'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Backdrop from '@material-ui/core/Backdrop'
-import { Grid, Box, Typography } from '@material-ui/core'
+import {
+  Grid,
+  Box,
+  Typography,
+  Divider,
+  List,
+  ListItem,
+  ListItemAvatar,
+  Avatar,
+  ListItemText,
+} from '@material-ui/core'
 import Progress from '../progress'
 import WhiteFlagImage from '../../resources/white-flag.png'
 import RedFlagImage from '../../resources/red-flag.png'
+import LogoImage from '../../resources/logo.png'
 
 const styles = {
   progressBar: {
@@ -22,10 +33,7 @@ const styles = {
   },
   userProgressInfo: {
     overflow: 'auto',
-    height: '40vh',
-    position: 'absolute',
-    bottom: '0px',
-    borderTop: 'solid 1px',
+    height: '41vh',
     width: '100vw',
   },
   percent: {
@@ -89,13 +97,12 @@ const styles = {
     boxShadow: 'rgb(78, 78, 78) 4px 4px 15px 1px',
   },
   card: {
-    margin: '10vw',
-    height: '40vh',
-    borderRadius: '5px',
-    boxShadow: '0px 0px 20px 1px rgb(78 78 78)',
+    height: 'calc(60vh - 56px)',
+    textAlign: 'center',
   },
-  flag: {
-    height: '4vh',
+  flagW: {
+    height: '20vh',
+    opacity: '0.3',
   },
 }
 
@@ -137,6 +144,7 @@ export default class ManageUsersPage extends Component {
       usersProgress: [],
       open: true,
       selectedPersonId: -1,
+      selectedPerson: {},
     }
   }
 
@@ -162,7 +170,13 @@ export default class ManageUsersPage extends Component {
           window.localStorage.getItem('captainBoardId')
       )
       .then((res) => {
-        this.setState({ usersProgress: res.data, open: false }, callback)
+        this.setState(
+          {
+            usersProgress: res.data,
+            open: false,
+          },
+          callback
+        )
       })
       .catch((err) => {
         console.log(err)
@@ -238,39 +252,59 @@ export default class ManageUsersPage extends Component {
     )
   }
 
-  renderSelectedPerson = (person) => {
+  renderSelectedPerson = () => {
     return (
       <div style={styles.card}>
-        {person === undefined ? (
-          <Typography variant="h4" color={'primary'}>
-            Select a user
-          </Typography>
+        {this.state.selectedPersonId === -1 ? (
+          <React.Fragment>
+            <img src={LogoImage} alt="logo" style={{ height: '30vh' }} />
+            <Typography variant="h5" style={{ color: '#131313' }}>
+              Select a user
+            </Typography>
+          </React.Fragment>
         ) : (
           <div style={{ padding: '2vh' }}>
-            <Typography variant="h4" color={'primary'}>
-              {this.state.selectedPerson.Name}
-            </Typography>
             <Progress
               steps={this.state.selectedPerson.c}
               currentStep={this.state.selectedPerson.o}
+              yar
             />
             <br />
-            {this.state.selectedPerson.f ? (
-              <img src={RedFlagImage} style={styles.flag} alt="flagRed" />
+            {!this.state.selectedPerson.f ? (
+              <img src={WhiteFlagImage} style={styles.flagW} alt="flagWhite" />
             ) : (
-              <img src={WhiteFlagImage} style={styles.flag} alt="flagWhite" />
+              <div style={{ overflow: 'scroll', height: '35vh' }}>
+                <List>
+                  {this.state.selectedPerson.flagTickets.map((ticket) => {
+                    return (
+                      <React.Fragment key={ticket.id}>
+                        <ListItem alignItems="flex-start">
+                          <ListItemAvatar>
+                            <Avatar
+                              style={{ border: 'solid 1px' }}
+                              alt="Remy Sharp"
+                              src={RedFlagImage}
+                            />
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary={
+                              <Typography
+                                variant="subtitle2"
+                                style={{ color: 'black' }}
+                              >
+                                {ticket.title}
+                              </Typography>
+                            }
+                            secondary={ticket.description}
+                          />
+                        </ListItem>
+                        <Divider />
+                      </React.Fragment>
+                    )
+                  })}
+                </List>
+              </div>
             )}
-            <ul style={{ margin: '0px' }}>
-              {this.state.selectedPerson.flagTickets.map((ticket) => {
-                return (
-                  <li key={ticket.id}>
-                    <Typography variant="body1" color={'primary'}>
-                      {ticket.title}
-                    </Typography>
-                  </li>
-                )
-              })}
-            </ul>
           </div>
         )}
       </div>
@@ -280,17 +314,25 @@ export default class ManageUsersPage extends Component {
   render() {
     return (
       <div>
-        <Menu isManager={true} title="My crew progress" />
-        {this.state.usersProgress.length > 0
-          ? this.renderSelectedPerson(this.state.selectedPerson)
-          : null}
-        <div style={styles.userProgressInfo}>
-          {this.state.usersProgress.length > 0 ? (
-            this.renderCrew(this.state.usersProgress)
-          ) : !this.state.open ? (
-            <div style={styles.empty}>No crew members yet</div>
-          ) : null}
-        </div>
+        <Menu
+          isManager={true}
+          title={
+            this.state.selectedPersonId === -1
+              ? 'My crew'
+              : this.state.selectedPerson.Name
+          }
+        />
+        {this.state.usersProgress.length > 0 && !this.state.open ? (
+          <React.Fragment>
+            {this.renderSelectedPerson()}
+            <Divider />
+            <div style={styles.userProgressInfo}>
+              {this.renderCrew(this.state.usersProgress)}
+            </div>
+          </React.Fragment>
+        ) : (
+          <div style={styles.empty}>No crew members yet</div>
+        )}
         <Backdrop style={styles.backdrop} open={this.state.open}>
           <CircularProgress color="inherit" />
         </Backdrop>
