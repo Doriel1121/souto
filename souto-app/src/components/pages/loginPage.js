@@ -11,7 +11,7 @@ import InfoIcon from '@material-ui/icons/Info'
 const styles = {
   loginImage: {
     height: '60vh',
-    minHeight: '380px',
+    minHeight: '400px',
     position: 'relative',
     left: '50%',
     transform: 'translateX(-50%)',
@@ -599,7 +599,7 @@ export default class LoginPage extends Component {
                   />
                 </Grid>
                 <Grid item xs={6}>
-                <Button
+                  <Button
                     variant="contained"
                     fullWidth
                     onClick={() => {
