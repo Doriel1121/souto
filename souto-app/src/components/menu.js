@@ -22,6 +22,9 @@ const styles = {
     width: '45vw',
     color: '#444444',
   },
+  appBar:{
+    background:"linear-gradient(45deg, rgb(0, 180, 219), rgb(28, 111, 140))"
+  }
 }
 
 export default class Menu extends Component {
@@ -50,7 +53,7 @@ export default class Menu extends Component {
 
     return (
       <div>
-        <AppBar position="static">
+        <AppBar style={styles.appBar} position="static">
           <Toolbar>
             <IconButton
               edge="start"
