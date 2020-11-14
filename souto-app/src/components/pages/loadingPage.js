@@ -10,6 +10,14 @@ const styles = {
     textAlign: 'center',
     paddingTop: '25vh',
   },
+  name: {
+    position: 'relative',
+    top: '15vh',
+    right: 'auto',
+    fontSize: '60px',
+    fontWeight: '800',
+    color: '#276677',
+  },
 }
 
 export default class LoadingPage extends Component {
@@ -34,6 +42,7 @@ export default class LoadingPage extends Component {
     return (
       <div style={styles.container}>
         <img src={Logo} alt="logo" style={styles.logo} />
+        <div style={styles.name}>SOUTO</div>
       </div>
     )
   }

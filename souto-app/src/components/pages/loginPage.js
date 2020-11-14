@@ -4,12 +4,13 @@ import SwipeableViews from 'react-swipeable-views'
 import axios from 'axios'
 import config from '../../config'
 import { Redirect } from 'react-router-dom'
-import loginImage0 from '../../resources/login-image-0.jpg'
+import loginImage0 from '../../resources/login-image-0.png'
 import OnBoarding from '../onBoarding'
 import InfoIcon from '@material-ui/icons/Info'
 
 const styles = {
   loginImage: {
+    width: '100vw',
     height: '60vh',
     minHeight: '400px',
     position: 'relative',

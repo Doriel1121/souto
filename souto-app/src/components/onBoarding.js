@@ -7,6 +7,7 @@ import dragAnimation from '../resources/onBoardingDrag.gif'
 import welcomePageImage from '../resources/onBoardWelcome.png'
 import captainKeyImage from '../resources/onBoardCaptainKey.png'
 import sailorKeyImage from '../resources/onBoardSailorKey.png'
+import flagImage from '../resources/onBoardFlag.png'
 
 const styles = {
   backdrop: {
@@ -77,6 +78,12 @@ const onBoardStages = [
     text:
       "It's super simple! Just pick a ticket you want to work on, and drag it to the right.",
   },
+  {
+    image: flagImage,
+    title: 'Raise a glag',
+    text:
+      'Got stucked with a ticket? Just raise a red flag and your captain will instantly know about it.',
+  },
 ]
 
 export default class OnBoarding extends Component {
@@ -127,7 +134,7 @@ export default class OnBoarding extends Component {
           style={styles.container}
         >
           {this.renderPageByIndex(this.state.currentIndex)}
-          <Grid item xs={6} style={{ paddingLeft: '0px' }}>
+          <Grid item xs={6} style={{ paddingLeft: '0px', marginTop: '10px' }}>
             <Button
               fullWidth
               variant="contained"
@@ -143,7 +150,11 @@ export default class OnBoarding extends Component {
             </Button>
           </Grid>
           {this.state.currentIndex === onBoardStages.length - 1 ? (
-            <Grid item xs={6} style={{ paddingRight: '0px' }}>
+            <Grid
+              item
+              xs={6}
+              style={{ paddingRight: '0px', marginTop: '10px' }}
+            >
               <Button
                 fullWidth
                 variant="contained"
@@ -155,7 +166,11 @@ export default class OnBoarding extends Component {
               </Button>
             </Grid>
           ) : (
-            <Grid item xs={6} style={{ paddingRight: '0px' }}>
+            <Grid
+              item
+              xs={6}
+              style={{ paddingRight: '0px', marginTop: '10px' }}
+            >
               <Button
                 fullWidth
                 variant="contained"
