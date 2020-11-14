@@ -80,6 +80,17 @@ export default class ManageUsersPage extends Component {
       })
   }
 
+  getUserFlagedTickets = (id) => {
+    console.log(id)
+    axios.get(config.server + '/tickets/getFlag/' + id).then((res) => {
+      console.log(res)
+      this.setState({userFlagedTickets : res.data})
+    }).catch((err) => {
+      console.log(err)
+      alert("Sorry could not get the data please try again later ")
+    })
+  }
+
   render() {
     return (
       <div>
@@ -94,10 +105,10 @@ export default class ManageUsersPage extends Component {
               percent = percent * element.o
               return (
                 <React.Fragment key={index}>
-                  <Grid style={styles.names} item xs={3}>
+                  <Grid onClick={() => {this.getUserFlagedTickets(element.id)}} style={styles.names} item xs={3}>
                     <b>{element.Name}</b>
                   </Grid>
-                  <Grid style={styles.proDiv} item xs={7}>
+                  <Grid onClick={() => {this.getUserFlagedTickets(element.id)}} style={styles.proDiv} item xs={7}>
                     <MobileStepper
                       variant="progress"
                       steps={element.c + 1}
