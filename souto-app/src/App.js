@@ -6,6 +6,7 @@ import ClientApp from './ClientApp'
 import ManagerApp from './ManagerApp'
 import LoginPage from './components/pages/loginPage'
 import UnsupportedDevicePage from './components/pages/unsupportedDevicePage'
+import LoadingPage from './components/pages/loadingPage'
 
 const mainTheme = createMuiTheme({
   palette: {
@@ -48,8 +49,11 @@ export default class App extends Component {
               <Route path="/manager">
                 <ManagerApp />
               </Route>
-              <Route exact path="/">
+              <Route exact path="/login">
                 <LoginPage />
+              </Route>
+              <Route exact path="/">
+                <LoadingPage />
               </Route>
             </Switch>
           </Router>

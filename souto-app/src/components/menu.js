@@ -48,7 +48,7 @@ export default class Menu extends Component {
 
   render() {
     if (this.state.redirectToLogin) {
-      return <Redirect to="/" />
+      return <Redirect to="/login" />
     }
 
     return (
