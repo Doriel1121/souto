@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "./static/css/main.dc14e679.chunk.css",
+    "main.js": "./static/js/main.75cbc895.chunk.js",
+    "main.js.map": "./static/js/main.75cbc895.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.15983474.js",
+    "runtime-main.js.map": "./static/js/runtime-main.15983474.js.map",
+    "static/js/2.f39a27a7.chunk.js": "./static/js/2.f39a27a7.chunk.js",
+    "static/js/2.f39a27a7.chunk.js.map": "./static/js/2.f39a27a7.chunk.js.map",
+    "index.html": "./index.html",
+    "precache-manifest.315ca347a75eb8ad514311a697285227.js": "./precache-manifest.315ca347a75eb8ad514311a697285227.js",
+    "service-worker.js": "./service-worker.js",
+    "static/css/main.dc14e679.chunk.css.map": "./static/css/main.dc14e679.chunk.css.map",
+    "static/js/2.f39a27a7.chunk.js.LICENSE.txt": "./static/js/2.f39a27a7.chunk.js.LICENSE.txt",
+    "static/media/index.css": "./static/media/Ubuntu-Regular.2505bfbd.ttf",
+    "static/media/board-empty.png": "./static/media/board-empty.18e8b5cd.png",
+    "static/media/icon1.png": "./static/media/icon1.58d19d8e.png",
+    "static/media/icon2.png": "./static/media/icon2.b069c9da.png",
+    "static/media/login-image-0.png": "./static/media/login-image-0.54f41e0b.png",
+    "static/media/logo-color.png": "./static/media/logo-color.c94a9297.png",
+    "static/media/logo-white.png": "./static/media/logo-white.5ae20ba5.png",
+    "static/media/logo.png": "./static/media/logo.3cffa998.png",
+    "static/media/onBoardCaptainKey.png": "./static/media/onBoardCaptainKey.8b4ebcf1.png",
+    "static/media/onBoardFlag.png": "./static/media/onBoardFlag.9a28c6d9.png",
+    "static/media/onBoardSailorKey.png": "./static/media/onBoardSailorKey.69a3cce9.png",
+    "static/media/onBoardWelcome.png": "./static/media/onBoardWelcome.be558438.png",
+    "static/media/onBoardingDrag.gif": "./static/media/onBoardingDrag.b4229a31.gif",
+    "static/media/red-flag.png": "./static/media/red-flag.77219dca.png",
+    "static/media/warning-mobile-device.png": "./static/media/warning-mobile-device.446e4535.png",
+    "static/media/white-flag.png": "./static/media/white-flag.cd7d616b.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.15983474.js",
+    "static/js/2.f39a27a7.chunk.js",
+    "static/css/main.dc14e679.chunk.css",
+    "static/js/main.75cbc895.chunk.js"
+  ]
+}
