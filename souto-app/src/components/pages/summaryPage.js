@@ -11,7 +11,7 @@ const styles = {
     background: 'linear-gradient(45deg, #00B4DB, rgb(28 111 140))',
     boxShadow: '0px 0px 20px 1px rgb(78 78 78)',
     margin: 'auto',
-    marginTop: '10vh',
+    marginTop: '4vh',
     paddingTop: '4vh',
   },
   item: {

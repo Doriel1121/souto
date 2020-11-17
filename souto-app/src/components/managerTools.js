@@ -5,7 +5,7 @@ import TicketDescription from './ticketDescription'
 
 const styles = {
   tools: {
-    marginBottom: '2vh',
+    marginBottom: '0px',
   },
   buttonFull: {
     borderRadius: '0px',

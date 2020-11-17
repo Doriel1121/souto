@@ -9,8 +9,7 @@ import Menu from '../menu'
 
 const styles = {
   ticketsHolder: {
-    position: 'absolute',
-    height: '85vh',
+    height: 'calc(100vh - 56px - 36px)',
     overflow: 'auto',
     bottom: '0px',
     display: 'inline-block',

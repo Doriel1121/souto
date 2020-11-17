@@ -9,9 +9,9 @@ import LinkValidator from './linkValidator'
 
 const styles = {
   pickBox: {
-    margin: '1.5vh',
+    margin: '12px',
     width: 'auto',
-    height: '10vh',
+    height: '65px',
     borderRadius: '15px',
     backgroundColor: 'white',
     boxShadow: '0 0 10px 1px #3e3e3e',
@@ -24,8 +24,8 @@ const styles = {
     fontWeight: 'bolder',
   },
   avatar: {
-    width: '5vh',
-    height: '5vh',
+    width: '40px',
+    height: '40px',
     backgroundColor: '#50acce',
     border: 'solid 1px',
   },
