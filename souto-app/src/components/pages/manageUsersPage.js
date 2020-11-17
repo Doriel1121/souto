@@ -241,7 +241,9 @@ export default class ManageUsersPage extends Component {
                     marginBottom: '10px',
                   }}
                 >
-                  {item.Name}
+                  {item.Name.length <= 17
+                    ? item.Name
+                    : item.Name.substring(0, 14) + ' ...'}
                 </div>
                 <CircularProgressWithLabel value={percent} />
               </div>
@@ -295,7 +297,11 @@ export default class ManageUsersPage extends Component {
                                 {ticket.title}
                               </Typography>
                             }
-                            secondary={ticket.description}
+                            secondary={
+                              ticket.description.length <= 75
+                                ? ticket.description
+                                : ticket.description.substring(0, 72) + '...'
+                            }
                           />
                         </ListItem>
                         <Divider />
