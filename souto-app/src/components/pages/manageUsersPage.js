@@ -1,9 +1,9 @@
-import axios from "axios"
-import React, { Component } from "react"
-import Menu from "../menu"
-import config from "../../config"
-import CircularProgress from "@material-ui/core/CircularProgress"
-import Backdrop from "@material-ui/core/Backdrop"
+import axios from 'axios'
+import React, { Component } from 'react'
+import Menu from '../menu'
+import config from '../../config'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import Backdrop from '@material-ui/core/Backdrop'
 import {
   Grid,
   Box,
@@ -14,105 +14,105 @@ import {
   ListItemAvatar,
   Avatar,
   ListItemText,
-} from "@material-ui/core"
-import Progress from "../progress"
-import WhiteFlagImage from "../../resources/white-flag.png"
-import RedFlagImage from "../../resources/red-flag.png"
-import LogoImage from "../../resources/logo.png"
+} from '@material-ui/core'
+import Progress from '../progress'
+import WhiteFlagImage from '../../resources/white-flag.png'
+import RedFlagImage from '../../resources/red-flag.png'
+import LogoImage from '../../resources/logo.png'
 
 const styles = {
   progressBar: {
-    flexGrow: "1",
-    backgroundColor: "transparent",
-    paddingTop: "3vh",
-    marginRight: "0",
+    flexGrow: '1',
+    backgroundColor: 'transparent',
+    paddingTop: '3vh',
+    marginRight: '0',
   },
   names: {
-    textAlign: "center",
-    transform: "translateY(1.7vh)",
+    textAlign: 'center',
+    transform: 'translateY(1.7vh)',
   },
   userProgressInfo: {
-    overflow: "auto",
-    height: "41vh",
-    width: "100vw",
+    overflow: 'auto',
+    height: '41vh',
+    width: '100vw',
   },
   percent: {
-    transform: "translateY(1.7vh)",
+    transform: 'translateY(1.7vh)',
   },
   svgLoading: {
-    display: "block",
-    width: "10vw",
-    height: "10vh",
-    margin: "auto",
+    display: 'block',
+    width: '10vw',
+    height: '10vh',
+    margin: 'auto',
   },
   empty: {
-    textAlign: "center",
-    fontSize: "25px",
+    textAlign: 'center',
+    fontSize: '25px',
   },
   backdrop: {
     zIndex: 1,
-    color: "#fff",
+    color: '#fff',
   },
   peopleContainer: {
-    padding: "2vw",
+    padding: '2vw',
   },
   singlePerson: {
-    textAlign: "center",
-    margin: "3vw auto",
-    width: "20vw",
-    height: "20vw",
-    borderRadius: "15px",
-    background: "linear-gradient(45deg, rgb(167 167 167), rgb(255 255 255))",
-    border: "solid 1px",
-    boxShadow: "rgb(78, 78, 78) 4px 4px 15px 1px",
+    textAlign: 'center',
+    margin: '3vw auto',
+    width: '20vw',
+    height: '20vw',
+    borderRadius: '15px',
+    background: 'linear-gradient(45deg, rgb(167 167 167), rgb(255 255 255))',
+    border: 'solid 1px',
+    boxShadow: 'rgb(78, 78, 78) 4px 4px 15px 1px',
   },
   selectedPerson: {
-    textAlign: "center",
-    margin: "3vw auto",
-    width: "20vw",
-    height: "20vw",
-    borderRadius: "15px",
-    background: "linear-gradient(45deg, rgb(167 167 167), rgb(124 124 124))",
-    border: "solid 1px",
-    boxShadow: "rgb(78, 78, 78) 4px 4px 15px 1px",
+    textAlign: 'center',
+    margin: '3vw auto',
+    width: '20vw',
+    height: '20vw',
+    borderRadius: '15px',
+    background: 'linear-gradient(45deg, rgb(167 167 167), rgb(124 124 124))',
+    border: 'solid 1px',
+    boxShadow: 'rgb(78, 78, 78) 4px 4px 15px 1px',
   },
   singlePersonFlagged: {
-    textAlign: "center",
-    margin: "3vw auto",
-    width: "20vw",
-    height: "20vw",
-    borderRadius: "15px",
-    background: "linear-gradient(45deg, rgb(165 72 72), rgb(255 151 151))",
-    border: "solid 1px",
-    boxShadow: "rgb(78, 78, 78) 4px 4px 15px 1px",
+    textAlign: 'center',
+    margin: '3vw auto',
+    width: '20vw',
+    height: '20vw',
+    borderRadius: '15px',
+    background: 'linear-gradient(45deg, rgb(165 72 72), rgb(255 151 151))',
+    border: 'solid 1px',
+    boxShadow: 'rgb(78, 78, 78) 4px 4px 15px 1px',
   },
   selectedPersonFlagged: {
-    textAlign: "center",
-    margin: "3vw auto",
-    width: "20vw",
-    height: "20vw",
-    borderRadius: "15px",
-    background: "linear-gradient(45deg, rgb(165, 72, 72), rgb(156 96 96))",
-    border: "solid 1px",
-    boxShadow: "rgb(78, 78, 78) 4px 4px 15px 1px",
+    textAlign: 'center',
+    margin: '3vw auto',
+    width: '20vw',
+    height: '20vw',
+    borderRadius: '15px',
+    background: 'linear-gradient(45deg, rgb(165, 72, 72), rgb(156 96 96))',
+    border: 'solid 1px',
+    boxShadow: 'rgb(78, 78, 78) 4px 4px 15px 1px',
   },
   card: {
-    height: "calc(60vh - 56px)",
-    textAlign: "center",
+    height: 'calc(60vh - 56px)',
+    textAlign: 'center',
   },
   flagW: {
-    height: "20vh",
-    opacity: "0.3",
+    height: '20vh',
+    opacity: '0.3',
   },
 }
 
 function CircularProgressWithLabel(props) {
   return (
     <Box position="relative" display="inline-flex">
-      <CircularProgress color={"primary"} variant="static" {...props} />
+      <CircularProgress color={'primary'} variant="static" {...props} />
       <CircularProgress
-        style={{ position: "absolute", top: "0", opacity: "0.5" }}
-        color={"primary"}
+        style={{ position: 'absolute', top: '0', opacity: '0.5' }}
+        color={'primary'}
         variant="static"
         value={100}
       />
@@ -157,9 +157,13 @@ export default class ManageUsersPage extends Component {
   syncInterval = (interval) => {
     setTimeout(() => {
       this.getUsersData(() => {
-        this.getUserFlaggedTickets(this.state.selectedPersonId, () => {
+        if (this.state.selectedPersonId === -1) {
           this.syncInterval(interval)
-        })
+        } else {
+          this.getUserFlaggedTickets(this.state.selectedPersonId, () => {
+            this.syncInterval(interval)
+          })
+        }
       })
     }, interval)
   }
@@ -168,8 +172,8 @@ export default class ManageUsersPage extends Component {
     axios
       .get(
         config.server +
-          "/board/allusers/" +
-          window.localStorage.getItem("captainBoardId")
+          '/board/allusers/' +
+          window.localStorage.getItem('captainBoardId')
       )
       .then((res) => {
         this.setState(
@@ -182,13 +186,13 @@ export default class ManageUsersPage extends Component {
       })
       .catch((err) => {
         console.log(err)
-        alert("Sorry could not get the data please try again later ")
+        alert('Sorry could not get the data please try again later ')
       })
   }
 
   getUserFlaggedTickets = (userId, callback) => {
     axios
-      .get(config.server + "/tickets/getflag/" + userId)
+      .get(config.server + '/tickets/getflag/' + userId)
       .then((response) => {
         let user = this.state.usersProgress.filter((item) => {
           return item.id === userId
@@ -202,7 +206,7 @@ export default class ManageUsersPage extends Component {
       .catch((error) => {
         console.log(error)
         alert(
-          "Sorry could not get the data about this user. Please try again later"
+          'Sorry could not get the data about this user. Please try again later'
         )
       })
   }
@@ -241,14 +245,14 @@ export default class ManageUsersPage extends Component {
               >
                 <div
                   style={{
-                    fontSize: "12px",
-                    marginTop: "5px",
-                    marginBottom: "10px",
+                    fontSize: '12px',
+                    marginTop: '5px',
+                    marginBottom: '10px',
                   }}
                 >
                   {item.Name.length <= 17
                     ? item.Name
-                    : item.Name.substring(0, 11) + " ..."}
+                    : item.Name.substring(0, 11) + ' ...'}
                 </div>
                 <CircularProgressWithLabel value={percent} />
               </div>
@@ -264,13 +268,13 @@ export default class ManageUsersPage extends Component {
       <div style={styles.card}>
         {this.state.selectedPersonId === -1 ? (
           <React.Fragment>
-            <img src={LogoImage} alt="logo" style={{ height: "30vh" }} />
-            <Typography variant="h5" style={{ color: "#131313" }}>
+            <img src={LogoImage} alt="logo" style={{ height: '30vh' }} />
+            <Typography variant="h5" style={{ color: '#131313' }}>
               Select a user
             </Typography>
           </React.Fragment>
         ) : (
-          <div style={{ padding: "2vh" }}>
+          <div>
             <Progress
               steps={this.state.selectedPerson.c}
               currentStep={this.state.selectedPerson.o}
@@ -280,7 +284,12 @@ export default class ManageUsersPage extends Component {
             {!this.state.selectedPerson.f ? (
               <img src={WhiteFlagImage} style={styles.flagW} alt="flagWhite" />
             ) : (
-              <div style={{ overflow: "scroll", height: "35vh" }}>
+              <div
+                style={{
+                  overflow: 'scroll',
+                  height: 'calc(60vh - 56px - 62px)',
+                }}
+              >
                 <List>
                   {this.state.selectedPerson.flagTickets.map((ticket) => {
                     return (
@@ -288,7 +297,7 @@ export default class ManageUsersPage extends Component {
                         <ListItem alignItems="flex-start">
                           <ListItemAvatar>
                             <Avatar
-                              style={{ border: "solid 1px" }}
+                              style={{ border: 'solid 1px' }}
                               alt="Remy Sharp"
                               src={RedFlagImage}
                             />
@@ -297,7 +306,7 @@ export default class ManageUsersPage extends Component {
                             primary={
                               <Typography
                                 variant="subtitle2"
-                                style={{ color: "black" }}
+                                style={{ color: 'black' }}
                               >
                                 {ticket.title}
                               </Typography>
@@ -305,7 +314,7 @@ export default class ManageUsersPage extends Component {
                             secondary={
                               ticket.description.length <= 75
                                 ? ticket.description
-                                : ticket.description.substring(0, 72) + "..."
+                                : ticket.description.substring(0, 72) + '...'
                             }
                           />
                         </ListItem>
@@ -329,7 +338,7 @@ export default class ManageUsersPage extends Component {
           isManager={true}
           title={
             this.state.selectedPersonId === -1
-              ? "My crew"
+              ? 'My crew'
               : this.state.selectedPerson.Name
           }
         />
