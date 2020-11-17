@@ -80,7 +80,7 @@ const onBoardStages = [
   },
   {
     image: flagImage,
-    title: 'Raise a glag',
+    title: 'Raise a flag',
     text:
       'Got stucked with a ticket? Just raise a red flag and your captain will instantly know about it.',
   },
