@@ -68,7 +68,7 @@ export default class Menu extends Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant = {titleLength < 29 ? "h6" : "h7" } >{this.props.title}</Typography>
+            <Typography variant = {titleLength < 29 ? "h6" : "subtitle1" } >{this.props.title}</Typography>
           </Toolbar>
         </AppBar>
         <Drawer
