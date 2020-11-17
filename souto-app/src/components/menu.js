@@ -50,7 +50,10 @@ export default class Menu extends Component {
     if (this.state.redirectToLogin) {
       return <Redirect to="/login" />
     }
-
+    if (this.props.title !== undefined) {
+      var titleLength = this.props.title.length
+    }
+   
     return (
       <div>
         <AppBar style={styles.appBar} position="static">
@@ -65,7 +68,7 @@ export default class Menu extends Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6">{this.props.title}</Typography>
+            <Typography variant = {titleLength < 29 ? "h6" : "h7" } >{this.props.title}</Typography>
           </Toolbar>
         </AppBar>
         <Drawer
