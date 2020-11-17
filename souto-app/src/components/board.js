@@ -10,11 +10,12 @@ const styles = {
     display: 'none',
   },
   board: {
-    height: '75vh',
+    height: 'calc(100vh - 56px - 62px - 56px)',
     overflow: 'auto',
     textAlign: 'center',
   },
   emptyBoardImage: {
+    marginTop: '20px',
     height: '60vh',
     opacity: '15%',
   },

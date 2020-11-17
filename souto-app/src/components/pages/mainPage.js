@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import { BottomNavigation, BottomNavigationAction } from '@material-ui/core'
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  Divider,
+} from '@material-ui/core'
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted'
 import ClientContext from '../../clientAppDataProvider'
 import EditIcon from '@material-ui/icons/Edit'
@@ -90,6 +94,7 @@ export default class MainPage extends Component {
                   steps={this.countAllTickets(ctx)}
                   currentStep={ctx.state.doneTickets.length}
                 />
+                <Divider />
                 {this.renderBoardById(this.state.currentBoard, ctx)}
               </React.Fragment>
             )
