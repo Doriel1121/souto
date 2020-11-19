@@ -28,6 +28,12 @@ The sailor, on the other hand - is the one that log in to a board and start the 
 The on boarding process is finished once the sailor had done all of the tickets.
 The sailor have the ability to indicate that he has a problem with doing a specific ticket - and the captain will immediatly know about it.
 
+
+## Important information
+This repository contains the Server code(souto-server) + Client(App) code(souto-app) + Application binary (apk in bin directory).
+You should only install the apk to run the application. The server is already running on AWS, So there is no need to run it.
+You can run the application code in google chrome dev-tools. For more information read the README in the souto-app directory.
+
 ### Prerequisites
 * An android device or emulator (Android Nougat or newer + API version 24 or above)
 * Clone the repo / Download the APK from the bin directory
@@ -38,5 +44,10 @@ It is highly recommended to install the application on an actual device!
 1. Download the APK from your device (Or drop in to your emulator)
 2. Install the APK
 
+## Read me please!
+You can create your own board of course, but for convenience reasons, we already opened a few example boards, you can connect them as a Captain (using the board secret) or as a Sailor (using the board key):
+* A new employee at Microsoft company, R&D department, WindowsDefender team. 
+** Board key: 1234
+** Board secret: 4321
 
-### Contributing
+Please notice that you are not the only tester that may check these board. So please do not delete / add garbage tickets.
