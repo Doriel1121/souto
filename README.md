@@ -17,11 +17,13 @@ The application is divided to 2 parts:
 1. Employer/ Manager/ etc - Called a Captain
 2. Employee/ Student/ Client/ etc - Called a Sailor
 
+#### Captain
 The captain creates a board in which he says exacly what the on boarding process includes:
 * He create a ticket of each step that should be taken
 
-The captain also have the ability to follow his sailors progress and see if any of them is having a problem with doing a ticket
+The captain also have the ability to follow his sailors progress and see if any of them is having a problem with doing a specific ticket
 
+#### Sailor
 The sailor, on the other hand - is the one that log in to a board and start the on-boarding process. He sees all the the tickets that he needs to do - and can mark them as 'In progress' when he works on them, or as 'Done' when he is finished.
 The on boarding process is finished once the sailor had done all of the tickets.
 The sailor have the ability to indicate that he has a problem with doing a specific ticket - and the captain will immediatly know about it.
