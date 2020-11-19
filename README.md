@@ -31,9 +31,9 @@ The sailor have the ability to indicate that he has a problem with doing a speci
 
 
 ## Important information
-This repository contains the Server code(souto-server) + Client(App) code(souto-app) + Application binary (apk in bin directory).
+This repository contains the Server code(souto-server) + Client app code(souto-app) + Application binary (apk in bin directory).
 You should only install the apk to run the application. The server is already running on AWS, So there is no need to run it.
-You can run the application code in google chrome dev-tools. For more information read the README in the souto-app directory.
+You can run the application code in google chrome dev-tools, for testing purpose. For more information read the README in the souto-app directory.
 
 ### Prerequisites
 * An android device or emulator (Android Nougat or newer + API version 24 or above)
