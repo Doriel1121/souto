@@ -10,7 +10,7 @@ Few examples:
 
 The application gives the employee / each of the students, the ability to understand at any moment exacly what he suppose to do.
 His supervisor might not being able to communicate with him 24/7, but with the help of Souto App he, the supervisor, can define the exact process of accepting a new employee / student.
-The employee / student knows exacly what is waiting for him in the on-boarding, and can manage his process with the help of the application by saying exacly what he had done, what he is doing, and what he didnt do yet.
+The later knows exacly what is waiting for him in the on-boarding, and can manage his process with the help of the application by saying exacly what he had done, what he is doing, and what he didnt do yet.
 
 ### How it works
 The application is divided to 2 parts:
