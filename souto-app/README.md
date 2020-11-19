@@ -1,70 +1,28 @@
-# Getting Started with Create React App
+![greadme](https://user-images.githubusercontent.com/10087174/99705315-3d830f80-2aa2-11eb-9c80-27ffe8f89479.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Souto client application
+This directory contains all the code of the client application. It does not work without a server. By default, in master, the server is configured to the production server in AWS. 
 
-## Available Scripts
+To change this, edit the file config.js under src directory
 
-In the project directory, you can run:
+## Code
+The code is built from web-application and Cordova project. 
+The Cordova build this web-application as APK.
+The web-application is the real brain of the app. To run this web-application please look at Debug section.
 
-### `yarn start`
+The web application is built with React 16.14 and Material-ui.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Debug
+First of all, after you clone this repository, run `npm install` or `yart install` from the souto-app directory. When installation is finished you can run the application with `npm start` or `yarn start`.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+A chrome (or your default browser) will open up and you will likely to get the message that the device is not supported. All you need to do is open the Developer tools and click at
+<img width="63" alt="Screen Shot 2020-11-20 at 1 04 59" src="https://user-images.githubusercontent.com/10087174/99734958-6ae4b300-2acc-11eb-981b-a3fb65a8dd64.png">
+button so it will handle this page as in mobile device. Please refresh the page manually and you will get the web-application.
 
-### `yarn test`
+An acceptable ratio of device screen is 420x820
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Deploy
+If you changed the code and want to deploy to your device, you can run `react-scripts build` and after that change the `build` directory name to `www`, and then run `cordova run android` when your device is connected and authorized
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Contribute
+Please contribute to this repository, We accept all Pull-requests of all features and every cool idea you got!
