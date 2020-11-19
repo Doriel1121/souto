@@ -14,8 +14,8 @@ The later knows exacly what is waiting for him in the on-boarding, and can manag
 
 ### How it works
 The application is divided to 2 parts:
-1. Employer - Called a Captain
-2. Employee - Called a Sailor
+1. Employer/ Manager/ etc - Called a Captain
+2. Employee/ Student/ Client/ etc - Called a Sailor
 
 The captain creates a board in which he says exacly what the on boarding process includes:
 * He create a ticket of each step that should be taken
