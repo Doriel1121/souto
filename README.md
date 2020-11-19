@@ -1,6 +1,5 @@
 ![greadme](https://user-images.githubusercontent.com/10087174/99705315-3d830f80-2aa2-11eb-9c80-27ffe8f89479.png)
 
-# Souto
 ## On boarding application
 
 ### Introduction
