@@ -62,7 +62,6 @@ const styles = {
     width: '20vw',
     height: '20vw',
     borderRadius: '15px',
-    background: 'linear-gradient(45deg, rgb(167 167 167), rgb(255 255 255))',
     border: 'solid 1px',
     boxShadow: 'rgb(78, 78, 78) 4px 4px 15px 1px',
   },
@@ -223,6 +222,18 @@ export default class ManageUsersPage extends Component {
       >
         {list.map((item) => {
           let percent = (100 / item.c) * item.o
+          let color =
+            item.id === this.state.selectedPersonId
+              ? percent === 100
+                ? 'linear-gradient(45deg, rgb(44 99 48), rgb(70 144 56))'
+                : item.f
+                ? 'linear-gradient(45deg, rgb(165, 72, 72), rgb(156 96 96))'
+                : 'linear-gradient(45deg, rgb(167 167 167), rgb(124 124 124))'
+              : percent === 100
+              ? 'linear-gradient(45deg, rgb(70 144 56), rgb(114 199 121))'
+              : item.f
+              ? 'linear-gradient(45deg, rgb(165 72 72), rgb(255 151 151))'
+              : 'linear-gradient(45deg, rgb(167 167 167), rgb(255 255 255))'
           return (
             <Grid
               item
@@ -232,17 +243,7 @@ export default class ManageUsersPage extends Component {
                 this.getUserFlaggedTickets(item.id, () => {})
               }}
             >
-              <div
-                style={
-                  item.id === this.state.selectedPersonId
-                    ? item.f
-                      ? styles.selectedPersonFlagged
-                      : styles.selectedPerson
-                    : item.f
-                    ? styles.singlePersonFlagged
-                    : styles.singlePerson
-                }
-              >
+              <div style={{ ...styles.singlePerson, background: color }}>
                 <div
                   style={{
                     fontSize: '12px',

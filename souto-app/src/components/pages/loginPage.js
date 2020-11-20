@@ -104,7 +104,6 @@ export default class LoginPage extends Component {
   }
 
   loginBySecret = () => {
-    console.log(this.state.sailorSecret)
     axios
       .get(config.server + '/users/secret/' + this.state.sailorSecret)
       .then((response) => {
