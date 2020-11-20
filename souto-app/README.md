@@ -3,7 +3,7 @@
 # Souto client application
 This directory contains all the code of the client application. It does not work without a server. By default, in master, the server is configured to the production server in AWS. 
 
-To change this, edit the file config.js under src directory
+To change this, edit the file `config.js` under `src` directory
 
 ## Code
 The code is built from web-application and Cordova project. 
@@ -20,6 +20,9 @@ A chrome (or your default browser) will open up and you will likely to get the m
 button so it will handle this page as in mobile device. Please refresh the page manually and you will get the web-application.
 
 An acceptable ratio of device screen is 420x820
+
+### Important to know
+The production server is running on AWS, and the communication is over HTTPS. We are using self-signed certificate, so your google chrome browser might not allow traffic to this server endpoint. To allow communication to the server please enter the health check at `https://18.192.53.137:3002/health`, you will likely to get a message that the certificate is invalid. Please click `Advanced` then `Proceed`. Now you can successfully enter the health check and accept `{"Data":"Alive"}` message.
 
 ## Deploy
 If you changed the code and want to deploy to your device, you can run `react-scripts build` and after that change the `build` directory name to `www`, and then run `cordova run android` when your device is connected and authorized
