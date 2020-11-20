@@ -30,8 +30,8 @@ const styles = {
     height: '40vh',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
     alignItems: 'center',
+    paddingTop: '50px',
   },
   views: {
     overflowX: 'hidden',
@@ -226,7 +226,13 @@ export default class LoginPage extends Component {
             disabled
             style={styles.views}
           >
-            <div style={styles.singleView}>
+            <div
+              style={{
+                ...styles.singleView,
+                paddingTop: '0',
+                justifyContent: 'center',
+              }}
+            >
               <Button
                 style={styles.typeButton}
                 variant="contained"

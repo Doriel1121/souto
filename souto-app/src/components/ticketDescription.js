@@ -186,7 +186,7 @@ export default class TicketDescription extends Component {
                 disabled={!this.isChangedFromInit()}
                 color="primary"
                 onClick={() => {
-                  this.props.update(this.getTicket(), this.props.close)
+                  this.props.update(this.getTicket(), this.clean)
                 }}
               >
                 <SaveIcon />
