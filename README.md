@@ -51,7 +51,7 @@ You can create your own board of course, but for convenience reasons, we already
   * Board key: 2069
   * Board secret: 6232
 * New student at Tel-aviv university, Law faculty
-  * Board key: 1111
-  * Board secret: 2222
+  * Board key: 7010
+  * Board secret: 4408
 
 Please notice that you are not the only tester that may check these board. So please do not delete / add garbage tickets.
