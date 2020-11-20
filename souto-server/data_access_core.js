@@ -34,14 +34,14 @@ exports.generateUniqueKeyRecursive = (retries, table, column, callback) => {
 
   let key = this.genetateKey()
   this.connection.query(
-    'SELECT * FROM ' + table + ' WHERE ? = ?',
-    [column, key],
+    'SELECT * FROM ' + table + ' WHERE ' + column + ' = ?',
+    [key],
     (error, rows) => {
       if (error) throw error
       if (rows.length === 0) {
         callback(key)
       } else {
-        this.generateUniqueKey(retries - 1, table, column, callback)
+        this.generateUniqueKeyRecursive(retries - 1, table, column, callback)
       }
     }
   )

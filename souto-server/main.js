@@ -157,9 +157,16 @@ app
       }
     })
   })
-  .get('/tickets/getFlag/:userId' , (request , response) => {
-    console.log("Flag is active or not")
-    tickets.getFlaggedTicketsByUserId(request.params.userId , (usersActiveFlags) => {
-      response.send(usersActiveFlags)
-    })
+  .get('/tickets/getFlag/:userId', (request, response) => {
+    console.log('Flag is active or not')
+    tickets.getFlaggedTicketsByUserId(
+      request.params.userId,
+      (usersActiveFlags) => {
+        response.send(usersActiveFlags)
+      }
+    )
+  })
+  .get('/health', (_, response) => {
+    console.log('Health request')
+    response.send({ Data: 'Alive' })
   })
