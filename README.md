@@ -48,7 +48,10 @@ It is highly recommended to install the application on an actual device!
 ## Read me please!
 You can create your own board of course, but for convenience reasons, we already opened a few example boards, you can connect them as a Captain (using the board secret) or as a Sailor (using the board key):
 * A new employee at Microsoft company, R&D department, WindowsDefender team 
-  * Board key: 1234
-  * Board secret: 4321
+  * Board key: 2069
+  * Board secret: 6232
+* New student at Tel-aviv university, Law faculty
+  * Board key: 1111
+  * Board secret: 2222
 
 Please notice that you are not the only tester that may check these board. So please do not delete / add garbage tickets.
