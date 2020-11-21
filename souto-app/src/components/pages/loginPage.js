@@ -31,12 +31,11 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    paddingTop: '50px',
+    paddingTop: '20px',
   },
   views: {
     overflowX: 'hidden',
     width: 'inherit',
-    height: 'inherit',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
