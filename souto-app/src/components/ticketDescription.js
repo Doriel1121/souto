@@ -23,6 +23,7 @@ const styles = {
     width: '15vw',
     height: '15vw',
     margin: '0 auto',
+    backgroundColor: 'white',
     border: 'solid 1px black',
     marginTop: '3vh',
   },
