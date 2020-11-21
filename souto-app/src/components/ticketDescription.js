@@ -109,13 +109,13 @@ export default class TicketDescription extends Component {
               <Grid item xs={12}>
                 <Select
                   native
-                  defaultValue={9}
+                  defaultValue={"none"}
                   value={this.state.icon}
                   onChange={(e) => {
                     this.setState({ icon: e.target.value })
                   }}
                 >
-                  <option style={styles.changeIconSelect} value={9}>
+                  <option disabled style={styles.changeIconSelect} value={"none"}>
                     Select work area
                   </option>
                   <option style={styles.changeIconSelect} value={0}>
