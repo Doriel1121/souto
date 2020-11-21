@@ -9,9 +9,9 @@ Few examples:
 * A new employee at Microsoft starts to work at the R&D of ExcellOnline team from home
 * Multiple students start their first year at Ben-gurion university from home due to the COVID-19 pandemic
 
-The application gives the employee / each of the students, the ability to understand at any moment exacly what he suppose to do.
+The application gives the employee / each of the students, the ability to understand at any moment exactly what he suppose to do.
 His supervisor might not being able to communicate with him 24/7, but with the help of Souto App he, the supervisor, can define the exact process of accepting a new employee / student.
-The later knows exacly what is waiting for him in the on-boarding, and can manage his process with the help of the application by saying exacly what he had done, what he is doing, and what he didnt do yet.
+The later knows exactly what is waiting for him in the on-boarding, and can manage his process with the help of the application by saying exactly what he had done, what he is doing, and what he didnt do yet.
 
 ### How it works
 The application is divided to 2 roles:
@@ -19,7 +19,7 @@ The application is divided to 2 roles:
 2. Employee/ Student/ Client/ etc - Called a Sailor
 
 #### Captain
-The captain creates a board in which he defines exacly what the on boarding process includes:
+The captain creates a board in which he defines exactly what the on boarding process includes:
 * He create a ticket of each step that should be taken
 
 The captain also have the ability to follow his sailors progress and to see if any of them is having a problem with doing a specific ticket
