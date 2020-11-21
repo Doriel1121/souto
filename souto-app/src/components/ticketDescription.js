@@ -109,11 +109,19 @@ export default class TicketDescription extends Component {
               <Grid item xs={12}>
                 <Select
                   native
+                  defaultValue={'none'}
                   value={this.state.icon}
                   onChange={(e) => {
                     this.setState({ icon: e.target.value })
                   }}
                 >
+                  <option
+                    disabled
+                    style={styles.changeIconSelect}
+                    value={'none'}
+                  >
+                    Default
+                  </option>
                   <option style={styles.changeIconSelect} value={0}>
                     Communication
                   </option>
