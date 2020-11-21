@@ -23,7 +23,6 @@ const styles = {
     width: '15vw',
     height: '15vw',
     margin: '0 auto',
-    backgroundColor: 'white',
     border: 'solid 1px black',
     marginTop: '3vh',
   },
@@ -35,9 +34,9 @@ const styles = {
     display: 'flex',
   },
   description: {
-    fontSize: 'small',
     textAlign: 'left',
     whiteSpace: 'pre-line',
+    fontSize: '15px',
   },
   modalContent: {
     width: '90%',
@@ -103,7 +102,10 @@ export default class TicketDescription extends Component {
               <Grid item xs={12}>
                 <Avatar
                   src={config.iconImages[this.state.icon]}
-                  style={styles.avatar}
+                  style={{
+                    ...styles.avatar,
+                    backgroundColor: `${config.iconColors[this.state.icon]}`,
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -201,7 +203,10 @@ export default class TicketDescription extends Component {
           <div style={styles.avatarDiv}>
             <Avatar
               src={config.iconImages[this.props.ticket.icon]}
-              style={styles.avatar}
+              style={{
+                ...styles.avatar,
+                backgroundColor: `${config.iconColors[this.state.icon]}`,
+              }}
             />
           </div>
           <div style={styles.modalContent}>

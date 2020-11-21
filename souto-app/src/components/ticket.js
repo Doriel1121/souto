@@ -74,8 +74,10 @@ export default class Ticket extends Component {
           <Grid item xs={2} style={styles.avatarBox}>
             <Avatar
               src={config.iconImages[this.props.info.icon]}
-              style={styles.avatar}
-              style={{border: 'solid 1px',height: '40px',width: '40px' , backgroundColor:`${config.iconColor[this.props.info.icon]}`}}
+              style={{
+                ...styles.avatar,
+                backgroundColor: `${config.iconColors[this.props.info.icon]}`,
+              }}
             />
           </Grid>
           <Grid
