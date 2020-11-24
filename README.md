@@ -55,3 +55,4 @@ You can create your own board of course, but for convenience reasons, we already
   * Board secret: 4408
 
 Please notice that you are not the only tester that may check these boards. So please do not delete / add garbage tickets.
+Please notice that once you connect to a board as sailor and open a user, in `My user` page you will find the user secret with whom you can connect to your user if you log out
